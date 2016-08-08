@@ -28,6 +28,7 @@
 		048074BA1CF579B900F59273 /* SetSelectorTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B31CF579B900F59273 /* SetSelectorTV.swift */; };
 		048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B41CF579B900F59273 /* SetTableViewController.swift */; };
 		048074E01CF5914F00F59273 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 048074DF1CF5914F00F59273 /* 120.png */; };
+		04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3BC101D582B9D002CF64C /* camera_logo.png */; };
 		6103C55E1CBE84BB002D6937 /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55A1CBE84BB002D6937 /* libIOTCAPIs_ALL.a */; };
 		6103C55F1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55B1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a */; };
 		6103C5601CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55C1CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a */; };
@@ -211,6 +212,7 @@
 		048074B41CF579B900F59273 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
 		048074C01CF57AA500F59273 /* Brideg_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brideg_Header.h; sourceTree = "<group>"; };
 		048074DF1CF5914F00F59273 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		04D3BC101D582B9D002CF64C /* camera_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_logo.png; sourceTree = "<group>"; };
 		6103C55A1CBE84BB002D6937 /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
 		6103C55B1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALLT.a; sourceTree = "<group>"; };
 		6103C55C1CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_P2PTunnel.a; sourceTree = "<group>"; };
@@ -1000,6 +1002,7 @@
 		89DA946E1C7A2E8F008735CA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				04D3BC101D582B9D002CF64C /* camera_logo.png */,
 				B77090F31C87212D00736155 /* Demo */,
 				B77090DD1C85E2B800736155 /* BottomBar */,
 				89574B241C7A603300A7E7A6 /* De */,
@@ -1484,6 +1487,7 @@
 				048074B61CF579B900F59273 /* EditCameraHead.xib in Resources */,
 				B7091FD01C8F2575006A37A1 /* rongtone_1.png in Resources */,
 				89574B231C7A596E00A7E7A6 /* voice.png in Resources */,
+				04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -37,14 +37,13 @@
 - (void)loadTabBar
 {
     NSArray *VCnames = @[@"MainViewController",
-                         @"ActionViewController",
                          @"AddCameraViewController",
                          @"InfomationViewController"];
-    NSArray *VCtitles = @[@"摄像机",@"事件",@"新增摄像机",@"信息"];
-    NSArray *VCimages = @[@"icon_home",@"icon_mine",@"icon_special",@"icon_search"];
-    NSArray *VCimagesAct = @[@"icon_home_select",@"icon_mine_select",@"icon_special_select",@"icon_search_select"];
+    NSArray *VCtitles = @[@"摄像机",@"新增摄像机",@"信息"];
+    NSArray *VCimages = @[@"icon_home",@"icon_special",@"icon_search"];
+    NSArray *VCimagesAct = @[@"icon_home_select",@"icon_special_select",@"icon_search_select"];
     NSMutableArray *viewControllers = [[NSMutableArray alloc]init];
-    for (NSInteger i=0; i<4; i++) {
+    for (NSInteger i=0; i<3; i++) {
         UIViewController *view = [[NSClassFromString(VCnames[i]) alloc]init];
         view.tabBarItem.title = VCtitles[i];
         view.tabBarItem.image = [UIImage imageNamed:VCimages[i]];

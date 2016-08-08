@@ -32,11 +32,12 @@
 
 - (UIImageView *)leftImageView{
     if (!_leftImageView) {
-        _leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80*AUTO_WIDTH, 60*AUTO_HEIGHT)];
+        _leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 0, 60*AUTO_HEIGHT, 60*AUTO_HEIGHT)];
         _leftImageView.contentMode = UIViewContentModeScaleAspectFill;
         _leftImageView.userInteractionEnabled = YES;
         UITapGestureRecognizer *leftTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLeft:)];
         [_leftImageView addGestureRecognizer:leftTap];
+        _leftImageView.image = [UIImage imageNamed:@"camera_logo"];
     }
     return _leftImageView;
 }

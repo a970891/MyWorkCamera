@@ -19,7 +19,7 @@
 #import "P2PCamera-Swift.h"
 
 static NSString *const mainCell = @"mainCell";
-@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
+@interface MainViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) UIScrollView   *scrollView;
 @property (nonatomic,strong) UIImageView    *setButton;
@@ -52,7 +52,7 @@ static NSString *const mainCell = @"mainCell";
     [self.rightButton setTitle:@"" forState:UIControlStateNormal];
 //    [self.rightButton setTitle:@"编辑" forState:UIControlStateNormal];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.searchBar];
+//    [self.view addSubview:self.searchBar];
     [self.view addSubview:self.lineView];
     [self.view addSubview:self.myTableView];
 //    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, lScreenWidth, lScreenHeight-64)];
@@ -96,7 +96,8 @@ static NSString *const mainCell = @"mainCell";
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 84*AUTO_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-84*AUTO_HEIGHT-49) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64*AUTO_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT-64*AUTO_HEIGHT-49) style:UITableViewStylePlain];
+        _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         [_myTableView registerClass:[MainTableViewCell class] forCellReuseIdentifier:mainCell];
@@ -133,6 +134,33 @@ static NSString *const mainCell = @"mainCell";
 
 - (void)setButton:(UITapGestureRecognizer *)tap {
     [self.navigationController pushViewController:[[SetViewController alloc] init] animated:YES];
+}
+
+#pragma mark - TableViewCell Delete
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return true;
+}
+
+//删除按钮点击事件
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确认要删除该摄像机吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alertView.tag = 9999+indexPath.row;
+    [alertView show];
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        return;//取消
+    } else {
+        //确认
+        [self.dataSource removeObjectAtIndex:alertView.tag - 9999];
+        [self.myTableView reloadData];
+    }
 }
 
 #pragma mark - TableView Delegate
