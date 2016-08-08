@@ -63,4 +63,19 @@
     return YES;
 }
 
+- (BOOL)deleteObject:(CameraObject *)object {
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:[self findAllObjects]];
+    for (int i = 0; i<arr.count; i++){
+        CameraObject *objectTemp = arr[i];
+        if ([object.uid isEqualToString:objectTemp.uid]) {
+            [arr removeObject:objectTemp];
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:arr];
+            [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"uid"];
+            [[NSUserDefaults standardUserDefaults]synchronize];
+            return true;
+        }
+    }
+    return false;
+}
+
 @end

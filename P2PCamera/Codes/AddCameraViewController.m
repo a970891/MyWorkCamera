@@ -66,6 +66,27 @@ static NSString *const Ccell = @"Ccell";
     [self.view addSubview:self.tableView];
 }
 
+#pragma mark - TableViewCell Delete
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return true;
+}
+
+//删除按钮点击事件
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确认要删除该摄像机吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    alertView.tag = 9999+indexPath.row;
+    [alertView show];
+    
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
+}
+
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+//    
+//}
+
 #pragma mark - 按钮响应事件
 
 - (UIButton *)addBtn{
@@ -102,6 +123,7 @@ static NSString *const Ccell = @"Ccell";
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130*AUTO_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         [_tableView registerClass:[BBCell class] forCellReuseIdentifier:Bcell];
@@ -191,7 +213,7 @@ static NSString *const Ccell = @"Ccell";
                 }
             }
         }
-    }
+    } else
     if (alertView.tag == 102){
         if (buttonIndex == 1) {
             UITextField *textField1 = [alertView textFieldAtIndex:0];
@@ -209,6 +231,15 @@ static NSString *const Ccell = @"Ccell";
                     [self.tableView reloadData];
                 }
             }
+        }
+    } else {
+        if (buttonIndex == 0) {
+            return;//取消
+        } else {
+            //确认
+            [[CameraManager sharedInstance]deleteObject:self.dataSource[alertView.tag - 9999]];
+            [self.dataSource removeObjectAtIndex:alertView.tag - 9999];
+            [self.tableView reloadData];
         }
     }
 }

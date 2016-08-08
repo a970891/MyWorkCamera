@@ -29,6 +29,8 @@
 		048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B41CF579B900F59273 /* SetTableViewController.swift */; };
 		048074E01CF5914F00F59273 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 048074DF1CF5914F00F59273 /* 120.png */; };
 		04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3BC101D582B9D002CF64C /* camera_logo.png */; };
+		04D3BC131D583970002CF64C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC121D583970002CF64C /* QRCodeViewController.swift */; };
+		04D3BC161D583E84002CF64C /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC151D583E84002CF64C /* QRCodeGenerator.m */; };
 		6103C55E1CBE84BB002D6937 /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55A1CBE84BB002D6937 /* libIOTCAPIs_ALL.a */; };
 		6103C55F1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55B1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a */; };
 		6103C5601CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6103C55C1CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a */; };
@@ -125,6 +127,7 @@
 		89DA94E11C7A358B008735CA /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DA94E01C7A358B008735CA /* MainViewController.m */; };
 		89DA94E51C7A3E80008735CA /* CameraModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DA94E41C7A3E80008735CA /* CameraModels.m */; };
 		89DA94E71C7A5032008735CA /* pull_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 89DA94E61C7A5032008735CA /* pull_down.png */; };
+		A5DBA00FC7533AE5A0407015 /* libPods-P2PCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A29B74D412AC3C4BD58C0083 /* libPods-P2PCamera.a */; };
 		B7091FC81C8DE0B7006A37A1 /* backBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B7091FC71C8DE0B7006A37A1 /* backBtn.png */; };
 		B7091FCA1C8DE121006A37A1 /* homeBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B7091FC91C8DE121006A37A1 /* homeBtn.png */; };
 		B7091FCE1C8F24D4006A37A1 /* settings_1.png in Resources */ = {isa = PBXBuildFile; fileRef = B7091FCD1C8F24D4006A37A1 /* settings_1.png */; };
@@ -213,6 +216,10 @@
 		048074C01CF57AA500F59273 /* Brideg_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brideg_Header.h; sourceTree = "<group>"; };
 		048074DF1CF5914F00F59273 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
 		04D3BC101D582B9D002CF64C /* camera_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_logo.png; sourceTree = "<group>"; };
+		04D3BC121D583970002CF64C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		04D3BC141D583E84002CF64C /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
+		04D3BC151D583E84002CF64C /* QRCodeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeGenerator.m; sourceTree = "<group>"; };
+		4F035CF514E88CBB80CBB5EF /* Pods-P2PCamera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P2PCamera.release.xcconfig"; path = "Pods/Target Support Files/Pods-P2PCamera/Pods-P2PCamera.release.xcconfig"; sourceTree = "<group>"; };
 		6103C55A1CBE84BB002D6937 /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
 		6103C55B1CBE84BB002D6937 /* libIOTCAPIs_ALLT.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_ALLT.a; sourceTree = "<group>"; };
 		6103C55C1CBE84BB002D6937 /* libIOTCAPIs_P2PTunnel.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libIOTCAPIs_P2PTunnel.a; sourceTree = "<group>"; };
@@ -465,6 +472,8 @@
 		89DA94E31C7A3E80008735CA /* CameraModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraModels.h; sourceTree = "<group>"; };
 		89DA94E41C7A3E80008735CA /* CameraModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraModels.m; sourceTree = "<group>"; };
 		89DA94E61C7A5032008735CA /* pull_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pull_down.png; sourceTree = "<group>"; };
+		A09DAEFB4274DF218312E9D5 /* Pods-P2PCamera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-P2PCamera.debug.xcconfig"; path = "Pods/Target Support Files/Pods-P2PCamera/Pods-P2PCamera.debug.xcconfig"; sourceTree = "<group>"; };
+		A29B74D412AC3C4BD58C0083 /* libPods-P2PCamera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-P2PCamera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7091FC71C8DE0B7006A37A1 /* backBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBtn.png; sourceTree = "<group>"; };
 		B7091FC91C8DE121006A37A1 /* homeBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeBtn.png; sourceTree = "<group>"; };
 		B7091FCD1C8F24D4006A37A1 /* settings_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_1.png; sourceTree = "<group>"; };
@@ -580,6 +589,7 @@
 				619B2A2A1CBCF52200B59660 /* libavformat.a in Frameworks */,
 				619B2A2C1CBCF52200B59660 /* libswresample.a in Frameworks */,
 				619B2A2B1CBCF52200B59660 /* libavutil.a in Frameworks */,
+				A5DBA00FC7533AE5A0407015 /* libPods-P2PCamera.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,6 +945,8 @@
 			children = (
 				89DA94551C7A2CFC008735CA /* P2PCamera */,
 				89DA94541C7A2CFC008735CA /* Products */,
+				DCEBAB3BCCA77A89078A43BD /* Pods */,
+				F8342D3B830BC51DCBE9D8F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1197,6 +1209,7 @@
 				89DA94DA1C7A3022008735CA /* BaseVC.m */,
 				89DA94DF1C7A358B008735CA /* MainViewController.h */,
 				89DA94E01C7A358B008735CA /* MainViewController.m */,
+				04D3BC121D583970002CF64C /* QRCodeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1371,11 +1384,30 @@
 		B78799C81C91B52300C47147 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				04D3BC141D583E84002CF64C /* QRCodeGenerator.h */,
+				04D3BC151D583E84002CF64C /* QRCodeGenerator.m */,
 				619B2A391CBD0B7600B59660 /* IOTC */,
 				619B29B81CBCF52200B59660 /* libs */,
 				61A67D9D1CBBC21600529961 /* kxmovie */,
 			);
 			name = Library;
+			sourceTree = "<group>";
+		};
+		DCEBAB3BCCA77A89078A43BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A09DAEFB4274DF218312E9D5 /* Pods-P2PCamera.debug.xcconfig */,
+				4F035CF514E88CBB80CBB5EF /* Pods-P2PCamera.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F8342D3B830BC51DCBE9D8F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A29B74D412AC3C4BD58C0083 /* libPods-P2PCamera.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1385,9 +1417,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89DA946A1C7A2CFC008735CA /* Build configuration list for PBXNativeTarget "P2PCamera" */;
 			buildPhases = (
+				CB38AB9C9FF32584AB329C67 /* Check Pods Manifest.lock */,
 				89DA944F1C7A2CFC008735CA /* Sources */,
 				89DA94501C7A2CFC008735CA /* Frameworks */,
 				89DA94511C7A2CFC008735CA /* Resources */,
+				300F9B3391541E2E0BC403B0 /* Embed Pods Frameworks */,
+				AB38D72DCF97483F086E67FA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1493,6 +1528,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		300F9B3391541E2E0BC403B0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P2PCamera/Pods-P2PCamera-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB38D72DCF97483F086E67FA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-P2PCamera/Pods-P2PCamera-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB38AB9C9FF32584AB329C67 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		89DA944F1C7A2CFC008735CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1580,6 +1663,8 @@
 				048074B71CF579B900F59273 /* EditCameraTableViewController.swift in Sources */,
 				B77091121C88981800736155 /* QRItem.m in Sources */,
 				619B29A91CBCF03000B59660 /* KxMovieViewController.m in Sources */,
+				04D3BC131D583970002CF64C /* QRCodeViewController.swift in Sources */,
+				04D3BC161D583E84002CF64C /* QRCodeGenerator.m in Sources */,
 				6136FDFA1CC28B33005301AA /* MCSimpleAudioPlayer.m in Sources */,
 				B77090AD1C85DB7000736155 /* AddCameraViewController.m in Sources */,
 				89DA94CF1C7A2F27008735CA /* UIImageView+WebCache.m in Sources */,
@@ -1677,6 +1762,7 @@
 		};
 		89DA946B1C7A2CFC008735CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A09DAEFB4274DF218312E9D5 /* Pods-P2PCamera.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1710,6 +1796,7 @@
 		};
 		89DA946C1C7A2CFC008735CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F035CF514E88CBB80CBB5EF /* Pods-P2PCamera.release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

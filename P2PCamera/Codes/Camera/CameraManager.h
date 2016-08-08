@@ -17,4 +17,6 @@
 
 - (BOOL)insertObject:(CameraObject *)object;
 
+- (BOOL)deleteObject:(CameraObject *)object;
+
 @end

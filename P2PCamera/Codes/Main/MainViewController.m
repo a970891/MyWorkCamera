@@ -59,6 +59,20 @@ static NSString *const mainCell = @"mainCell";
 //    _scrollView.backgroundColor = [UIColor clearColor];
 //    _scrollView.contentSize = CGSizeMake(lScreenWidth, _scrollView.frame.size.height);
 //    [self.view addSubview:_scrollView];
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(lScreenWidth-12-100, 20, 100, 44)];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitle:@"二维码" forState:UIControlStateNormal];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
+- (void)popAction {
+    QRCodeViewController *vc = [[QRCodeViewController alloc] init];
+    vc.hidesBottomBarWhenPushed = true;
+    [self.navigationController pushViewController:vc animated:true];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -158,6 +172,7 @@ static NSString *const mainCell = @"mainCell";
         return;//取消
     } else {
         //确认
+        [[CameraManager sharedInstance]deleteObject:self.dataSource[alertView.tag - 9999]];
         [self.dataSource removeObjectAtIndex:alertView.tag - 9999];
         [self.myTableView reloadData];
     }
