@@ -32,7 +32,7 @@ class QRCodeViewController: UIViewController {
         
         let titleLabel = UILabel(frame: CGRectMake(0,20,SW,44))
         titleLabel.font = UIFont.systemFontOfSize(15)
-        titleLabel.text = "二维码"
+        titleLabel.text = "二维码WiFi"
         titleLabel.textColor = UIColor.blackColor()
         self.view.addSubview(titleLabel)
         titleLabel.textAlignment = NSTextAlignment.Center

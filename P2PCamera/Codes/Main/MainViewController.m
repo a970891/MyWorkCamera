@@ -60,17 +60,18 @@ static NSString *const mainCell = @"mainCell";
 //    _scrollView.contentSize = CGSizeMake(lScreenWidth, _scrollView.frame.size.height);
 //    [self.view addSubview:_scrollView];
     
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(lScreenWidth-12-100, 20, 100, 44)];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button setTitle:@"二维码" forState:UIControlStateNormal];
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(lScreenWidth-12-24, 30, 24, 24)];
+//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [button setTitle:@"二维码" forState:UIControlStateNormal];
+//    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button setImage:[UIImage imageNamed:@"icon_set"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 }
 
 - (void)popAction {
-    QRCodeViewController *vc = [[QRCodeViewController alloc] init];
+    MainSettingViewController *vc = [[MainSettingViewController alloc] init];
     vc.hidesBottomBarWhenPushed = true;
     [self.navigationController pushViewController:vc animated:true];
 }

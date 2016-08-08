@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0422DC8C1D5882DD000F6F6A /* MainSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422DC8B1D5882DD000F6F6A /* MainSettingTableViewCell.swift */; };
+		0422DC8E1D58A36C000F6F6A /* icon_set.png in Resources */ = {isa = PBXBuildFile; fileRef = 0422DC8D1D58A36C000F6F6A /* icon_set.png */; };
 		0431A8911CE03B7B008BC4D0 /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A87D1CE03B7B008BC4D0 /* AAPLEAGLLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0431A8931CE03B7B008BC4D0 /* DecodeH264.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A8811CE03B7B008BC4D0 /* DecodeH264.m */; };
 		0431A8941CE03B7B008BC4D0 /* g711.c in Sources */ = {isa = PBXBuildFile; fileRef = 0431A8821CE03B7B008BC4D0 /* g711.c */; };
@@ -28,6 +30,7 @@
 		048074BA1CF579B900F59273 /* SetSelectorTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B31CF579B900F59273 /* SetSelectorTV.swift */; };
 		048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B41CF579B900F59273 /* SetTableViewController.swift */; };
 		048074E01CF5914F00F59273 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 048074DF1CF5914F00F59273 /* 120.png */; };
+		04CBFE6F1D585CAE00D04429 /* MainSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */; };
 		04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3BC101D582B9D002CF64C /* camera_logo.png */; };
 		04D3BC131D583970002CF64C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC121D583970002CF64C /* QRCodeViewController.swift */; };
 		04D3BC161D583E84002CF64C /* QRCodeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC151D583E84002CF64C /* QRCodeGenerator.m */; };
@@ -181,6 +184,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0422DC8B1D5882DD000F6F6A /* MainSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingTableViewCell.swift; sourceTree = "<group>"; };
+		0422DC8D1D58A36C000F6F6A /* icon_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_set.png; sourceTree = "<group>"; };
 		0431A87C1CE03B7B008BC4D0 /* AAPLEAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLEAGLLayer.h; sourceTree = "<group>"; };
 		0431A87D1CE03B7B008BC4D0 /* AAPLEAGLLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLEAGLLayer.m; sourceTree = "<group>"; };
 		0431A8801CE03B7B008BC4D0 /* DecodeH264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DecodeH264.h; sourceTree = "<group>"; };
@@ -215,6 +220,7 @@
 		048074B41CF579B900F59273 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
 		048074C01CF57AA500F59273 /* Brideg_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brideg_Header.h; sourceTree = "<group>"; };
 		048074DF1CF5914F00F59273 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingViewController.swift; sourceTree = "<group>"; };
 		04D3BC101D582B9D002CF64C /* camera_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_logo.png; sourceTree = "<group>"; };
 		04D3BC121D583970002CF64C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		04D3BC141D583E84002CF64C /* QRCodeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeGenerator.h; sourceTree = "<group>"; };
@@ -1014,6 +1020,7 @@
 		89DA946E1C7A2E8F008735CA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0422DC8D1D58A36C000F6F6A /* icon_set.png */,
 				04D3BC101D582B9D002CF64C /* camera_logo.png */,
 				B77090F31C87212D00736155 /* Demo */,
 				B77090DD1C85E2B800736155 /* BottomBar */,
@@ -1198,6 +1205,7 @@
 			children = (
 				B77090EE1C85F1FE00736155 /* MainTableViewCell.h */,
 				B77090EF1C85F1FE00736155 /* MainTableViewCell.m */,
+				0422DC8B1D5882DD000F6F6A /* MainSettingTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1209,6 +1217,7 @@
 				89DA94DA1C7A3022008735CA /* BaseVC.m */,
 				89DA94DF1C7A358B008735CA /* MainViewController.h */,
 				89DA94E01C7A358B008735CA /* MainViewController.m */,
+				04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */,
 				04D3BC121D583970002CF64C /* QRCodeViewController.swift */,
 			);
 			name = Controllers;
@@ -1499,6 +1508,7 @@
 				89574B181C7A55E100A7E7A6 /* back.png in Resources */,
 				89574B441C7A6DDB00A7E7A6 /* trash.png in Resources */,
 				89574B191C7A55E100A7E7A6 /* home.png in Resources */,
+				0422DC8E1D58A36C000F6F6A /* icon_set.png in Resources */,
 				89574B2B1C7A603D00A7E7A6 /* exit.png in Resources */,
 				89574B221C7A596E00A7E7A6 /* reduce.png in Resources */,
 				048074E01CF5914F00F59273 /* 120.png in Resources */,
@@ -1645,6 +1655,7 @@
 				89DA94E11C7A358B008735CA /* MainViewController.m in Sources */,
 				89DA94C41C7A2F27008735CA /* SDWebImageCompat.m in Sources */,
 				B770910B1C8897BE00736155 /* QRViewController.m in Sources */,
+				04CBFE6F1D585CAE00D04429 /* MainSettingViewController.swift in Sources */,
 				6136FDF91CC28B33005301AA /* MCParsedAudioData.m in Sources */,
 				89DA94DB1C7A3022008735CA /* BaseVC.m in Sources */,
 				6136FDF71CC28B33005301AA /* MCAudioOutputQueue.m in Sources */,
@@ -1656,6 +1667,7 @@
 				89DA94E51C7A3E80008735CA /* CameraModels.m in Sources */,
 				B73225F61C96FEAD00C1EB8E /* MASViewAttribute.m in Sources */,
 				89DA94C71C7A2F27008735CA /* SDWebImageDownloaderOperation.m in Sources */,
+				0422DC8C1D5882DD000F6F6A /* MainSettingTableViewCell.swift in Sources */,
 				048074B91CF579B900F59273 /* SetExtension.swift in Sources */,
 				89DA94581C7A2CFC008735CA /* main.m in Sources */,
 				6136FDF61CC28B33005301AA /* MCAudioFileStream.m in Sources */,
