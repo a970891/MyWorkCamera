@@ -13,3 +13,4 @@
 #endif /* Brideg_Header_h */
 #import "CameraObject.h"
 #import "QRCodeGenerator.h"
+#import "YYText.h"

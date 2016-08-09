@@ -4,6 +4,9 @@
 # use_frameworks!
 
 target 'P2PCamera' do
+
 pod 'libqrencode', '~> 3.4.2'
+pod 'YYText'
+
 end
 

@@ -1,10 +1,13 @@
 PODS:
   - libqrencode (3.4.2)
+  - YYText (1.0.5)
 
 DEPENDENCIES:
   - libqrencode (~> 3.4.2)
+  - YYText
 
 SPEC CHECKSUMS:
   libqrencode: 43dc34b89af83ea4b07c409cd8e09c87aa3a1c9f
+  YYText: ac09660c9ccd9b817f409a20caa6f5587444d2ae
 
 COCOAPODS: 0.39.0

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04202F3B1D59AE1400AB7E9C /* router_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 04202F3A1D59AE1400AB7E9C /* router_icon.png */; };
+		04202F5B1D59CA6A00AB7E9C /* SystemWifiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04202F5A1D59CA6A00AB7E9C /* SystemWifiManager.swift */; };
+		04202F5D1D59D4FE00AB7E9C /* LuTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04202F5C1D59D4FE00AB7E9C /* LuTextField.swift */; };
 		0422DC8C1D5882DD000F6F6A /* MainSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422DC8B1D5882DD000F6F6A /* MainSettingTableViewCell.swift */; };
 		0422DC8E1D58A36C000F6F6A /* icon_set.png in Resources */ = {isa = PBXBuildFile; fileRef = 0422DC8D1D58A36C000F6F6A /* icon_set.png */; };
 		0431A8911CE03B7B008BC4D0 /* AAPLEAGLLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A87D1CE03B7B008BC4D0 /* AAPLEAGLLayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -19,6 +22,7 @@
 		0431A8991CE03B7B008BC4D0 /* VideoFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A88C1CE03B7B008BC4D0 /* VideoFileParser.m */; };
 		0431A89A1CE03B7B008BC4D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A88E1CE03B7B008BC4D0 /* ViewController.m */; };
 		0431A89B1CE03B7B008BC4D0 /* Yp420PixelConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */; };
+		0439D2951D59E73800866590 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2941D59E73800866590 /* QRViewController.swift */; };
 		048074A41CF2B30000F59273 /* CameraObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A31CF2B30000F59273 /* CameraObject.m */; };
 		048074A71CF2C29F00F59273 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A61CF2C29F00F59273 /* CameraManager.m */; };
 		048074AA1CF2C87100F59273 /* BBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A91CF2C87100F59273 /* BBCell.m */; };
@@ -184,6 +188,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04202F3A1D59AE1400AB7E9C /* router_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = router_icon.png; sourceTree = "<group>"; };
+		04202F5A1D59CA6A00AB7E9C /* SystemWifiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemWifiManager.swift; sourceTree = "<group>"; };
+		04202F5C1D59D4FE00AB7E9C /* LuTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LuTextField.swift; sourceTree = "<group>"; };
 		0422DC8B1D5882DD000F6F6A /* MainSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingTableViewCell.swift; sourceTree = "<group>"; };
 		0422DC8D1D58A36C000F6F6A /* icon_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_set.png; sourceTree = "<group>"; };
 		0431A87C1CE03B7B008BC4D0 /* AAPLEAGLLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLEAGLLayer.h; sourceTree = "<group>"; };
@@ -205,6 +212,7 @@
 		0431A88E1CE03B7B008BC4D0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0431A88F1CE03B7B008BC4D0 /* Yp420PixelConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yp420PixelConverter.h; sourceTree = "<group>"; };
 		0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yp420PixelConverter.m; sourceTree = "<group>"; };
+		0439D2941D59E73800866590 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		048074A21CF2B30000F59273 /* CameraObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraObject.h; sourceTree = "<group>"; };
 		048074A31CF2B30000F59273 /* CameraObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraObject.m; sourceTree = "<group>"; };
 		048074A51CF2C29F00F59273 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
@@ -1020,6 +1028,7 @@
 		89DA946E1C7A2E8F008735CA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				04202F3A1D59AE1400AB7E9C /* router_icon.png */,
 				0422DC8D1D58A36C000F6F6A /* icon_set.png */,
 				04D3BC101D582B9D002CF64C /* camera_logo.png */,
 				B77090F31C87212D00736155 /* Demo */,
@@ -1219,6 +1228,7 @@
 				89DA94E01C7A358B008735CA /* MainViewController.m */,
 				04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */,
 				04D3BC121D583970002CF64C /* QRCodeViewController.swift */,
+				0439D2941D59E73800866590 /* QRViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1324,6 +1334,8 @@
 			isa = PBXGroup;
 			children = (
 				B77090B51C85DED000736155 /* TabBar */,
+				04202F5A1D59CA6A00AB7E9C /* SystemWifiManager.swift */,
+				04202F5C1D59D4FE00AB7E9C /* LuTextField.swift */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -1514,6 +1526,7 @@
 				048074E01CF5914F00F59273 /* 120.png in Resources */,
 				B77090E81C85E2DC00736155 /* icon_mine.png in Resources */,
 				89574B201C7A596E00A7E7A6 /* lock.png in Resources */,
+				04202F3B1D59AE1400AB7E9C /* router_icon.png in Resources */,
 				89DA94DD1C7A3407008735CA /* background.jpg in Resources */,
 				B7091FCA1C8DE121006A37A1 /* homeBtn.png in Resources */,
 				B77090E91C85E2DC00736155 /* icon_special_select.png in Resources */,
@@ -1611,6 +1624,7 @@
 				89574B4D1C7A6FCD00A7E7A6 /* WIFIViewController.m in Sources */,
 				B77090A81C85DB5800736155 /* ActionViewController.m in Sources */,
 				89574B421C7A6C2C00A7E7A6 /* PhotoViewController.m in Sources */,
+				04202F5D1D59D4FE00AB7E9C /* LuTextField.swift in Sources */,
 				048074A41CF2B30000F59273 /* CameraObject.m in Sources */,
 				0431A8941CE03B7B008BC4D0 /* g711.c in Sources */,
 				B77090B21C85DB8000736155 /* InfomationViewController.m in Sources */,
@@ -1649,6 +1663,7 @@
 				89574B3C1C7A626400A7E7A6 /* RingTonesViewController.m in Sources */,
 				B73225F81C96FEAD00C1EB8E /* NSArray+MASAdditions.m in Sources */,
 				B73225FA1C96FEAD00C1EB8E /* View+MASAdditions.m in Sources */,
+				0439D2951D59E73800866590 /* QRViewController.swift in Sources */,
 				6136FDF41CC28B33005301AA /* MCAudioBuffer.m in Sources */,
 				89DA94C51C7A2F27008735CA /* SDWebImageDecoder.m in Sources */,
 				89DA94C31C7A2F27008735CA /* SDImageCache.m in Sources */,
@@ -1656,6 +1671,7 @@
 				89DA94C41C7A2F27008735CA /* SDWebImageCompat.m in Sources */,
 				B770910B1C8897BE00736155 /* QRViewController.m in Sources */,
 				04CBFE6F1D585CAE00D04429 /* MainSettingViewController.swift in Sources */,
+				04202F5B1D59CA6A00AB7E9C /* SystemWifiManager.swift in Sources */,
 				6136FDF91CC28B33005301AA /* MCParsedAudioData.m in Sources */,
 				89DA94DB1C7A3022008735CA /* BaseVC.m in Sources */,
 				6136FDF71CC28B33005301AA /* MCAudioOutputQueue.m in Sources */,
@@ -1709,9 +1725,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1731,6 +1749,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1752,9 +1771,11 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1779,8 +1800,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: DINGJIE LU (77NF87HPA9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: DINGJIE LU (77NF87HPA9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
@@ -1796,6 +1818,25 @@
 					"$(SRCROOT)/P2PCamera",
 					"$(PROJECT_DIR)/P2PCamera/libs",
 					"$(PROJECT_DIR)/P2PCamera",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"YYText\"",
+					"-l\"libqrencode\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"UIKit\"",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meizu.lu.P2PCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1815,6 +1856,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: DINGJIE LU (2798R95YM9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DINGJIE LU (2798R95YM9)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
@@ -1830,6 +1872,25 @@
 					"$(SRCROOT)/P2PCamera",
 					"$(PROJECT_DIR)/P2PCamera/libs",
 					"$(PROJECT_DIR)/P2PCamera",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"YYText\"",
+					"-l\"libqrencode\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"UIKit\"",
+					"-licucore",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.meizu.lu.P2PCamera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
