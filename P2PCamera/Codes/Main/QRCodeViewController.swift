@@ -29,6 +29,9 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(QRCodeViewController.keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillDisappear:"), name: UIKeyboardWillHideNotification, object: nil)
 
 //        let image = UIImageView(frame: CGRectMake(40, 64+(SH-64-(SW-80))/3, SW-80, SW-80))
 //        image.image = QRCodeGenerator.qrImageForString("uid:xxxxx", imageSize: SW-80)
@@ -150,6 +153,27 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
+    func keyboardWillAppear(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let height = userInfo[UIKeyboardFrameEndUserInfoKey]?.CGRectValue().size.height {
+                UIView.animateWithDuration(0.25, animations: {
+                    self.mainView.frame = CGRectMake(0, 65-100, SW, SH-65)
+                })
+            }
+        }
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification) {
+        UIView.animateWithDuration(0.25, animations: {
+            self.mainView.frame = CGRectMake(0, 65, SW, SH-65)
+        })
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        self.password.resignFirstResponder()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
