@@ -14,6 +14,14 @@
 #import "OpenALPlayer.h"
 #import "CameraObject.h"
 #import "SVProgressHUD.h"
+/*
+ //ZA define
+	IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
+	IOTYPE_USER_IPCAM_APP_LOCK1		= 0x04F2,	// APP send lock1
+	IOTYPE_USER_IPCAM_APP_LOCK2		= 0x04F3,	// App send lock2
+ 点击开锁1，就发送指IOTYPE_USER_IPCAM_APP_LOCK1，
+ 点击开锁2，就发送指IOTYPE_USER_IPCAM_APP_LOCK2
+ */
 
 @interface CameraViewController () <UICollectionViewDelegate>
 
@@ -36,10 +44,9 @@
 
 @property (nonatomic,strong) UIView *video;
 @property (nonatomic,strong) UISlider *slider;
-
-@property (nonatomic,strong) UIImageView *voice;
-@property (nonatomic,strong) UIImageView *camera;
-@property (nonatomic,strong) UIImageView *lock;
+@property (nonatomic,assign) BOOL audioSwitch;
+@property (nonatomic,assign) BOOL lockASwitch;
+@property (nonatomic,assign) BOOL lockBSwitch;
 
 @end
 
@@ -53,6 +60,11 @@
 }
 
 - (void)viewDidLoad {
+    
+    self.audioSwitch = true;
+    self.lockASwitch = true;
+    self.lockBSwitch = true;
+    
     [super viewDidLoad];
     [self initSetupUI];
     [self initNaviTools];
@@ -129,30 +141,6 @@
     [plus addGestureRecognizer:tap2];
     plus.userInteractionEnabled = YES;
     
-    _voice = [[UIImageView alloc]initWithFrame:CGRectMake(10, _slider.frame.origin.y+50, (lScreenWidth-20)/3, 80)];
-    _voice.image = [[UIImage imageNamed:@"voice"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _voice.tintColor = [UIColor lightGrayColor];
-    _voice.contentMode = UIViewContentModeScaleAspectFit;
-    UITapGestureRecognizer *tap3 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(voiceButton)];
-    [_voice addGestureRecognizer:tap3];
-    _voice.userInteractionEnabled = YES;
-
-    _lock = [[UIImageView alloc]initWithFrame:CGRectMake(10+2*(lScreenWidth-20)/3, _slider.frame.origin.y+50, (lScreenWidth-20)/3, 80)];
-    _lock.image = [[UIImage imageNamed:@"lock"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _lock.tintColor = [UIColor lightGrayColor];
-    _lock.contentMode = UIViewContentModeScaleAspectFit;
-    UITapGestureRecognizer *tap4 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lockButton)];
-    [_lock addGestureRecognizer:tap4];
-    _lock.userInteractionEnabled = YES;
-    
-    _camera = [[UIImageView alloc]initWithFrame:CGRectMake(10+(lScreenWidth-20)/3, _slider.frame.origin.y+50, (lScreenWidth-20)/3, 80)];
-    _camera.image = [[UIImage imageNamed:@"camera"]imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    _camera.contentMode = UIViewContentModeScaleAspectFit;
-    _camera.tintColor = [UIColor lightGrayColor];
-    UITapGestureRecognizer *tap5 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cameraButton)];
-    [_camera addGestureRecognizer:tap5];
-    _camera.userInteractionEnabled = YES;
-    
     UIView *lineA = [[UIView alloc]initWithFrame:CGRectMake(10, _slider.frame.origin.y+40, lScreenWidth-20, 2*_px)];
     lineA.backgroundColor = [UIColor whiteColor];
 
@@ -161,12 +149,9 @@
     
     [self.view addSubview:lineA];
     [self.view addSubview:lineB];
-    [self.view addSubview:_voice];
-    [self.view addSubview:_lock];
-    [self.view addSubview:_camera];
-    [self.view addSubview:plus];
-    [self.view addSubview:reduce];
-    [self.view addSubview:_slider];
+//    [self.view addSubview:plus];
+//    [self.view addSubview:reduce];
+//    [self.view addSubview:_slider];
     [self.view addSubview:_video];
     
     
@@ -201,6 +186,69 @@
     [_video addSubview:down];
     [_video addSubview:left];
     [_video addSubview:right];
+    
+    
+    NSArray *btnArr = @[@"camera_audio",@"camera_shot",@"camera_unlock",@"camera_unlock"];
+    
+    for (int i = 0; i < 4; i++) {
+        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((lScreenWidth - 40*4)/5*(i+1)+i*40, _slider.frame.origin.y+40, 40, 40)];
+        [button setBackgroundImage:[UIImage imageNamed:btnArr[i]] forState:UIControlStateNormal];
+        button.contentMode = UIViewContentModeScaleAspectFit;
+        if (i == 2) {
+            UILabel *view = [[UILabel alloc]initWithFrame:CGRectMake(24, 24, 16, 16)];
+            view.text = @"1";
+            view.layer.cornerRadius = 8;
+            view.layer.borderWidth = 2;
+            view.layer.borderColor = [UIColor redColor].CGColor;
+            view.textColor = [UIColor redColor];
+            view.textAlignment = NSTextAlignmentCenter;
+            view.backgroundColor = [UIColor whiteColor];
+            [button addSubview:view];
+        }
+        if (i == 3) {
+            UILabel *view = [[UILabel alloc]initWithFrame:CGRectMake(24, 24, 16, 16)];
+            view.text = @"2";
+            view.layer.cornerRadius = 8;
+            view.layer.borderWidth = 2;
+            view.layer.borderColor = [UIColor redColor].CGColor;
+            view.textColor = [UIColor redColor];
+            view.textAlignment = NSTextAlignmentCenter;
+            view.backgroundColor = [UIColor whiteColor];
+            [button addSubview:view];
+        }
+        button.tag = 880+i;
+        [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:button];
+    }
+    
+    UIButton *voiceButton = [[UIButton alloc]initWithFrame:CGRectMake((lScreenWidth-25)/2, _slider.frame.origin.y+120, 25, 40)];
+    [voiceButton setImage:[UIImage imageNamed:@"camera_voice"] forState:UIControlStateNormal];
+    [voiceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:voiceButton];
+}
+
+- (void)buttonAction:(UIButton *)button {
+    switch (button.tag - 880) {
+        case 0:
+            self.audioSwitch = !self.audioSwitch;
+            [button setBackgroundImage:[UIImage imageNamed:self.audioSwitch ? @"camera_audio":@"camera_unaudio"] forState:UIControlStateNormal];
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            [tutkP2PAVClient lock_unlock:1 status:self.lockASwitch];
+            self.lockASwitch = !self.lockASwitch;
+            [button setBackgroundImage:[UIImage imageNamed:!self.lockASwitch ? @"camera_lock":@"camera_unlock"] forState:UIControlStateNormal];
+            break;
+        case 3:
+            [tutkP2PAVClient lock_unlock:2 status:self.lockBSwitch];
+            self.lockBSwitch = !self.lockBSwitch;
+            [button setBackgroundImage:[UIImage imageNamed:!self.lockBSwitch ? @"camera_lock":@"camera_unlock"] forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)turn:(UITapGestureRecognizer *)tap {

@@ -23,6 +23,13 @@
 		0431A89A1CE03B7B008BC4D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A88E1CE03B7B008BC4D0 /* ViewController.m */; };
 		0431A89B1CE03B7B008BC4D0 /* Yp420PixelConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */; };
 		0439D2951D59E73800866590 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2941D59E73800866590 /* QRViewController.swift */; };
+		0439D2971D5B089300866590 /* CameraSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2961D5B089300866590 /* CameraSwiftViewController.swift */; };
+		046D51BF1D5C559100472619 /* camera_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51B91D5C559100472619 /* camera_audio.png */; };
+		046D51C01D5C559100472619 /* camera_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BA1D5C559100472619 /* camera_lock.png */; };
+		046D51C11D5C559100472619 /* camera_shot.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BB1D5C559100472619 /* camera_shot.png */; };
+		046D51C21D5C559100472619 /* camera_unaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BC1D5C559100472619 /* camera_unaudio.png */; };
+		046D51C31D5C559100472619 /* camera_voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BD1D5C559100472619 /* camera_voice.png */; };
+		046D51C41D5C559100472619 /* camera_unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BE1D5C559100472619 /* camera_unlock.png */; };
 		048074A41CF2B30000F59273 /* CameraObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A31CF2B30000F59273 /* CameraObject.m */; };
 		048074A71CF2C29F00F59273 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A61CF2C29F00F59273 /* CameraManager.m */; };
 		048074AA1CF2C87100F59273 /* BBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A91CF2C87100F59273 /* BBCell.m */; };
@@ -213,6 +220,13 @@
 		0431A88F1CE03B7B008BC4D0 /* Yp420PixelConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yp420PixelConverter.h; sourceTree = "<group>"; };
 		0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yp420PixelConverter.m; sourceTree = "<group>"; };
 		0439D2941D59E73800866590 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
+		0439D2961D5B089300866590 /* CameraSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSwiftViewController.swift; sourceTree = "<group>"; };
+		046D51B91D5C559100472619 /* camera_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_audio.png; sourceTree = "<group>"; };
+		046D51BA1D5C559100472619 /* camera_lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_lock.png; sourceTree = "<group>"; };
+		046D51BB1D5C559100472619 /* camera_shot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_shot.png; sourceTree = "<group>"; };
+		046D51BC1D5C559100472619 /* camera_unaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_unaudio.png; sourceTree = "<group>"; };
+		046D51BD1D5C559100472619 /* camera_voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_voice.png; sourceTree = "<group>"; };
+		046D51BE1D5C559100472619 /* camera_unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_unlock.png; sourceTree = "<group>"; };
 		048074A21CF2B30000F59273 /* CameraObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraObject.h; sourceTree = "<group>"; };
 		048074A31CF2B30000F59273 /* CameraObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraObject.m; sourceTree = "<group>"; };
 		048074A51CF2C29F00F59273 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
@@ -636,6 +650,19 @@
 			path = Videos;
 			sourceTree = "<group>";
 		};
+		046D51B81D5C554F00472619 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				046D51B91D5C559100472619 /* camera_audio.png */,
+				046D51BA1D5C559100472619 /* camera_lock.png */,
+				046D51BB1D5C559100472619 /* camera_shot.png */,
+				046D51BC1D5C559100472619 /* camera_unaudio.png */,
+				046D51BD1D5C559100472619 /* camera_voice.png */,
+				046D51BE1D5C559100472619 /* camera_unlock.png */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		048074AD1CF579B900F59273 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1028,6 +1055,7 @@
 		89DA946E1C7A2E8F008735CA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				046D51B81D5C554F00472619 /* Camera */,
 				04202F3A1D59AE1400AB7E9C /* router_icon.png */,
 				0422DC8D1D58A36C000F6F6A /* icon_set.png */,
 				04D3BC101D582B9D002CF64C /* camera_logo.png */,
@@ -1113,6 +1141,7 @@
 			children = (
 				89574B131C7A542200A7E7A6 /* CameraViewController.h */,
 				89574B141C7A542200A7E7A6 /* CameraViewController.m */,
+				0439D2961D5B089300866590 /* CameraSwiftViewController.swift */,
 				048074A21CF2B30000F59273 /* CameraObject.h */,
 				048074A31CF2B30000F59273 /* CameraObject.m */,
 				048074A51CF2C29F00F59273 /* CameraManager.h */,
@@ -1492,6 +1521,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046D51C41D5C559100472619 /* camera_unlock.png in Resources */,
 				B7091FCE1C8F24D4006A37A1 /* settings_1.png in Resources */,
 				048074B81CF579B900F59273 /* Settings.storyboard in Resources */,
 				B77090ED1C85E2DC00736155 /* icon_search.png in Resources */,
@@ -1503,6 +1533,7 @@
 				B724F8861C9075BC00DFDAC8 /* icon_right.png in Resources */,
 				B724F87E1C906B6400DFDAC8 /* home_btn.png in Resources */,
 				619B29A61CBCF03000B59660 /* kxmovie.bundle in Resources */,
+				046D51C11D5C559100472619 /* camera_shot.png in Resources */,
 				89574B301C7A603D00A7E7A6 /* wifi.png in Resources */,
 				B77090EB1C85E2DC00736155 /* icon_home_select.png in Resources */,
 				89574B2C1C7A603D00A7E7A6 /* key.png in Resources */,
@@ -1514,11 +1545,14 @@
 				B77091011C87334400736155 /* CODE.png in Resources */,
 				B77090E71C85E2DC00736155 /* icon_mine_select.png in Resources */,
 				B77091031C8886B300736155 /* refresh.png in Resources */,
+				046D51BF1D5C559100472619 /* camera_audio.png in Resources */,
 				B7091FDE1C8F2D24006A37A1 /* wifi_1.png in Resources */,
 				B77090E61C85E2DC00736155 /* icon_home.png in Resources */,
 				89574B471C7A6F0100A7E7A6 /* left_b.png in Resources */,
 				89574B181C7A55E100A7E7A6 /* back.png in Resources */,
+				046D51C01D5C559100472619 /* camera_lock.png in Resources */,
 				89574B441C7A6DDB00A7E7A6 /* trash.png in Resources */,
+				046D51C21D5C559100472619 /* camera_unaudio.png in Resources */,
 				89574B191C7A55E100A7E7A6 /* home.png in Resources */,
 				0422DC8E1D58A36C000F6F6A /* icon_set.png in Resources */,
 				89574B2B1C7A603D00A7E7A6 /* exit.png in Resources */,
@@ -1536,6 +1570,7 @@
 				B724F8851C9075BC00DFDAC8 /* icon_left.png in Resources */,
 				B77090F71C87215800736155 /* 1_pic.jpg in Resources */,
 				89574B2E1C7A603D00A7E7A6 /* rongtone.png in Resources */,
+				046D51C31D5C559100472619 /* camera_voice.png in Resources */,
 				B7091FD81C8F2BA5006A37A1 /* photos_1.png in Resources */,
 				89574B4A1C7A6F7D00A7E7A6 /* right_b.png in Resources */,
 				B77090F81C87215800736155 /* 2_pic.jpg in Resources */,
@@ -1665,6 +1700,7 @@
 				B73225FA1C96FEAD00C1EB8E /* View+MASAdditions.m in Sources */,
 				0439D2951D59E73800866590 /* QRViewController.swift in Sources */,
 				6136FDF41CC28B33005301AA /* MCAudioBuffer.m in Sources */,
+				0439D2971D5B089300866590 /* CameraSwiftViewController.swift in Sources */,
 				89DA94C51C7A2F27008735CA /* SDWebImageDecoder.m in Sources */,
 				89DA94C31C7A2F27008735CA /* SDImageCache.m in Sources */,
 				89DA94E11C7A358B008735CA /* MainViewController.m in Sources */,
@@ -1729,7 +1765,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1751,6 +1787,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1775,7 +1812,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1789,6 +1826,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1802,7 +1840,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
@@ -1842,6 +1880,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/P2PCamera/Codes/Brideg_Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = ffmpeg;
 				VALID_ARCHS = "arm64 armv7";
 			};
@@ -1856,7 +1895,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: DINGJIE LU (2798R95YM9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: DINGJIE LU (2798R95YM9)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "";
 				HEADER_SEARCH_PATHS = (
@@ -1896,6 +1935,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/P2PCamera/Codes/Brideg_Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = ffmpeg;
 				VALID_ARCHS = "arm64 armv7";
 			};

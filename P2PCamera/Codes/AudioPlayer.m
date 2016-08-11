@@ -65,69 +65,18 @@ unsigned int _getTickCount() {
 }
 
 - (NSString *)SearchAndConnect {
-    NSLog(@"1");
     struct st_LanSearchInfo  p[1];
+    
     int errorCode = IOTC_Lan_Search(p, 1, 100);
     NSLog(@"errorcode = %d", errorCode);
     
     NSLog(@"ip = %s,UID = %s",p[0].IP, p[0].UID);
     if ([[NSString  stringWithFormat:@"%s",p[0].IP] isEqualToString:@""]) {
-        NSLog(@"找到0个摄像机");
-        [SVProgressHUD showErrorWithStatus:@"找到0个摄像机"];
         return @"";
     } else {
         NSArray *arr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%s",p[0].IP], [NSString stringWithFormat:@"%s",p[0].UID],[NSNumber numberWithUnsignedShort:p[0].port], nil];
-        NSLog(@"找到1个设备 :%@", arr[1]);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"找到1个设备,已显示在摄像头列表" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
-        [alert show];
         return arr[1];
     }
-    
-//    return;
-    
-//    int SID = IOTC_Connect_ByUID(p[0].UID);
-//    NSLog(@"connectCode = %d",SID);
-//    struct st_SInfo Sinfo;
-//    int ret = IOTC_Session_Check(SID, &Sinfo);
-//    
-//    if (ret >= 0)
-//    {
-//        if(Sinfo.Mode == 0)
-//            printf("Device is from %s:%d[%s] Mode=P2P\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
-//        else if (Sinfo.Mode == 1)
-//            printf("Device is from %s:%d[%s] Mode=RLY\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
-//        else if (Sinfo.Mode == 2)
-//            printf("Device is from %s:%d[%s] Mode=LAN\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
-//    }
-//    
-//    unsigned long srvType;
-//    int avIndex = avClientStart(SID, "admin", "admin123", 20000, &srvType, 0);
-//    printf("Step 3: call avClientStart(%d).......\n", avIndex);
-//    
-//    if(avIndex < 0)
-//    {
-//        printf("avClientStart failed[%d]\n", avIndex);
-//        return@"";
-//    }
-//    
-//    if ([self start_ipcam_stream:avIndex])
-//    {
-//        pthread_t ThreadVideo_ID, ThreadAudio_ID;
-//        pthread_create(&ThreadVideo_ID, NULL, &thread_ReceiveVideo, (void *)&avIndex);
-//        pthread_create(&ThreadAudio_ID, NULL, &thread_ReceiveAudio, (void *)&avIndex);
-//        pthread_join(ThreadVideo_ID, NULL);
-//        pthread_join(ThreadAudio_ID, NULL);
-//    }
-//    
-//    
-//    avClientStop(avIndex);
-//    NSLog(@"avClientStop OK");
-//    IOTC_Session_Close(SID);
-//    NSLog(@"IOTC_Session_Close OK");
-//    avDeInitialize();
-//    IOTC_DeInitialize();
-//    
-//    NSLog(@"StreamClient exit...");
     return @"";
 }
 

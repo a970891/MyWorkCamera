@@ -514,6 +514,24 @@
     free(request);
 }
 
+//加锁解锁
+- (void)lock_unlock:(int)lockIndex status:(BOOL)status{
+    int ret;
+    SMsgLockContral *request = (SMsgLockContral *)malloc(sizeof(SMsgLockContral));
+    request->nControl = status;
+    request->nNeedKey = 0;
+    if (lockIndex == 1) {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_APP_LOCK1, (char *)request, sizeof(request)) < 0)) {
+            NSLog(@"发送A锁定指令失败[%d]",ret);
+        }
+    } else {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_APP_LOCK2, (char *)request, sizeof(request)) < 0)) {
+            NSLog(@"发送B锁定指令失败[%d]",ret);
+        }
+    }
+    free(request);
+}
+
 - (int)_getSampleRate:(unsigned char)flag {
     
     switch(flag >> 2) {

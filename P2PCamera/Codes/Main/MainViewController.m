@@ -17,6 +17,7 @@
 #import "ViewController.h"
 #import "IOTCAPIs.h"
 #import "P2PCamera-Swift.h"
+#import "AudioPlayer.h"
 
 static NSString *const mainCell = @"mainCell";
 @interface MainViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate,UIAlertViewDelegate>
@@ -28,6 +29,8 @@ static NSString *const mainCell = @"mainCell";
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,strong) UISearchBar    *searchBar;
 @property (nonatomic,strong) UIView         *lineView;
+@property (nonatomic,strong) AudioPlayer    *audioPlayer;
+@property (nonatomic,strong) NSMutableArray *deviceUids;
 @end
 
 @implementation MainViewController
@@ -38,6 +41,9 @@ static NSString *const mainCell = @"mainCell";
 //    [self initNaviTools];
     [self setupUI];
 //    [self setCameras];
+    _audioPlayer = [[AudioPlayer alloc] init];
+    [_audioPlayer IOTC_Init];
+    _deviceUids = [[NSMutableArray alloc]init];
 }
 
 - (void)IOTCtest{
@@ -80,6 +86,10 @@ static NSString *const mainCell = @"mainCell";
     [super viewWillAppear:animated];
     //清除数据源
     [self.dataSource removeAllObjects];
+    //获取在线设备
+    NSString *str = [_audioPlayer SearchAndConnect];
+    [self.deviceUids removeAllObjects];
+    [self.deviceUids addObject:str];
     //获取数据
     self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
     //刷新界面
@@ -196,6 +206,16 @@ static NSString *const mainCell = @"mainCell";
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainCell forIndexPath:indexPath];
 
     CameraObject *object = self.dataSource[indexPath.row];
+    
+    //判断是否在线
+    BOOL on = false;
+    for (NSString *str in self.deviceUids) {
+        if ([object.uid isEqualToString:str]) {
+            on = true;
+            break;
+        }
+    }
+    [cell setOnlineStatus:on];
     [cell setCell:object];
     cell.lComplection = ^(NSInteger m){
         CameraViewController *cameraVC = [[CameraViewController alloc]initWithUid:object.uid password:object.password];

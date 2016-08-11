@@ -17,7 +17,7 @@ class QRViewController: UIViewController {
         self.view.backgroundColor = UIColor.whiteColor()
         
         let image = UIImageView(frame: CGRectMake(40, 64+(SH-64-(SW-80))/3, SW-80, SW-80))
-        image.image = QRCodeGenerator.qrImageForString("str", imageSize: SW-80)
+        image.image = QRCodeGenerator.qrImageForString(self.ssid, imageSize: SW-80)
         self.view.addSubview(image)
         
         let button = UIButton(frame: CGRectMake(12,20,44,44))

@@ -116,7 +116,7 @@
 - (UILabel *)titleLabel
 {
     if(_titleLabel == nil){
-        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-45*AUTO_WIDTH, 32*AUTO_HEIGHT, 90*AUTO_WIDTH, 20*AUTO_HEIGHT)];
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/2-90*AUTO_WIDTH, 32*AUTO_HEIGHT, 180*AUTO_WIDTH, 20*AUTO_HEIGHT)];
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;

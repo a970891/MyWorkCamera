@@ -45,10 +45,8 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //清除数据源
-    [self.dataSource removeAllObjects];
     //获取数据
-    self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
+    [self searchCamera];
     //刷新界面
     if (self.dataSource.count != 0) {
         [self.tableView reloadData];
@@ -146,6 +144,7 @@ static NSString *const Ccell = @"Ccell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BBCell *cell = [tableView dequeueReusableCellWithIdentifier:Bcell forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     CameraObject *object = self.dataSource[indexPath.row];
     [cell setCell:indexPath.row camera:object];
     return cell;
@@ -153,6 +152,20 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"%ld",indexPath.row);
+    CameraObject *object = self.dataSource[indexPath.row];
+    if([object.password isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        alert.tag = 102;
+        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        UITextField *textField1 = [alert textFieldAtIndex:0];
+        UITextField *textField2 = [alert textFieldAtIndex:1];
+        textField1.text = object.uid;
+        textField2.placeholder = @"请输入密码";
+        textField1.enabled = false;
+        [alert show];
+    } else {
+        return;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -227,7 +240,12 @@ static NSString *const Ccell = @"Ccell";
                 object.password = textField2.text;
                 
                 if ([[CameraManager sharedInstance] insertObject:object]) {
-                    [self.dataSource addObject:object];
+                    for (int i = 0; i < self.dataSource.count; i++) {
+                        CameraObject *obj = self.dataSource[i];
+                        if ([obj.uid isEqualToString:textField1.text]) {
+                            self.dataSource[i] = object;
+                        }
+                    }
                     [self.tableView reloadData];
                 }
             }
@@ -249,22 +267,23 @@ static NSString *const Ccell = @"Ccell";
 }
 
 - (void)searchCamera{
+    [self.dataSource removeAllObjects];
     NSString *str = [_audioPlayer SearchAndConnect];
     if ([str isEqualToString:@""] || str == NULL){
         [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"找到一个摄像机" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
-        alert.tag = 102;
-        NSLog(@"%@",str);
-        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-        UITextField *textField1 = [alert textFieldAtIndex:0];
-        UITextField *textField2 = [alert textFieldAtIndex:1];
-        textField1.text = str;
-        textField2.placeholder = @"请输入密码";
-        textField1.enabled = false;
-        [alert show];
+        
+        NSArray *arr = [[CameraManager sharedInstance] findAllObjects];
+        for (CameraObject *obj in arr) {
+            if ([obj.uid isEqualToString:str]) {
+                [self.dataSource addObject:obj];
+                return;
+            }
+        }
+        CameraObject *obj = [[CameraObject alloc]init];
+        obj.uid = str;
+        obj.password = @"";
     }
-    [self.tableView reloadData];
 }
 
 

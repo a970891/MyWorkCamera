@@ -177,6 +177,11 @@ typedef enum
     IOTYPE_USER_IPCAM_GET_SAVE_DROPBOX_RESP     = 0x501,
     IOTYPE_USER_IPCAM_SET_SAVE_DROPBOX_REQ      = 0x502,
     IOTYPE_USER_IPCAM_SET_SAVE_DROPBOX_RESP     = 0x503,
+    
+    //ZA define
+    IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
+    IOTYPE_USER_IPCAM_APP_LOCK1             = 0x04F2,	// APP send lock1
+    IOTYPE_USER_IPCAM_APP_LOCK2             = 0x04F3,	// App send lock2
 	
     IOTYPE_USER_CMD_MAX
 }ENUM_AVIOCTRL_MSGTYPE;
@@ -798,6 +803,13 @@ typedef struct
 	unsigned char channel;	// camera index
 	unsigned char reserve[2];
 } SMsgAVIoctrlPtzCmd;
+
+typedef struct
+{
+    unsigned short nControl;     // 0:lock 1: open
+    unsigned short nNeedKey;             // 0:no/ 1:yes
+    char szKeyValue[16];                // psw
+}SMsgLockContral;
 
 /*
 IOTYPE_USER_IPCAM_EVENT_REPORT	= 0x1FFF,	// Device Event Report Msg 
