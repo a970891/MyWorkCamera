@@ -14,16 +14,16 @@ let SH = UIScreen.mainScreen().bounds.size.height
 class QRCodeViewController: UIViewController,UITextFieldDelegate {
 
     private var iconLogo:UIImageView!
-    private var nowWifi:YYLabel!
-    private var changeWifi:YYLabel!
+    private var nowWifi:UILabel!
+    private var changeWifi:UILabel!
     private var password:LuTextField!
     private var nextButton:UIButton!
     private var mainView:UIView!
     
     private var ssid:String = ""
     
-    private var nowWifiStringA:NSMutableAttributedString!
-    private var nowWifiStringB:NSMutableAttributedString!
+    private var nowWifiStringA:String!
+    private var nowWifiStringB:String!
     
     
     override func viewDidLoad() {
@@ -31,11 +31,7 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
         self.view.backgroundColor = UIColor.whiteColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(QRCodeViewController.keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillDisappear:"), name: UIKeyboardWillHideNotification, object: nil)
-
-//        let image = UIImageView(frame: CGRectMake(40, 64+(SH-64-(SW-80))/3, SW-80, SW-80))
-//        image.image = QRCodeGenerator.qrImageForString("uid:xxxxx", imageSize: SW-80)
-//        self.view.addSubview(image)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(QRCodeViewController.keyboardWillDisappear(_:)), name: UIKeyboardWillHideNotification, object: nil)
         
         let refresh = UIButton(frame: CGRectMake(SW-12-60, 30, 60, 24))
         refresh.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
@@ -44,11 +40,6 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
         refresh.titleLabel?.font = UIFont.systemFontOfSize(13)
         refresh.addTarget(self, action: #selector(QRCodeViewController.refreshAction), forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(refresh)
-//        UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(lScreenWidth-12-24, 30, 24, 24)];
-        //    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        //    [button setTitle:@"二维码" forState:UIControlStateNormal];
-        //    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        //    button.titleLabel.font = [UIFont systemFontOfSize:13];
         
         let button = UIButton(frame: CGRectMake(12,20,44,44))
         button.setBackgroundImage(UIImage(named: "backBtn"), forState: UIControlState.Normal)
@@ -71,13 +62,9 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
     func refreshAction() {
         let str = SystemWifiManager.getSSID()
         ssid = str
-        nowWifiStringB = NSMutableAttributedString(string: " "+str)
-        nowWifiStringB.yy_color = UIColor.blackColor()
-        nowWifiStringB.yy_font = UIFont.systemFontOfSize(13)
-        let strA = NSMutableAttributedString(string: "")
-        strA.appendAttributedString(nowWifiStringA)
-        strA.appendAttributedString(nowWifiStringB)
-        self.nowWifi.attributedText = strA
+        nowWifiStringB = " " + str
+        let strA = nowWifiStringA + nowWifiStringB
+        self.nowWifi.text = strA
         nowWifi.textAlignment = NSTextAlignment.Center
     }
     
@@ -87,22 +74,21 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
         iconLogo = UIImageView(frame:CGRectMake((SW-80)/2, (SW-80)/4, 80, 80))
         iconLogo.image = UIImage(named: "router_icon")
         
-        nowWifi = YYLabel()
-        nowWifiStringA = NSMutableAttributedString(string: "当前Wi-Fi:")
-        nowWifiStringA.yy_color = UIColor.lightGrayColor()
-        nowWifiStringA.yy_font = UIFont.systemFontOfSize(13)
+        nowWifi = UILabel()
+        nowWifiStringA = "当前Wi-Fi:"
+        nowWifi.font = UIFont.systemFontOfSize(13)
+        nowWifi.textColor = UIColor.lightGrayColor()
         nowWifi.frame = CGRectMake(0, iconLogo.frame.origin.y + 100, SW, 25)
         
-        changeWifi = YYLabel()
+        changeWifi = UILabel()
         let changeWifiString = NSMutableAttributedString(string: "更换其他Wi-Fi")
-        changeWifiString.yy_font = UIFont.systemFontOfSize(13)
         let aValue = NSNumber(integer: NSUnderlineStyle.StyleSingle.rawValue)
         changeWifiString.addAttribute(NSUnderlineStyleAttributeName, value: aValue, range: NSMakeRange(0, 9))
-        changeWifiString.yy_color = UIColor(red: 91/255, green: 187/255, blue: 247/255, alpha: 1.0)
+        changeWifi.textColor = UIColor(red: 91/255, green: 187/255, blue: 247/255, alpha: 1.0)
+        changeWifi.font = UIFont.systemFontOfSize(13)
         changeWifi.frame = CGRectMake(0, nowWifi.frame.origin.y + 35, SW, 25)
-        changeWifiString.yy_setTextHighlightRange(NSMakeRange(0, 9), color: UIColor(red: 91/255, green: 187/255, blue: 247/255, alpha: 1.0), backgroundColor: UIColor.clearColor()) { (view, string, range, frame) in
-            UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
-        }
+        changeWifi.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("goToWifiSetting")))
+        changeWifi.userInteractionEnabled = true
         changeWifi.attributedText = changeWifiString
         changeWifi.textAlignment = NSTextAlignment.Center
         
@@ -129,6 +115,10 @@ class QRCodeViewController: UIViewController,UITextFieldDelegate {
         mainView.addSubview(nowWifi)
         mainView.addSubview(password)
         mainView.addSubview(nextButton)
+    }
+    
+    func goToWifiSetting() {
+        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
     }
     
     func gotoQRCodeVC() {

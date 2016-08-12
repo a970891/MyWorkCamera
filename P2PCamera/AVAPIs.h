@@ -894,7 +894,7 @@ AVAPI_API int avSendIOCtrl(int nAVChannelID, unsigned int nIOCtrlType, const cha
  * \brief Receive AV IO control
  *
  * \details This function is used by AV servers or AV clients to receive a
- *			AV IO control.
+ *			AV IO control.          
  *
  * \param nAVChannelID [in] The channel ID of the AV channel to receive IO control
  * \param pnIOCtrlType [out] The type of received IO control

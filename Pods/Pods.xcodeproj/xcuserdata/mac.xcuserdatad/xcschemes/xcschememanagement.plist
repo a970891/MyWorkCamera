@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>YYText.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>libqrencode.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,12 +17,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05A5C8E38CA4EAEAD430E4414DE57300</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>516E22963C314F199122BCBECEB7D745</key>
+		<key>2C2D8005C92C156121C41B6B34947235</key>
 		<dict>
 			<key>primary</key>
 			<true/>
