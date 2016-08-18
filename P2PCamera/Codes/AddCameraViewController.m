@@ -283,6 +283,9 @@ static NSString *const Ccell = @"Ccell";
             CameraObject *obj = [[CameraObject alloc]init];
             obj.uid = str;
             obj.password = @"";
+            [self.dataSource addObject:obj];
+            [self.tableView reloadData];
+            [[CameraManager sharedInstance] insertObject:obj];
         }
     }];
 }
