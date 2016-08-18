@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^SearchBlock)(NSString *str);
+
 @interface AudioPlayer : NSObject
 - (void)IOTC_Init;
 - (NSString *)SearchAndConnect;

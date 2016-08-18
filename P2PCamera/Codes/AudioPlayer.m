@@ -64,20 +64,21 @@ unsigned int _getTickCount() {
     avInitialize(4);
 }
 
-- (NSString *)SearchAndConnect {
+- (void)SearchAndConnect:(SearchBlock)searchBlock {
     struct st_LanSearchInfo  p[1];
     
     int errorCode = IOTC_Lan_Search(p, 1, 100);
     NSLog(@"errorcode = %d", errorCode);
-    
+    searchBlock([NSString stringWithFormat:@"%s",p[0].UID]);
     NSLog(@"ip = %s,UID = %s",p[0].IP, p[0].UID);
     if ([[NSString  stringWithFormat:@"%s",p[0].IP] isEqualToString:@""]) {
-        return @"";
+        return;
     } else {
         NSArray *arr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%s",p[0].IP], [NSString stringWithFormat:@"%s",p[0].UID],[NSNumber numberWithUnsignedShort:p[0].port], nil];
-        return arr[1];
+        
+        return;
     }
-    return @"";
+    return;
 }
 
 void *thread_ReceiveAudio(void *arg)
