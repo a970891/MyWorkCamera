@@ -10,7 +10,12 @@ import UIKit
 
 class EditCameraTableViewController: UITableViewController {
     
-    var cameraObj = CameraObject()
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    var cameraObj:CameraObject!
+    
     lazy var tableViewHead:EditCameraHead = {
         let v = NSBundle.mainBundle().loadNibNamed("EditCameraHead", owner: self, options: nil).first as! EditCameraHead
         return v
@@ -27,5 +32,7 @@ class EditCameraTableViewController: UITableViewController {
         self.navigationController?.navigationBar.hidden = false
     }
     
-    
+    func saveButtonAction() {
+        
+    }
 }

@@ -179,13 +179,38 @@ static NSString *const mainCell = @"mainCell";
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        return;//取消
+    if (alertView.tag == 102){
+        if (buttonIndex == 1) {
+            UITextField *textField1 = [alertView textFieldAtIndex:0];
+            UITextField *textField2 = [alertView textFieldAtIndex:1];
+            if ([textField2.text length] == 0){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                [alert show];
+            } else {
+                CameraObject *object = [[CameraObject alloc]init];
+                object.uid = textField1.text;
+                object.password = textField2.text;
+                
+                if ([[CameraManager sharedInstance] insertObject:object]) {
+                    for (int i = 0; i < self.dataSource.count; i++) {
+                        CameraObject *obj = self.dataSource[i];
+                        if ([obj.uid isEqualToString:textField1.text]) {
+                            self.dataSource[i] = object;
+                        }
+                    }
+                    [_myTableView reloadData];
+                }
+            }
+        }
     } else {
-        //确认
-        [[CameraManager sharedInstance]deleteObject:self.dataSource[alertView.tag - 9999]];
-        [self.dataSource removeObjectAtIndex:alertView.tag - 9999];
-        [self.myTableView reloadData];
+        if (buttonIndex == 0) {
+            return;//取消
+        } else {
+            //确认
+            [[CameraManager sharedInstance]deleteObject:self.dataSource[alertView.tag - 9999]];
+            [self.dataSource removeObjectAtIndex:alertView.tag - 9999];
+            [self.myTableView reloadData];
+        }
     }
 }
 
@@ -218,6 +243,18 @@ static NSString *const mainCell = @"mainCell";
     [cell setOnlineStatus:on];
     [cell setCell:object];
     cell.lComplection = ^(NSInteger m){
+        if (object.password == NULL || [object.password isEqualToString:@""]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            alert.tag = 102;
+            [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+            UITextField *textField1 = [alert textFieldAtIndex:0];
+            UITextField *textField2 = [alert textFieldAtIndex:1];
+            textField1.text = object.uid;
+            textField2.placeholder = @"请输入密码";
+            textField1.enabled = false;
+            [alert show];
+            return;
+        }
         CameraViewController *cameraVC = [[CameraViewController alloc]initWithUid:object.uid password:object.password];
         self.navigationController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:cameraVC animated:YES];
@@ -226,7 +263,6 @@ static NSString *const mainCell = @"mainCell";
         EditCameraTableViewController *vc = (EditCameraTableViewController *)[self StoryboardWithIdentifier:@"Settings" Identifier:@"EditCamera"];
         vc.hidesBottomBarWhenPushed = true;
         vc.cameraObj = object;
-//        [self presentViewController:vc animated:true completion:nil];
         [self.navigationController pushViewController:vc animated:true];
     };
     return cell;

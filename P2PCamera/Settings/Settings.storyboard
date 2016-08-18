@@ -52,11 +52,6 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="摄像机" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnN-sD-aw5">
-                                                    <rect key="frame" x="50" y="12" width="262" height="20"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJX-03-gHY" userLabel="分割线">
                                                     <rect key="frame" x="8" y="43" width="312" height="1"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -64,6 +59,11 @@
                                                         <constraint firstAttribute="height" constant="1" id="YfD-Ie-Wqz"/>
                                                     </constraints>
                                                 </view>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="摄像机" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nnN-sD-aw5">
+                                                    <rect key="frame" x="50" y="12" width="262" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -190,8 +190,18 @@
                                 <action selector="popLastViewVcAndOpenNav:" destination="GWS-m7-ced" id="1y4-tD-VpY"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="保存" id="6Og-NE-WKp">
+                            <connections>
+                                <action selector="popLastViewVcAndOpenNav:" destination="GWS-m7-ced" id="DJi-Jr-kFX"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="nameField" destination="nnN-sD-aw5" id="xB1-WH-PcJ"/>
+                        <outlet property="passwordField" destination="wqC-84-EYx" id="TsH-tn-LA6"/>
+                        <outlet property="statusLabel" destination="an5-Bg-zUK" id="adE-hB-TmO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prz-aA-bKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="100" id="lac-od-m5g">
