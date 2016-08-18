@@ -268,22 +268,23 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)searchCamera{
     [self.dataSource removeAllObjects];
-    NSString *str = [_audioPlayer SearchAndConnect];
-    if ([str isEqualToString:@""] || str == NULL){
-        [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
-    } else {
-        
-        NSArray *arr = [[CameraManager sharedInstance] findAllObjects];
-        for (CameraObject *obj in arr) {
-            if ([obj.uid isEqualToString:str]) {
-                [self.dataSource addObject:obj];
-                return;
+    [_audioPlayer SearchAndConnect:^(NSString *str) {
+        if ([str isEqualToString:@""] || str == NULL){
+            [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
+        } else {
+            
+            NSArray *arr = [[CameraManager sharedInstance] findAllObjects];
+            for (CameraObject *obj in arr) {
+                if ([obj.uid isEqualToString:str]) {
+                    [self.dataSource addObject:obj];
+                    return;
+                }
             }
+            CameraObject *obj = [[CameraObject alloc]init];
+            obj.uid = str;
+            obj.password = @"";
         }
-        CameraObject *obj = [[CameraObject alloc]init];
-        obj.uid = str;
-        obj.password = @"";
-    }
+    }];
 }
 
 

@@ -86,16 +86,16 @@ static NSString *const mainCell = @"mainCell";
     [super viewWillAppear:animated];
     //清除数据源
     [self.dataSource removeAllObjects];
-    //获取在线设备
-    NSString *str = [_audioPlayer SearchAndConnect];
     [self.deviceUids removeAllObjects];
-    [self.deviceUids addObject:str];
-    //获取数据
-    self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
-    //刷新界面
-    if (self.dataSource.count != 0) {
-        [self.myTableView reloadData];
-    }
+    [_audioPlayer SearchAndConnect:^(NSString *str) {
+        [self.deviceUids addObject:str];
+        //获取数据
+        self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
+        //刷新界面
+        if (self.dataSource.count != 0) {
+            [self.myTableView reloadData];
+        }
+    }];
 }
 
 - (void)setCameras {

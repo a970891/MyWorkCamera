@@ -12,5 +12,5 @@ typedef void (^SearchBlock)(NSString *str);
 
 @interface AudioPlayer : NSObject
 - (void)IOTC_Init;
-- (NSString *)SearchAndConnect;
+- (NSString *)SearchAndConnect:(SearchBlock)searchBlock;
 @end
