@@ -65,21 +65,16 @@ unsigned int _getTickCount() {
 }
 
 - (void)SearchAndConnect:(SearchBlock)searchBlock {
-    struct st_LanSearchInfo  p[1];
+    struct st_LanSearchInfo  p[100];
     
-    int errorCode = IOTC_Lan_Search(p, 1, 100);
-    NSLog(@"errorcode = %d", errorCode);
+    IOTC_Lan_Search(p, 100, 100);
     
-    searchBlock([NSString stringWithFormat:@"%s",p[0].UID]);
-//    NSLog(@"ip = %s,UID = %s",p[0].IP, p[0].UID);
-//    if ([[NSString  stringWithFormat:@"%s",p[0].IP] isEqualToString:@""]) {
-//        return;
-//    } else {
-//        NSArray *arr = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%s",p[0].IP], [NSString stringWithFormat:@"%s",p[0].UID],[NSNumber numberWithUnsignedShort:p[0].port], nil];
-//        
-//        return;
-//    }
-//    return;
+    for(int i = 0;i < 100;i++) {
+        NSString *str = [NSString stringWithFormat:@"%s",p[i].UID];
+        if (str != NULL && ![str isEqualToString:@""]) {
+            searchBlock(str);
+        }
+    }
 }
 
 void *thread_ReceiveAudio(void *arg)
