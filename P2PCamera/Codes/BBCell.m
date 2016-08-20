@@ -38,7 +38,7 @@
 }
 
 - (void)setCell:(NSInteger)index camera:(CameraObject *)object {
-    _titleLabel.text = [NSString stringWithFormat:@"摄像机%ld",index];
+    _titleLabel.text = object.name;
     _descLabel.text = [NSString stringWithFormat:@"uid:%@|密码:%@",object.uid,object.password];
 }
 

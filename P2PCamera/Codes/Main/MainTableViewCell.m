@@ -58,7 +58,6 @@
     if (!_firstLabel) {
         _firstLabel = [[UILabel alloc]initWithFrame:CGRectMake(90*AUTO_WIDTH, 10*AUTO_HEIGHT, 120*AUTO_WIDTH, 20*AUTO_HEIGHT)];
         _firstLabel.font = [UIFont systemFontOfSize:17];
-        _firstLabel.text = @"摄像机(离线)";
     }
     return _firstLabel;
 }
@@ -97,11 +96,12 @@
 }
 
 - (void)setCell:(CameraObject *)object{
+    self.firstLabel.text = object.name;
     self.secondLabel.text = [NSString stringWithFormat:@"UID:%@",object.uid];
 }
 
-- (void)setOnlineStatus:(BOOL)on {
-    _firstLabel.text = on ? @"摄像机(在线)" : @"摄像机(离线)";
+- (void)setOnlineStatus:(BOOL)on name:(NSString *)name {
+    _firstLabel.text = on ? [NSString stringWithFormat:@"%@(在线)",name] : [NSString stringWithFormat:@"%@(离线)",name];
 }
 
 @end

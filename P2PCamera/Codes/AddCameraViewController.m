@@ -8,12 +8,13 @@
 
 #import "AddCameraViewController.h"
 #import "AddDetailViewController.h"
-#import "QRViewController.h"
+//#import "QRViewController.h"
 #import "AudioPlayer.h"
 #import "CameraObject.h"
 #import "CameraManager.h"
 #import "BBCell.h"
 #import "SVProgressHUD.h"
+#import "P2PCamera-Swift.h"
 
 static NSString *const Bcell = @"Bcell";
 static NSString *const Ccell = @"Ccell";
@@ -154,14 +155,14 @@ static NSString *const Ccell = @"Ccell";
     NSLog(@"%ld",indexPath.row);
     CameraObject *object = self.dataSource[indexPath.row];
     if([object.password isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
         alert.tag = 102;
         [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
         UITextField *textField1 = [alert textFieldAtIndex:0];
         UITextField *textField2 = [alert textFieldAtIndex:1];
-        textField1.text = object.uid;
+        textField1.placeholder = @"请输入名字";
+        textField1.uid = object.uid;
         textField2.placeholder = @"请输入密码";
-        textField1.enabled = false;
         [alert show];
     } else {
         return;
@@ -213,7 +214,7 @@ static NSString *const Ccell = @"Ccell";
             UITextField *textField1 = [alertView textFieldAtIndex:0];
             UITextField *textField2 = [alertView textFieldAtIndex:1];
             if ([textField1.text length] == 0 || [textField2.text length] == 0){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"uid或密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"名字或密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
                 [alert show];
             } else {
                 CameraObject *object = [[CameraObject alloc]init];
@@ -231,18 +232,19 @@ static NSString *const Ccell = @"Ccell";
         if (buttonIndex == 1) {
             UITextField *textField1 = [alertView textFieldAtIndex:0];
             UITextField *textField2 = [alertView textFieldAtIndex:1];
-            if ([textField2.text length] == 0){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+            if ([textField2.text length] == 0 || [textField1.text length] == 0){
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"名字或密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
                 [alert show];
             } else {
                 CameraObject *object = [[CameraObject alloc]init];
-                object.uid = textField1.text;
+                object.uid = textField1.uid;
+                object.name = textField1.text;
                 object.password = textField2.text;
                 
                 if ([[CameraManager sharedInstance] insertObject:object]) {
                     for (int i = 0; i < self.dataSource.count; i++) {
                         CameraObject *obj = self.dataSource[i];
-                        if ([obj.uid isEqualToString:textField1.text]) {
+                        if ([obj.uid isEqualToString:textField1.uid]) {
                             self.dataSource[i] = object;
                         }
                     }
@@ -277,12 +279,15 @@ static NSString *const Ccell = @"Ccell";
             for (CameraObject *obj in arr) {
                 if ([obj.uid isEqualToString:str]) {
                     [self.dataSource addObject:obj];
+                    NSLog(@"%@",obj.name);
+                    [self.tableView reloadData];
                     return;
                 }
             }
             CameraObject *obj = [[CameraObject alloc]init];
             obj.uid = str;
             obj.password = @"";
+            obj.name = @"";
             [self.dataSource addObject:obj];
             [self.tableView reloadData];
             [[CameraManager sharedInstance] insertObject:obj];

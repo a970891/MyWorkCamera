@@ -14,6 +14,7 @@
 {
     [aCoder encodeObject:_uid forKey:@"UID"];
     [aCoder encodeObject:_password forKey:@"password"];
+    [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:_quality forKey:@"quality"];
     [aCoder encodeObject:_turnVideo forKey:@"turnVideo"];
     [aCoder encodeObject:_placeMode forKey:@"placeMode"];
@@ -32,6 +33,7 @@
     if (self) {
         _uid = [aDecoder decodeObjectForKey:@"UID"];
         _password = [aDecoder decodeObjectForKey:@"password"];
+        _name = [aDecoder decodeObjectForKey:@"name"];
         _quality = [aDecoder decodeObjectForKey:@"quality"];
         _turnVideo = [aDecoder decodeObjectForKey:@"turnVideo"];
         _placeMode = [aDecoder decodeObjectForKey:@"placeMode"];
@@ -52,6 +54,7 @@
     if (self) {
         self.uid = @"";
         self.password = @"";
+        self.name = @"摄像头";
         self.quality = @0;
         self.turnVideo = @0;
         self.placeMode = @0;

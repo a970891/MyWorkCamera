@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Pods-P2PCamera.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>YYText.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>libqrencode.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>05A5C8E38CA4EAEAD430E4414DE57300</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2C2D8005C92C156121C41B6B34947235</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>516E22963C314F199122BCBECEB7D745</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>59B5154DEC6908AAF54B5F46275BEC56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

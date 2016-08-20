@@ -240,7 +240,7 @@ static NSString *const mainCell = @"mainCell";
             break;
         }
     }
-    [cell setOnlineStatus:on];
+    [cell setOnlineStatus:on name:object.name];
     [cell setCell:object];
     cell.lComplection = ^(NSInteger m){
         if (object.password == NULL || [object.password isEqualToString:@""]) {

@@ -25,6 +25,8 @@ class EditCameraTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.tableHeaderView = self.tableViewHead
         self.tableViewHead.TitleLabel.text = cameraObj.uid
+        self.nameField.text = cameraObj.name
+        self.passwordField.text = cameraObj.password
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,7 +34,19 @@ class EditCameraTableViewController: UITableViewController {
         self.navigationController?.navigationBar.hidden = false
     }
     
-    func saveButtonAction() {
+    @IBAction func saveAction(sender: AnyObject) {
         
+        if let pwd = self.passwordField.text {
+            if let name = self.nameField.text {
+                if (pwd as NSString).length != 0 && (name as NSString).length != 0 {
+                    self.cameraObj.password = pwd
+                    self.cameraObj.name = name
+                    CameraManager.sharedInstance().insertObject(cameraObj)
+                    return;
+                }
+            }
+        }
+        UIAlertView(title: "提示", message: "名字或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
     }
+
 }

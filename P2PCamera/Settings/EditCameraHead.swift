@@ -23,3 +23,18 @@ class EditCameraHead: UIView {
 //        self.TitleLabel.text = "";
     }
 }
+
+private var xoTag:Int = 0
+
+extension UITextField {
+    
+    var uid:String {
+        get{
+            return (objc_getAssociatedObject(self, &xoTag)) as! String
+        }
+        set(newValue){
+            objc_setAssociatedObject(self, &xoTag, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+}

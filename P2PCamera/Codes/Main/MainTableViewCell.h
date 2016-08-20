@@ -23,6 +23,6 @@ typedef void(^RightImageViewTap)(NSInteger n);
 @property (nonatomic,copy)RightImageViewTap rComplection;
 
 - (void)setCell:(CameraObject *)object;
-- (void)setOnlineStatus:(BOOL)on;
+- (void)setOnlineStatus:(BOOL)on name:(NSString *)name;
 
 @end
