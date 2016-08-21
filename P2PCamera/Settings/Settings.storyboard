@@ -504,6 +504,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="environmentLabel" destination="JOV-lt-8ZT" id="5no-NM-cWC"/>
+                        <outlet property="moveDetect" destination="bvy-Sd-xg7" id="aK1-jD-KHx"/>
+                        <outlet property="qualtyLabel" destination="EwR-f5-8eK" id="kJg-bR-oix"/>
+                        <outlet property="recordModeLabel" destination="vYS-MP-I3h" id="lYF-hu-ZXl"/>
+                        <outlet property="videoTurnLabel" destination="NNK-Wa-c9K" id="yLu-5f-YSS"/>
+                        <outlet property="wifiLabel" destination="a3b-kw-cb2" id="o9L-AJ-KWt"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Zh-Mi-83n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

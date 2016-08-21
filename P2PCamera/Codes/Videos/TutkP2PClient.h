@@ -40,6 +40,20 @@ typedef struct
 -(void) setWifi:(IpcWifiAp) ap;
 -(void)setPassword:(NSString *) oldPasswd : (NSString *) newPasswd;
 -(void)setVideoMode:(int) video_mod; // 0 倒转, 1 镜像 , 3 倒转和镜像
+
+//获取显示模式
+-(int)getVideoMode;
+//获取环境模式
+-(int)getEnvironmentMode;
+//获取移动侦测
+-(int)getMotionDetect;
+//获取录像模式
+-(int)getDeviceInfo;
+//格式化SD卡
+-(int)getStorage;
+//获取视频质量
+-(int)getVideoQuality;
+
 - (void)lock_unlock:(int)lockIndex status:(BOOL)status;//加锁解锁
 @property (nonatomic,retain) id delegate;
 @end

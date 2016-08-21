@@ -502,7 +502,7 @@ IOTYPE_USER_IPCAM_DEVINFO_RESP			= 0x0331,
 typedef struct
 {
 	unsigned char model[16];	// IPCam mode
-	unsigned char vendor[16];	// IPCam manufacturer
+	unsigned char vendor[16];	// IPCam manufacturer厂商
 	unsigned int version;		// IPCam firmware version	ex. v1.2.3.4 => 0x01020304;  v1.0.0.2 => 0x01000002
 	unsigned int channel;		// Camera index
 	unsigned int total;			// 0: No cards been detected or an unrecognizeable sdcard that could not be re-formatted.

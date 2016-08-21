@@ -39,6 +39,149 @@
     IOTC_DeInitialize();
 }
 
+-(int) recv_io_ctrl_loop {
+    
+    while (stopFlg) {
+        unsigned int ioType;
+        char trash[1500];
+        int ret = avRecvIOCtrl(avIndex, &ioType, trash, sizeof(trash), 10000);
+        if(ret < 0) {
+            printf("avRecvIOCtrl[%d][%d]\n", ret, avIndex);
+            break;
+        }else {
+            switch (ioType) {
+                case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
+                    SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
+                    [self handListWifiAPReponse:wifiList];
+                    break;
+                case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
+                    //SMsgAVIoctrlSetWifiResp *reponse=(SMsgAVIoctrlSetWifiResp*)trash;
+                    //[self handSetWifiResp:reponse];
+                    break;
+                //获取录像模式
+                case IOTYPE_USER_IPCAM_GET_VIDEOMODE_RESP:;
+                    SMsgAVIoctrlGetVideoModeResp *response = (SMsgAVIoctrlGetVideoModeResp *)trash;
+                    switch (response->mode) {
+                        case AVIOCTRL_VIDEOMODE_NORMAL:
+                            NSLog(@"正常");
+                            break;
+                        case AVIOCTRL_VIDEOMODE_FLIP:
+                            NSLog(@"翻转");
+                            break;
+                        case AVIOCTRL_VIDEOMODE_MIRROR:
+                            NSLog(@"镜像");
+                            break;
+                        case AVIOCTRL_VIDEOMODE_FLIP_MIRROR:
+                            NSLog(@"翻转镜像");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                //获取环境模式
+                case IOTYPE_USER_IPCAM_GET_ENVIRONMENT_RESP:;
+                    SMsgAVIoctrlGetEnvironmentResp *environment = (SMsgAVIoctrlGetEnvironmentResp *)trash;
+                    switch (environment->mode) {
+                        case AVIOCTRL_ENVIRONMENT_INDOOR_50HZ:
+                            NSLog(@"室内50HZ模式");
+                            break;
+                        case AVIOCTRL_ENVIRONMENT_INDOOR_60HZ:
+                            NSLog(@"室内60HZ模式");
+                            break;
+                        case AVIOCTRL_ENVIRONMENT_OUTDOOR:
+                            NSLog(@"室外模式");
+                            break;
+                        case AVIOCTRL_ENVIRONMENT_NIGHT:
+                            NSLog(@"夜间模式");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                //获取移动侦测
+                case IOTYPE_USER_IPCAM_GETMOTIONDETECT_RESP:;
+                    SMsgAVIoctrlGetMotionDetectResp *motion = (SMsgAVIoctrlGetMotionDetectResp *)trash;
+                    switch (motion->sensitivity) {
+                        case 0:
+                            NSLog(@"0");
+                            break;
+                        case 1:
+                            NSLog(@"25");
+                            break;
+                        case 2:
+                            NSLog(@"50");
+                            break;
+                        case 3:
+                            NSLog(@"75");
+                            break;
+                        case 4:
+                            NSLog(@"100");
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                //获取设备信息
+                case IOTYPE_USER_IPCAM_DEVINFO_RESP:;
+                    SMsgAVIoctrlDeviceInfoResp * info = (SMsgAVIoctrlDeviceInfoResp *)trash;
+                    /*
+                     unsigned char model[16];	// IPCam mode
+                     unsigned char vendor[16];	// IPCam manufacturer厂商
+                     unsigned int version;		// IPCam firmware version	ex. v1.2.3.4 => 0x01020304;  v1.0.0.2 => 0x01000002
+                     unsigned int channel;		// Camera index
+                     unsigned int total;			// 0: No cards been detected or an unrecognizeable sdcard that could not be re-formatted.
+                     // -1: if camera detect an unrecognizable sdcard, and could be re-formatted
+                     // otherwise: return total space size of sdcard (MBytes)
+                     
+                     unsigned int free;			// Free space size of sdcard (MBytes)
+                     unsigned char reserved[8];	// reserved
+                     */
+                    break;
+                case IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_RESP:;
+                    SMsgAVIoctrlFormatExtStorageResp *result = (SMsgAVIoctrlFormatExtStorageResp *)trash;
+                    switch (result->result) {
+                        case 0:
+                            NSLog(@"格式化成功");
+                            break;
+                        default:
+                            NSLog(@"格式化失败");
+                            break;
+                    }
+                case IOTYPE_USER_IPCAM_GETSTREAMCTRL_RESP:;
+                    SMsgAVIoctrlGetStreamCtrlResq *quality = (SMsgAVIoctrlGetStreamCtrlResq *)trash;
+                    switch (quality->quality) {
+                        case AVIOCTRL_QUALITY_UNKNOWN:
+                            NSLog(@"未知");
+                            break;
+                        case AVIOCTRL_QUALITY_MAX:
+                            NSLog(@"最高");
+                            break;
+                        case AVIOCTRL_QUALITY_HIGH:
+                            NSLog(@"高");
+                            break;
+                        case AVIOCTRL_QUALITY_MIDDLE:
+                            NSLog(@"中");
+                            break;
+                        case AVIOCTRL_QUALITY_LOW:
+                            NSLog(@"低");
+                            break;
+                        case AVIOCTRL_QUALITY_MIN:
+                            NSLog(@"最低");
+                            break;
+                        default:
+                            break;
+                    }
+                    
+                    break;
+                default:;
+            }
+            
+        }
+    }
+    return 1;
+}
+
+//获取Wifi信息
 -(int)listWifiAp{
     int ret;
     
@@ -51,6 +194,90 @@
     //free(request);
     return 1;
 }
+
+//获取显示模式
+-(int)getVideoMode{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+//获取环境模式
+-(int)getEnvironmentMode{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+//获取移动侦测
+-(int)getMotionDetect{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+//获取设备信息
+-(int)getDeviceInfo{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_DEVINFO_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+//格式化SD卡
+-(int)getStorage{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+//获取视频质量
+-(int)getVideoQuality{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+    //free(request);
+    return 1;
+}
+
+/*************************************************************************/
+/*************************      设置       *******************************/
+/************************************************************************/
+
 /*
  设置WIFI
  */
@@ -110,32 +337,7 @@
     return ret;
 }
 
--(int) recv_io_ctrl_loop {
-    
-    while (stopFlg) {
-        unsigned int ioType;
-        char trash[1500];
-        int ret = avRecvIOCtrl(avIndex, &ioType, trash, sizeof(trash), 10000);
-        if(ret < 0) {
-            printf("avRecvIOCtrl[%d][%d]\n", ret, avIndex);
-            break;
-        }else {
-            switch (ioType) {
-                case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
-                    SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
-                    [self handListWifiAPReponse:wifiList];
-                    break;
-                case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
-                    //SMsgAVIoctrlSetWifiResp *reponse=(SMsgAVIoctrlSetWifiResp*)trash;
-                    //[self handSetWifiResp:reponse];
-                    break;
-                default:;
-            }
-            
-        }
-    }
-    return 1;
-}
+
 
 /*
  -(void) handSetWifiResp:(SMsgAVIoctrlSetWifiResp *) reponse{

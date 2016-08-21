@@ -14,3 +14,4 @@
 #import "CameraObject.h"
 #import "QRCodeGenerator.h"
 #import "CameraManager.h"
+#import "TutkP2PClient.h"

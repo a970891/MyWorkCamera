@@ -10,6 +10,16 @@ import UIKit
 
 class SetTableViewController: UITableViewController {
 
+    
+    @IBOutlet weak var qualtyLabel: UILabel!
+    @IBOutlet weak var videoTurnLabel: UILabel!
+    @IBOutlet weak var environmentLabel: UILabel!
+    @IBOutlet weak var wifiLabel: UILabel!
+    @IBOutlet weak var moveDetect: UILabel!
+    @IBOutlet weak var recordModeLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

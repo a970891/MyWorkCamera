@@ -67,7 +67,7 @@ static NSString *const Ccell = @"Ccell";
 
 #pragma mark - TableViewCell Delete
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return true;
+    return false;
 }
 
 //删除按钮点击事件

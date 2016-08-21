@@ -14,6 +14,8 @@ class EditCameraTableViewController: UITableViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var statusLabel: UILabel!
     
+    private var tutkManager:TutkP2PAVClient!
+    
     var cameraObj:CameraObject!
     
     lazy var tableViewHead:EditCameraHead = {
@@ -27,11 +29,39 @@ class EditCameraTableViewController: UITableViewController {
         self.tableViewHead.TitleLabel.text = cameraObj.uid
         self.nameField.text = cameraObj.name
         self.passwordField.text = cameraObj.password
+        self.getCameraInfo()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.hidden = false
+    }
+    
+    func getCameraInfo() {
+        tutkManager = TutkP2PAVClient()
+        let a = tutkManager.connect(cameraObj.uid, cameraObj.password)
+        if a != -1 {
+            tutkManager.getVideoMode()
+            tutkManager.getEnvironmentMode()
+            tutkManager.getMotionDetect()
+            tutkManager.getDeviceInfo()
+            tutkManager.getVideoQuality()
+            
+            /*
+             //获取显示模式
+             -(int)getVideoMode;
+             //获取环境模式
+             -(int)getEnvironmentMode;
+             //获取移动侦测
+             -(int)getMotionDetect;
+             //获取录像模式
+             -(int)getRecordMode;
+             //格式化SD卡
+             -(int)getStorage;
+             //获取视频质量
+             -(int)getVideoQuality;
+             */
+        }
     }
     
     @IBAction func saveAction(sender: AnyObject) {
