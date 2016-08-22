@@ -57,7 +57,10 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
             vc.cameraObj = cameraObj
             vc.tutkManager = tutkManager
         }
-        
+        if let vc = segue.destinationViewController as? SetPasswordController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -200,11 +203,11 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
             let f1 = alertView.textFieldAtIndex(0)
             let f2 = alertView.textFieldAtIndex(1)
             if let f1x = f1?.text, f2x = f2?.text {
-                if f1x.characters.count != 0 || f2x.characters.count != 0 {
+                if f1x.characters.count != 0 && f2x.characters.count != 0 {
                     SVProgressHUD.showSuccessWithStatus("设置完成!")
                     self.cameraObj.ssid = f1x
                     self.wifiLabel.text = f1x
-                    
+                    tutkManager.setWifi(f1x, pwd: f2x)
                     return;
                 }
             }

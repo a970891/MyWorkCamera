@@ -109,6 +109,7 @@
 		89574B471C7A6F0100A7E7A6 /* left_b.png in Resources */ = {isa = PBXBuildFile; fileRef = 89574B451C7A6F0100A7E7A6 /* left_b.png */; };
 		89574B4A1C7A6F7D00A7E7A6 /* right_b.png in Resources */ = {isa = PBXBuildFile; fileRef = 89574B491C7A6F7D00A7E7A6 /* right_b.png */; };
 		89574B4D1C7A6FCD00A7E7A6 /* WIFIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89574B4C1C7A6FCD00A7E7A6 /* WIFIViewController.m */; };
+		8966A5121D6B677700F8419D /* SetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966A5111D6B677700F8419D /* SetPasswordController.swift */; };
 		89DA94581C7A2CFC008735CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DA94571C7A2CFC008735CA /* main.m */; };
 		89DA945B1C7A2CFC008735CA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DA945A1C7A2CFC008735CA /* AppDelegate.m */; };
 		89DA94631C7A2CFC008735CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89DA94621C7A2CFC008735CA /* Assets.xcassets */; };
@@ -435,6 +436,7 @@
 		89574B491C7A6F7D00A7E7A6 /* right_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_b.png; sourceTree = "<group>"; };
 		89574B4B1C7A6FCD00A7E7A6 /* WIFIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIFIViewController.h; sourceTree = "<group>"; };
 		89574B4C1C7A6FCD00A7E7A6 /* WIFIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIFIViewController.m; sourceTree = "<group>"; };
+		8966A5111D6B677700F8419D /* SetPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetPasswordController.swift; sourceTree = "<group>"; };
 		89DA94531C7A2CFC008735CA /* P2PCamera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P2PCamera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89DA94571C7A2CFC008735CA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89DA94591C7A2CFC008735CA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 				0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */,
 				0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */,
 				0438023E1D6B02F600A26C9D /* CameraInfoController.swift */,
+				8966A5111D6B677700F8419D /* SetPasswordController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1664,6 +1667,7 @@
 				89DA94D81C7A2FEB008735CA /* MyNavViewController.m in Sources */,
 				89574B121C7A53F700A7E7A6 /* SetViewController.m in Sources */,
 				0431A8991CE03B7B008BC4D0 /* VideoFileParser.m in Sources */,
+				8966A5121D6B677700F8419D /* SetPasswordController.swift in Sources */,
 				0431A89A1CE03B7B008BC4D0 /* ViewController.m in Sources */,
 				89DA948F1C7A2EE0008735CA /* AFURLRequestSerialization.m in Sources */,
 				B77090BA1C85DF3B00736155 /* ZHLTViewController.m in Sources */,

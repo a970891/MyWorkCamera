@@ -84,7 +84,7 @@ typedef struct
 //设置禁音
 - (int)setMute:(BOOL)on;
 //对讲
-- (int)sendVoice;
+- (int)sendVoice:(BOOL)on;
 
 - (void)lock_unlock:(int)lockIndex status:(BOOL)status;//加锁解锁
 @property (nonatomic,retain) id delegate;

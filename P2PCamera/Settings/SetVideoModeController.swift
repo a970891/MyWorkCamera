@@ -29,6 +29,8 @@ class SetVideoModeController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tutkManager.setVideoMode(Int32(indexPath.row))
+        cameraObj.videoMode = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
                 cell.accessoryType = .None

@@ -450,6 +450,45 @@
 }
 //设置禁音
 - (int)setMute:(BOOL)on{
+    SMsgAVIoctrlAVStream request;
+    request.channel = avIndex;
+    int ret;
+    
+    if (on) {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_AUDIOSTART, (char *)&request, sizeof(request)) < 0))
+        {
+            NSLog(@"set_video_quality_failed[%d]", ret);
+            return -1;
+        }
+    } else {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_AUDIOSTOP, (char *)&request, sizeof(request)) < 0))
+        {
+            NSLog(@"set_video_quality_failed[%d]", ret);
+            return -1;
+        }
+    }
+    
+    return 1;
+}
+//对讲
+- (int)sendVoice:(BOOL)on{
+    SMsgAVIoctrlAVStream request;
+    request.channel = avIndex;
+    int ret;
+    
+    if (on) {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SPEAKERSTART, (char *)&request, sizeof(request)) < 0))
+        {
+            NSLog(@"set_video_quality_failed[%d]", ret);
+            return -1;
+        }
+    } else {
+        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SPEAKERSTOP, (char *)&request, sizeof(request)) < 0))
+        {
+            NSLog(@"set_video_quality_failed[%d]", ret);
+            return -1;
+        }
+    }
     
     return 1;
 }

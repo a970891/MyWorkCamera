@@ -47,6 +47,7 @@
 @property (nonatomic,assign) BOOL audioSwitch;
 @property (nonatomic,assign) BOOL lockASwitch;
 @property (nonatomic,assign) BOOL lockBSwitch;
+@property (nonatomic,assign) BOOL talkSwitch;
 
 @end
 
@@ -64,6 +65,7 @@
     self.audioSwitch = true;
     self.lockASwitch = true;
     self.lockBSwitch = true;
+    self.talkSwitch = false;
     
     [super viewDidLoad];
     [self initSetupUI];
@@ -224,6 +226,7 @@
     UIButton *voiceButton = [[UIButton alloc]initWithFrame:CGRectMake((lScreenWidth-25)/2, _slider.frame.origin.y+120, 25, 40)];
     [voiceButton setImage:[UIImage imageNamed:@"camera_voice"] forState:UIControlStateNormal];
     [voiceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    voiceButton.tag = 884;
     [self.view addSubview:voiceButton];
 }
 
@@ -232,6 +235,7 @@
         case 0:
             self.audioSwitch = !self.audioSwitch;
             [button setBackgroundImage:[UIImage imageNamed:self.audioSwitch ? @"camera_audio":@"camera_unaudio"] forState:UIControlStateNormal];
+            [tutkP2PAVClient setMute:self.audioSwitch];
             break;
         case 1:
             
@@ -247,6 +251,8 @@
             [button setBackgroundImage:[UIImage imageNamed:!self.lockBSwitch ? @"camera_lock":@"camera_unlock"] forState:UIControlStateNormal];
             break;
         default:
+            [tutkP2PAVClient sendVoice:self.talkSwitch];
+            self.talkSwitch = !self.talkSwitch;
             break;
     }
 }

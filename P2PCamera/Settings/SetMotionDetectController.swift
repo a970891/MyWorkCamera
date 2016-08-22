@@ -29,6 +29,8 @@ class SetMotionDetectController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tutkManager.setMotionDetece(Int32(indexPath.row))
+        cameraObj.motionDetect = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
                 cell.accessoryType = .None

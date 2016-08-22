@@ -29,6 +29,8 @@ class SetEnvironmentModeController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tutkManager.setEnvironmentMode(Int32(indexPath.row))
+        cameraObj.placeMode = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
                 cell.accessoryType = .None

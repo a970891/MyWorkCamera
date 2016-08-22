@@ -31,6 +31,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         self.tableViewHead.TitleLabel.text = cameraObj.uid
         self.nameField.text = cameraObj.name
         self.passwordField.text = cameraObj.password
+        self.passwordField.enabled = false
         self.getCameraInfo()
     }
     
