@@ -19,6 +19,18 @@ typedef struct
     char passwd[64];            //WIFI password
 }IpcWifiAp;
 
+@protocol CameraInfoDelegate <NSObject>
+
+- (void)receiveWifi;
+- (void)receiveVideoMode:(int)mode;
+- (void)receiveEnvironmentMode:(int)mode;
+- (void)receiveEXTSdCardResult:(int)result;
+- (void)receiveMotionDetect:(int)detect;
+- (void)receiveDeviceInfo:(int)type content:(NSString *)content;
+- (void)receiveQuality:(int)quality;
+- (void)receiveRecordType:(int)type;
+
+@end
 
 @protocol TutkP2PAVClientDelegate<NSObject>
 -(void)onReceivedIFrame:(uint8_t*) data : (int) length;
@@ -36,11 +48,12 @@ typedef struct
 -(void) stopAndCloseSession;
 -(int) closeSession;
 -(void) turn:(ENUM_TURN_CMD)direction;
--(void) listWifiAp;
+
 -(void) setWifi:(IpcWifiAp) ap;
 -(void)setPassword:(NSString *) oldPasswd : (NSString *) newPasswd;
 -(void)setVideoMode:(int) video_mod; // 0 倒转, 1 镜像 , 3 倒转和镜像
-
+//获取wifi
+-(void)listWifiAp;
 //获取显示模式
 -(int)getVideoMode;
 //获取环境模式
@@ -53,7 +66,10 @@ typedef struct
 -(int)getStorage;
 //获取视频质量
 -(int)getVideoQuality;
+//获取录像模式
+-(int)getRecordMode;
 
 - (void)lock_unlock:(int)lockIndex status:(BOOL)status;//加锁解锁
 @property (nonatomic,retain) id delegate;
+@property (nonatomic,retain) id<CameraInfoDelegate> infoDelegate;
 @end

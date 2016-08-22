@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditCameraTableViewController: UITableViewController {
+class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -25,6 +25,8 @@ class EditCameraTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tutkManager = TutkP2PAVClient()
+        tutkManager.infoDelegate = self;
         self.tableView.tableHeaderView = self.tableViewHead
         self.tableViewHead.TitleLabel.text = cameraObj.uid
         self.nameField.text = cameraObj.name
@@ -38,7 +40,6 @@ class EditCameraTableViewController: UITableViewController {
     }
     
     func getCameraInfo() {
-        tutkManager = TutkP2PAVClient()
         let a = tutkManager.connect(cameraObj.uid, cameraObj.password)
         if a != -1 {
             tutkManager.getVideoMode()
@@ -46,22 +47,64 @@ class EditCameraTableViewController: UITableViewController {
             tutkManager.getMotionDetect()
             tutkManager.getDeviceInfo()
             tutkManager.getVideoQuality()
-            
-            /*
-             //获取显示模式
-             -(int)getVideoMode;
-             //获取环境模式
-             -(int)getEnvironmentMode;
-             //获取移动侦测
-             -(int)getMotionDetect;
-             //获取录像模式
-             -(int)getRecordMode;
-             //格式化SD卡
-             -(int)getStorage;
-             //获取视频质量
-             -(int)getVideoQuality;
-             */
+            tutkManager.getRecordMode()
         }
+    }
+    
+    //Mark************* cameraInfoDelegate *************
+    //收到wifi信息回调
+    func receiveWifi() {
+        
+    }
+    //收到视频模式回调
+    func receiveVideoMode(mode: Int32) {
+        self.cameraObj.videoMode = NSNumber(int: mode)
+    }
+    //收到视频质量回调
+    func receiveQuality(quality: Int32) {
+        self.cameraObj.quality = NSNumber(int: quality)
+    }
+    //收到移动侦测回调
+    func receiveMotionDetect(detect: Int32) {
+        self.cameraObj.motionDetect = NSNumber(int: detect)
+    }
+    //收到环境模式回调
+    func receiveEnvironmentMode(mode: Int32) {
+        self.cameraObj.placeMode = NSNumber(int: mode)
+    }
+    //收到SD卡格式化回调
+    func receiveEXTSdCardResult(result: Int32) {
+        switch result {
+        case 0:
+            //成功
+            
+            break;
+        default:
+            //失败
+            
+            break;
+        }
+    }
+    //收到设备信息回调
+    func receiveDeviceInfo(type: Int32, content: String!) {
+        switch type {
+        case 0:
+            self.cameraObj.model = content
+        case 1:
+            self.cameraObj.firm = content
+        case 2:
+            self.cameraObj.cameraVersion = content
+        case 3:
+            self.cameraObj.rom = NSNumber(int:(content as NSString).intValue)
+        case 4:
+            self.cameraObj.reduceRom = NSNumber(int:(content as NSString).intValue)
+        default:
+            break;
+        }
+    }
+    //收到录像模式回调
+    func receiveRecordType(type: Int32) {
+        self.cameraObj.recordMode = NSNumber(int: type)
     }
     
     @IBAction func saveAction(sender: AnyObject) {
@@ -79,4 +122,12 @@ class EditCameraTableViewController: UITableViewController {
         UIAlertView(title: "提示", message: "名字或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        let vc = segue.destinationViewController
+        if vc.classForCoder == SetTableViewController.classForCoder() {
+            (vc as! SetTableViewController).cameraObj = self.cameraObj
+        }
+    }
+    
 }

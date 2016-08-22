@@ -20,11 +20,12 @@
     [aCoder encodeObject:_placeMode forKey:@"placeMode"];
     [aCoder encodeObject:_motionDetect forKey:@"motionDetect"];
     [aCoder encodeObject:_recordMode forKey:@"recordMode"];
-    [aCoder encodeObject:_cameraMode forKey:@"cameraMode"];
+    [aCoder encodeObject:_videoMode forKey:@"videoMode"];
     [aCoder encodeObject:_cameraVersion forKey:@"cameraVersion"];
     [aCoder encodeObject:_firm forKey:@"firm"];
     [aCoder encodeObject:_reduceRom forKey:@"reduceRom"];
     [aCoder encodeObject:_rom forKey:@"rom"];
+    [aCoder encodeObject:_model forKey:@"model"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -39,11 +40,12 @@
         _placeMode = [aDecoder decodeObjectForKey:@"placeMode"];
         _motionDetect = [aDecoder decodeObjectForKey:@"motionDetect"];
         _recordMode = [aDecoder decodeObjectForKey:@"recordMode"];
-        _cameraMode = [aDecoder decodeObjectForKey:@"cameraMode"];
+        _videoMode = [aDecoder decodeObjectForKey:@"videoMode"];
         _cameraVersion = [aDecoder decodeObjectForKey:@"cameraVersion"];
         _firm = [aDecoder decodeObjectForKey:@"firm"];
         _reduceRom = [aDecoder decodeObjectForKey:@"reduceRom"];
         _rom = [aDecoder decodeObjectForKey:@"rom"];
+        _model = [aDecoder decodeObjectForKey:@"model"];
     }
     return self;
 }
@@ -60,11 +62,12 @@
         self.placeMode = @0;
         self.motionDetect = @0;
         self.recordMode = @0;
-        self.cameraMode = @"";
+        self.videoMode = @"";
         self.cameraVersion = @"";
         self.firm = @"";
         self.reduceRom = @0;
         self.rom = @0;
+        self.model = @"";
     }
     return self;
 }

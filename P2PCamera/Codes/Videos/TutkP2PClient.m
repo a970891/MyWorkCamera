@@ -64,17 +64,22 @@
                     switch (response->mode) {
                         case AVIOCTRL_VIDEOMODE_NORMAL:
                             NSLog(@"正常");
+                            [self.delegate receiveVideoMode:0];
                             break;
                         case AVIOCTRL_VIDEOMODE_FLIP:
                             NSLog(@"翻转");
+                            [self.delegate receiveVideoMode:1];
                             break;
                         case AVIOCTRL_VIDEOMODE_MIRROR:
+                            [self.delegate receiveVideoMode:2];
                             NSLog(@"镜像");
                             break;
                         case AVIOCTRL_VIDEOMODE_FLIP_MIRROR:
+                            [self.delegate receiveVideoMode:3];
                             NSLog(@"翻转镜像");
                             break;
                         default:
+                            [self.delegate receiveVideoMode:-1];
                             break;
                     }
                     break;
@@ -83,18 +88,23 @@
                     SMsgAVIoctrlGetEnvironmentResp *environment = (SMsgAVIoctrlGetEnvironmentResp *)trash;
                     switch (environment->mode) {
                         case AVIOCTRL_ENVIRONMENT_INDOOR_50HZ:
+                            [self.delegate receiveEnvironmentMode:0];
                             NSLog(@"室内50HZ模式");
                             break;
                         case AVIOCTRL_ENVIRONMENT_INDOOR_60HZ:
+                            [self.delegate receiveEnvironmentMode:1];
                             NSLog(@"室内60HZ模式");
                             break;
                         case AVIOCTRL_ENVIRONMENT_OUTDOOR:
+                            [self.delegate receiveEnvironmentMode:2];
                             NSLog(@"室外模式");
                             break;
                         case AVIOCTRL_ENVIRONMENT_NIGHT:
+                            [self.delegate receiveEnvironmentMode:3];
                             NSLog(@"夜间模式");
                             break;
                         default:
+                            [self.delegate receiveEnvironmentMode:-1];
                             break;
                     }
                     break;
@@ -104,26 +114,42 @@
                     switch (motion->sensitivity) {
                         case 0:
                             NSLog(@"0");
+                            [self.delegate receiveMotionDetect:0];
                             break;
                         case 1:
                             NSLog(@"25");
+                            [self.delegate receiveMotionDetect:1];
                             break;
                         case 2:
                             NSLog(@"50");
+                            [self.delegate receiveMotionDetect:2];
                             break;
                         case 3:
                             NSLog(@"75");
+                            [self.delegate receiveMotionDetect:3];
                             break;
                         case 4:
                             NSLog(@"100");
+                            [self.delegate receiveMotionDetect:4];
                             break;
                         default:
+                            [self.delegate receiveMotionDetect:-1];
                             break;
                     }
                     break;
                 //获取设备信息
                 case IOTYPE_USER_IPCAM_DEVINFO_RESP:;
                     SMsgAVIoctrlDeviceInfoResp * info = (SMsgAVIoctrlDeviceInfoResp *)trash;
+                    //型号model
+                    [self.delegate receiveDeviceInfo:0 content:[NSString stringWithFormat:@"%s",info->model]];
+                    //厂商
+                    [self.delegate receiveDeviceInfo:1 content:[NSString stringWithFormat:@"%s",info->vendor]];
+                    //版本号version
+                    [self.delegate receiveDeviceInfo:2 content:[NSString stringWithFormat:@"%x",info->version]];
+                    //总容量
+                    [self.delegate receiveDeviceInfo:3 content:[NSString stringWithFormat:@"%d",info->total]];
+                    //剩余容量
+                    [self.delegate receiveDeviceInfo:4 content:[NSString stringWithFormat:@"%d",info->free]];
                     /*
                      unsigned char model[16];	// IPCam mode
                      unsigned char vendor[16];	// IPCam manufacturer厂商
@@ -142,37 +168,64 @@
                     switch (result->result) {
                         case 0:
                             NSLog(@"格式化成功");
+                            [self.delegate receiveEXTSdCardResult:0];
                             break;
                         default:
                             NSLog(@"格式化失败");
+                            [self.delegate receiveEXTSdCardResult:-1];
                             break;
                     }
+                //获取视频质量
                 case IOTYPE_USER_IPCAM_GETSTREAMCTRL_RESP:;
                     SMsgAVIoctrlGetStreamCtrlResq *quality = (SMsgAVIoctrlGetStreamCtrlResq *)trash;
                     switch (quality->quality) {
                         case AVIOCTRL_QUALITY_UNKNOWN:
                             NSLog(@"未知");
+                            [self.delegate receiveQuality:-1];
                             break;
                         case AVIOCTRL_QUALITY_MAX:
                             NSLog(@"最高");
+                            [self.delegate receiveQuality:0];
                             break;
                         case AVIOCTRL_QUALITY_HIGH:
                             NSLog(@"高");
+                            [self.delegate receiveQuality:1];
                             break;
                         case AVIOCTRL_QUALITY_MIDDLE:
                             NSLog(@"中");
+                            [self.delegate receiveQuality:2];
                             break;
                         case AVIOCTRL_QUALITY_LOW:
                             NSLog(@"低");
+                            [self.delegate receiveQuality:3];
                             break;
                         case AVIOCTRL_QUALITY_MIN:
                             NSLog(@"最低");
+                            [self.delegate receiveQuality:4];
                             break;
                         default:
+                            [self.delegate receiveQuality:-1];
                             break;
                     }
-                    
                     break;
+                case IOTYPE_USER_IPCAM_GETRECORD_RESP:;
+                    SMsgAVIoctrlGetRecordResq *record = (SMsgAVIoctrlGetRecordResq *)trash;
+                    switch (record->recordType) {
+                        case AVIOTC_RECORDTYPE_OFF:
+                            [self.delegate receiveRecordType:0];
+                            break;
+                        case AVIOTC_RECORDTYPE_FULLTIME:
+                            [self.delegate receiveRecordType:1];
+                            break;
+                        case AVIOTC_RECORDTYPE_ALARM:
+                            [self.delegate receiveRecordType:2];
+                            break;
+                        case AVIOTC_RECORDTYPE_MANUAL:
+                            [self.delegate receiveRecordType:3];
+                        default:
+                            [self.delegate receiveRecordType:-1];
+                            break;
+                    }
                 default:;
             }
             
@@ -271,6 +324,19 @@
         return -1;
     }
     //free(request);
+    return 1;
+}
+//获取录像模式
+-(int)getRecordMode{
+    int ret;
+    
+    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        return -1;
+    }
+//    free(request);
     return 1;
 }
 

@@ -18,7 +18,8 @@
 @property (nonnull,nonatomic,copy) NSNumber *placeMode;                 //环境模式
 @property (nonnull,nonatomic,copy) NSNumber *motionDetect;              //移动侦测
 @property (nonnull,nonatomic,copy) NSNumber *recordMode;                //录像模式
-@property (nonnull,nonatomic,copy) NSString *cameraMode;                //录像机型号
+@property (nonnull,nonatomic,copy) NSNumber *videoMode;                 //视频模式
+@property (nonnull,nonatomic,copy) NSString *model;                     //录像机model
 @property (nonnull,nonatomic,copy) NSString *cameraVersion;             //录像机versionCode
 @property (nonnull,nonatomic,copy) NSString *firm;                      //厂商
 @property (nonnull,nonatomic,copy) NSNumber *reduceRom;                 //剩余空间
