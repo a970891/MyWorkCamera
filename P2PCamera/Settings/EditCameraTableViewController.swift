@@ -77,11 +77,11 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         switch result {
         case 0:
             //成功
-            
+            SVProgressHUD.showErrorWithStatus("格式化成功")
             break;
         default:
             //失败
-            
+            SVProgressHUD.showErrorWithStatus("格式化失败")
             break;
         }
     }
@@ -127,6 +127,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         let vc = segue.destinationViewController
         if vc.classForCoder == SetTableViewController.classForCoder() {
             (vc as! SetTableViewController).cameraObj = self.cameraObj
+            (vc as! SetTableViewController).tutkManager = self.tutkManager
         }
     }
     

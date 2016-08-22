@@ -96,6 +96,12 @@ static NSString *const mainCell = @"mainCell";
             [self.myTableView reloadData];
         }
     }];
+    //获取数据
+    self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
+    //刷新界面
+    if (self.dataSource.count != 0) {
+        [self.myTableView reloadData];
+    }
 }
 
 - (void)setCameras {

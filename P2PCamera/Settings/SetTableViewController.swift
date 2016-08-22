@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SetTableViewController: UITableViewController {
+class SetTableViewController: UITableViewController,UIAlertViewDelegate {
 
     var cameraObj:CameraObject!
+    var tutkManager:TutkP2PAVClient!
     
     @IBOutlet weak var qualtyLabel: UILabel!
     @IBOutlet weak var videoTurnLabel: UILabel!
@@ -32,13 +33,31 @@ class SetTableViewController: UITableViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? SetSelectorTV {
-            vc.setClosure = {
-                print($0)
-            }
-        }else{
-            print("非SetSelectorTV类")
+        if let vc = segue.destinationViewController as? SetQualityController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
         }
+        if let vc = segue.destinationViewController as? SetVideoModeController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
+        if let vc = segue.destinationViewController as? SetEnvironmentModeController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
+        if let vc = segue.destinationViewController as? SetMotionDetectController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
+        if let vc = segue.destinationViewController as? SetRecordModeController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
+        if let vc = segue.destinationViewController as? CameraInfoController {
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -108,16 +127,16 @@ class SetTableViewController: UITableViewController {
         //画面翻转
         switch cameraObj.videoMode.intValue {
         case 0:
-            self.videoTurnLabel.text = "正常"
+            self.videoTurnLabel.text = "一般"
             break
         case 1:
-            self.videoTurnLabel.text = "翻转"
+            self.videoTurnLabel.text = "垂直翻转"
             break
         case 2:
-            self.videoTurnLabel.text = "镜像"
+            self.videoTurnLabel.text = "水平翻转(镜像)"
             break
         case 3:
-            self.videoTurnLabel.text = "翻转镜像"
+            self.videoTurnLabel.text = "垂直及水平翻转"
             break
         default:
             break
@@ -138,6 +157,27 @@ class SetTableViewController: UITableViewController {
             break;
         default:
             break;
+        }
+    }
+ 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 5 {
+            let alert = UIAlertView(title: "提示", message: "是否格式化SD卡", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "好")
+            alert.tag = 140
+            alert.show()
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if alertView.tag == 140 {
+            if buttonIndex == 0 {
+                return;
+            } else {
+                SVProgressHUD.showWithStatus("格式化SD卡中")
+                if tutkManager.getStorage() == -1 {
+                    SVProgressHUD.showErrorWithStatus("格式化失败")
+                }
+            }
         }
     }
     

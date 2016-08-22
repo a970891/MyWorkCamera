@@ -520,7 +520,7 @@
         <!--视频质量-->
         <scene sceneID="GPL-mx-j62">
             <objects>
-                <tableViewController id="yPZ-CX-OBf" customClass="SetSelectorTV" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="yPZ-CX-OBf" customClass="SetQualityController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="uvA-XT-6iL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -636,7 +636,7 @@
         <!--摄像机信息-->
         <scene sceneID="bsC-o1-3eh">
             <objects>
-                <tableViewController id="q9L-GQ-79E" sceneMemberID="viewController">
+                <tableViewController id="q9L-GQ-79E" customClass="CameraInfoController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="SBm-7B-I9M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -773,6 +773,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="摄像机信息" id="Hxb-eA-Q15"/>
+                    <connections>
+                        <outlet property="firmLabel" destination="Fq1-O3-XWd" id="6JZ-YZ-7NL"/>
+                        <outlet property="modelLabel" destination="Xn7-rX-G8z" id="pRR-X4-2L6"/>
+                        <outlet property="reduceLabel" destination="hQ3-YH-A8K" id="nLD-Mi-Jui"/>
+                        <outlet property="totalLabel" destination="1pO-YI-70u" id="7BH-o4-9LR"/>
+                        <outlet property="versionLabel" destination="W5Q-bG-3SH" id="Aw3-c9-jVq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UfK-KL-XnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -919,7 +926,7 @@
         <!--环境模式-->
         <scene sceneID="W7S-ef-PAK">
             <objects>
-                <tableViewController id="o2s-7x-OzF" userLabel="环境模式" customClass="SetSelectorTV" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="o2s-7x-OzF" userLabel="环境模式" customClass="SetEnvironmentModeController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="5rR-gv-mNo">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1023,7 +1030,7 @@
         <!--移动侦测-->
         <scene sceneID="uta-F8-te9">
             <objects>
-                <tableViewController id="LOt-1K-gGo" customClass="SetSelectorTV" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="LOt-1K-gGo" customClass="SetMotionDetectController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="D8Q-x1-YEb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1139,7 +1146,7 @@
         <!--画面翻转-->
         <scene sceneID="mjR-po-cWs">
             <objects>
-                <tableViewController id="RcU-sX-aTQ" userLabel="画面翻转" customClass="SetSelectorTV" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RcU-sX-aTQ" userLabel="画面翻转" customClass="SetVideoModeController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="sYq-Kb-3Ta">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1238,7 +1245,7 @@
         <!--录像模式-->
         <scene sceneID="ED7-il-HXf">
             <objects>
-                <tableViewController id="RLW-QC-qlg" customClass="SetSelectorTV" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RLW-QC-qlg" customClass="SetRecordModeController" customModule="P2PCamera" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="Di6-VZ-Ick">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

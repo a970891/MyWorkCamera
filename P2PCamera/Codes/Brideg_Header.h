@@ -15,3 +15,4 @@
 #import "QRCodeGenerator.h"
 #import "CameraManager.h"
 #import "TutkP2PClient.h"
+#import "SVProgressHUD.h"

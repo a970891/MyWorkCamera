@@ -22,6 +22,12 @@
 		0431A8991CE03B7B008BC4D0 /* VideoFileParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A88C1CE03B7B008BC4D0 /* VideoFileParser.m */; };
 		0431A89A1CE03B7B008BC4D0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A88E1CE03B7B008BC4D0 /* ViewController.m */; };
 		0431A89B1CE03B7B008BC4D0 /* Yp420PixelConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */; };
+		043802351D6B003800A26C9D /* SetQualityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043802341D6B003800A26C9D /* SetQualityController.swift */; };
+		043802371D6B011B00A26C9D /* SetVideoModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043802361D6B011B00A26C9D /* SetVideoModeController.swift */; };
+		043802391D6B013400A26C9D /* SetEnvironmentModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043802381D6B013400A26C9D /* SetEnvironmentModeController.swift */; };
+		0438023B1D6B014F00A26C9D /* SetMotionDetectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */; };
+		0438023D1D6B02DD00A26C9D /* SetRecordModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */; };
+		0438023F1D6B02F600A26C9D /* CameraInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023E1D6B02F600A26C9D /* CameraInfoController.swift */; };
 		0439D2951D59E73800866590 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2941D59E73800866590 /* QRViewController.swift */; };
 		0439D2971D5B089300866590 /* CameraSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2961D5B089300866590 /* CameraSwiftViewController.swift */; };
 		046D51BF1D5C559100472619 /* camera_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51B91D5C559100472619 /* camera_audio.png */; };
@@ -219,6 +225,12 @@
 		0431A88E1CE03B7B008BC4D0 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0431A88F1CE03B7B008BC4D0 /* Yp420PixelConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Yp420PixelConverter.h; sourceTree = "<group>"; };
 		0431A8901CE03B7B008BC4D0 /* Yp420PixelConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Yp420PixelConverter.m; sourceTree = "<group>"; };
+		043802341D6B003800A26C9D /* SetQualityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetQualityController.swift; sourceTree = "<group>"; };
+		043802361D6B011B00A26C9D /* SetVideoModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetVideoModeController.swift; sourceTree = "<group>"; };
+		043802381D6B013400A26C9D /* SetEnvironmentModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetEnvironmentModeController.swift; sourceTree = "<group>"; };
+		0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMotionDetectController.swift; sourceTree = "<group>"; };
+		0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRecordModeController.swift; sourceTree = "<group>"; };
+		0438023E1D6B02F600A26C9D /* CameraInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraInfoController.swift; sourceTree = "<group>"; };
 		0439D2941D59E73800866590 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		0439D2961D5B089300866590 /* CameraSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSwiftViewController.swift; sourceTree = "<group>"; };
 		046D51B91D5C559100472619 /* camera_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_audio.png; sourceTree = "<group>"; };
@@ -673,6 +685,12 @@
 				048074B21CF579B900F59273 /* SetExtension.swift */,
 				048074B31CF579B900F59273 /* SetSelectorTV.swift */,
 				048074B41CF579B900F59273 /* SetTableViewController.swift */,
+				043802341D6B003800A26C9D /* SetQualityController.swift */,
+				043802361D6B011B00A26C9D /* SetVideoModeController.swift */,
+				043802381D6B013400A26C9D /* SetEnvironmentModeController.swift */,
+				0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */,
+				0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */,
+				0438023E1D6B02F600A26C9D /* CameraInfoController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1649,6 +1667,7 @@
 				0431A89A1CE03B7B008BC4D0 /* ViewController.m in Sources */,
 				89DA948F1C7A2EE0008735CA /* AFURLRequestSerialization.m in Sources */,
 				B77090BA1C85DF3B00736155 /* ZHLTViewController.m in Sources */,
+				043802371D6B011B00A26C9D /* SetVideoModeController.swift in Sources */,
 				89DA94C81C7A2F27008735CA /* SDWebImageManager.m in Sources */,
 				048074A71CF2C29F00F59273 /* CameraManager.m in Sources */,
 				B77091131C88981800736155 /* QRMenu.m in Sources */,
@@ -1666,6 +1685,7 @@
 				89DA94C61C7A2F27008735CA /* SDWebImageDownloader.m in Sources */,
 				6136FDF81CC28B33005301AA /* MCAudioSession.m in Sources */,
 				0431A89B1CE03B7B008BC4D0 /* Yp420PixelConverter.m in Sources */,
+				0438023B1D6B014F00A26C9D /* SetMotionDetectController.swift in Sources */,
 				6136FDCE1CC2533E005301AA /* AudioPlayer.m in Sources */,
 				89DA94911C7A2EE0008735CA /* AFURLSessionManager.m in Sources */,
 				0431A8971CE03B7B008BC4D0 /* OpenALPlayer.m in Sources */,
@@ -1673,6 +1693,7 @@
 				89DA94901C7A2EE0008735CA /* AFURLResponseSerialization.m in Sources */,
 				048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */,
 				B77090BB1C85DF3B00736155 /* ZHLTTabBar.m in Sources */,
+				0438023D1D6B02DD00A26C9D /* SetRecordModeController.swift in Sources */,
 				619B29A71CBCF03000B59660 /* KxMovieDecoder.m in Sources */,
 				89DA945B1C7A2CFC008735CA /* AppDelegate.m in Sources */,
 				B73225F31C96FEAD00C1EB8E /* MASConstraint.m in Sources */,
@@ -1685,6 +1706,7 @@
 				0431A8951CE03B7B008BC4D0 /* g711codec.c in Sources */,
 				89DA948B1C7A2EE0008735CA /* AFHTTPSessionManager.m in Sources */,
 				89DA94C21C7A2F27008735CA /* NSData+ImageContentType.m in Sources */,
+				043802391D6B013400A26C9D /* SetEnvironmentModeController.swift in Sources */,
 				B77091061C8891BC00736155 /* AddDetailViewController.m in Sources */,
 				89DA94CB1C7A2F27008735CA /* UIImage+GIF.m in Sources */,
 				B73225F71C96FEAD00C1EB8E /* MASViewConstraint.m in Sources */,
@@ -1693,6 +1715,8 @@
 				B77090F11C85F1FE00736155 /* MainTableViewCell.m in Sources */,
 				B73225F41C96FEAD00C1EB8E /* MASConstraintMaker.m in Sources */,
 				0431A8981CE03B7B008BC4D0 /* TutkP2PClient.m in Sources */,
+				0438023F1D6B02F600A26C9D /* CameraInfoController.swift in Sources */,
+				043802351D6B003800A26C9D /* SetQualityController.swift in Sources */,
 				89DA948A1C7A2EE0008735CA /* AFHTTPRequestOperationManager.m in Sources */,
 				89DA94C91C7A2F27008735CA /* SDWebImagePrefetcher.m in Sources */,
 				89574B3C1C7A626400A7E7A6 /* RingTonesViewController.m in Sources */,
