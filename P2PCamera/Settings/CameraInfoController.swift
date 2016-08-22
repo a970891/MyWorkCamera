@@ -29,6 +29,11 @@ class CameraInfoController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        modelLabel.text = cameraObj.model
+        versionLabel.text = cameraObj.cameraVersion
+        firmLabel.text = cameraObj.firm
+        totalLabel.text = String(cameraObj.rom.integerValue/1024)
+        reduceLabel.text = String(cameraObj.reduceRom.integerValue/1024)
     }
     
 }

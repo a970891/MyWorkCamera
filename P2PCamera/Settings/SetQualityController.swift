@@ -20,6 +20,14 @@ class SetQualityController: UITableViewController {
         
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
+//        self.selectTem = self.cameraObj.quality.integerValue
+        self.selectTem = 3
+        self.tableView.reloadData()
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
