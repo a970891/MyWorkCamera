@@ -66,6 +66,11 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
     }
     
     func setInfo() {
+        //wifi
+        if cameraObj.ssid == "" || cameraObj.ssid == "关闭" {
+            cameraObj.ssid = "关闭"
+        }
+        self.wifiLabel.text = cameraObj.ssid
         //视频质量
         switch cameraObj.quality.intValue {
         case 0:
@@ -166,6 +171,16 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
             alert.tag = 140
             alert.show()
         }
+        if indexPath.section == 2 {
+            let alert = UIAlertView(title: "提示", message: "设置wifi网络", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确认")
+            alert.alertViewStyle = UIAlertViewStyle.LoginAndPasswordInput
+            let f1 = alert.textFieldAtIndex(0)
+            let f2 = alert.textFieldAtIndex(1)
+            f1?.placeholder = "请输入wifi名(ssid)"
+            f2?.placeholder = "请输入wifi密码"
+            alert.tag = 150
+            alert.show()
+        }
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
@@ -176,8 +191,24 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
                 SVProgressHUD.showWithStatus("格式化SD卡中")
                 if tutkManager.getStorage() == -1 {
                     SVProgressHUD.showErrorWithStatus("格式化失败")
+                }else {
+                    SVProgressHUD.showSuccessWithStatus("格式化成功")
                 }
             }
+        }
+        if alertView.tag == 150 {
+            let f1 = alertView.textFieldAtIndex(0)
+            let f2 = alertView.textFieldAtIndex(1)
+            if let f1x = f1?.text, f2x = f2?.text {
+                if f1x.characters.count != 0 || f2x.characters.count != 0 {
+                    SVProgressHUD.showSuccessWithStatus("设置完成!")
+                    self.cameraObj.ssid = f1x
+                    self.wifiLabel.text = f1x
+                    
+                    return;
+                }
+            }
+            UIAlertView(title: "提示", message: "ssid或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
         }
     }
     

@@ -22,9 +22,15 @@ class SetQualityController: UITableViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-    
-//        self.selectTem = self.cameraObj.quality.integerValue
-        self.selectTem = 3
+        
+        self.selectTem = self.cameraObj.quality.integerValue
+        if self.selectTem == -1 {
+            self.selectTem = 0
+        }
+        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+        cell1?.accessoryType = .None
+        let cell3 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0))
+        cell3?.accessoryType = .Checkmark
         self.tableView.reloadData()
     }
     

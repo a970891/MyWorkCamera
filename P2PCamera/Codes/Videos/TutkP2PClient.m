@@ -52,13 +52,13 @@
             switch (ioType) {
                 case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
                     SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
-                    [self handListWifiAPReponse:wifiList];
+                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
                     break;
                 case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
                     //SMsgAVIoctrlSetWifiResp *reponse=(SMsgAVIoctrlSetWifiResp*)trash;
                     //[self handSetWifiResp:reponse];
                     break;
-                //获取录像模式
+                //获取视频模式
                 case IOTYPE_USER_IPCAM_GET_VIDEOMODE_RESP:;
                     SMsgAVIoctrlGetVideoModeResp *response = (SMsgAVIoctrlGetVideoModeResp *)trash;
                     switch (response->mode) {
@@ -208,6 +208,7 @@
                             break;
                     }
                     break;
+                //获取录像模式
                 case IOTYPE_USER_IPCAM_GETRECORD_RESP:;
                     SMsgAVIoctrlGetRecordResq *record = (SMsgAVIoctrlGetRecordResq *)trash;
                     switch (record->recordType) {
@@ -253,7 +254,7 @@
     int ret;
     
     SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -265,8 +266,9 @@
 -(int)getEnvironmentMode{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
+    SMsgAVIoctrlGetEnvironmentReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    request.channel = avIndex;
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -278,8 +280,9 @@
 -(int)getMotionDetect{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
+    SMsgAVIoctrlGetMotionDetectReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    request.channel = avIndex;
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -291,7 +294,7 @@
 -(int)getDeviceInfo{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlDeviceInfoReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_DEVINFO_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
@@ -304,7 +307,7 @@
 -(int)getStorage{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlFormatExtStorageReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
@@ -317,7 +320,8 @@
 -(int)getVideoQuality{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlGetStreamCtrlReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    request.channel = avIndex;
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
@@ -330,7 +334,8 @@
 -(int)getRecordMode{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlGetRecordReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    request.channel = avIndex;
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
@@ -362,7 +367,7 @@
     }
     return ret;
 }
-
+//设置密码
 -(int)setPassword:(NSString *) oldPasswd : (NSString *) newPasswd{
     SMsgAVIoctrlSetPasswdReq request;
     strcpy(request.newpasswd, [newPasswd UTF8String]);
@@ -389,7 +394,20 @@
     }
     return ret;
 }
-
+//设置环境模式
+- (int)setEnvironmentMode:(int)mode{
+    SMsgAVIoctrlSetEnvironmentReq request;
+    request.channel=avIndex;
+    request.mode=mode;
+    int ret;
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"set_video_mode_failed[%d]", ret);
+        return -1;
+    }
+    return ret;
+}
+//设置视频质量
 -(int)setQuality:(int)quality{
     SMsgAVIoctrlSetStreamCtrlReq request;
     request.channel=avIndex;
@@ -402,8 +420,39 @@
     }
     return ret;
 }
-
-
+//设置移动侦测
+- (int)setMotionDetece:(int)mode{
+    SMsgAVIoctrlSetMotionDetectReq request;
+    request.channel = avIndex;
+    request.sensitivity = mode;
+    
+    int ret;
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"set_video_quality_failed[%d]", ret);
+        return -1;
+    }
+    return ret;
+}
+//设置录像模式
+- (int)setRecordMode:(int)mode{
+    SMsgAVIoctrlSetRecordReq request;
+    request.channel = avIndex;
+    request.recordType = mode;
+    
+    int ret;
+    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
+    {
+        NSLog(@"set_video_quality_failed[%d]", ret);
+        return -1;
+    }
+    return ret;
+}
+//设置禁音
+- (int)setMute:(BOOL)on{
+    
+    return 1;
+}
 
 /*
  -(void) handSetWifiResp:(SMsgAVIoctrlSetWifiResp *) reponse{

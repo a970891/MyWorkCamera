@@ -72,6 +72,7 @@ unsigned int _getTickCount() {
     for(int i = 0;i < 100;i++) {
         NSString *str = [NSString stringWithFormat:@"%s",p[i].UID];
         if (str != NULL && ![str isEqualToString:@""]) {
+            NSLog(@"%@",str);
             searchBlock(str);
         }
     }

@@ -21,7 +21,7 @@ typedef struct
 
 @protocol CameraInfoDelegate <NSObject>
 
-- (void)receiveWifi;
+- (void)receiveWifi:(NSString *)ssid;
 - (void)receiveVideoMode:(int)mode;
 - (void)receiveEnvironmentMode:(int)mode;
 - (void)receiveEXTSdCardResult:(int)result;
@@ -50,8 +50,6 @@ typedef struct
 -(void) turn:(ENUM_TURN_CMD)direction;
 
 -(void) setWifi:(IpcWifiAp) ap;
--(void)setPassword:(NSString *) oldPasswd : (NSString *) newPasswd;
--(void)setVideoMode:(int) video_mod; // 0 倒转, 1 镜像 , 3 倒转和镜像
 //获取wifi
 -(void)listWifiAp;
 //获取显示模式
@@ -60,7 +58,7 @@ typedef struct
 -(int)getEnvironmentMode;
 //获取移动侦测
 -(int)getMotionDetect;
-//获取录像模式
+//获取设备信息
 -(int)getDeviceInfo;
 //格式化SD卡
 -(int)getStorage;
@@ -68,6 +66,25 @@ typedef struct
 -(int)getVideoQuality;
 //获取录像模式
 -(int)getRecordMode;
+
+//设置wifi
+- (int)setWifi:(NSString *)ssid pwd:(NSString *)pswd;
+//设置密码
+- (int)setPassword:(NSString *)oldPasswd :(NSString *)newPasswd;
+//设置显示模式
+- (int)setVideoMode:(int)video_mod;
+//设置环境模式
+- (int)setEnvironmentMode:(int)mode;
+//设置移动侦测
+- (int)setMotionDetece:(int)mode;
+//设置录像模式
+- (int)setRecordMode:(int)mode;
+//设置视频质量
+-(int)setQuality:(int)quality;
+//设置禁音
+- (int)setMute:(BOOL)on;
+//对讲
+- (int)sendVoice;
 
 - (void)lock_unlock:(int)lockIndex status:(BOOL)status;//加锁解锁
 @property (nonatomic,retain) id delegate;

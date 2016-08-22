@@ -42,6 +42,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     func getCameraInfo() {
         let a = tutkManager.connect(cameraObj.uid, cameraObj.password)
         if a != -1 {
+            tutkManager.listWifiAp()
             tutkManager.getVideoMode()
             tutkManager.getEnvironmentMode()
             tutkManager.getMotionDetect()
@@ -52,10 +53,6 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     }
     
     //Mark************* cameraInfoDelegate *************
-    //收到wifi信息回调
-    func receiveWifi() {
-        
-    }
     //收到视频模式回调
     func receiveVideoMode(mode: Int32) {
         self.cameraObj.videoMode = NSNumber(int: mode)
@@ -101,6 +98,10 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         default:
             break;
         }
+    }
+    //收到wifi回调
+    func receiveWifi(ssid: String!) {
+        self.cameraObj.ssid = ssid
     }
     //收到录像模式回调
     func receiveRecordType(type: Int32) {

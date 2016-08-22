@@ -13,6 +13,7 @@
 @property (nonnull,nonatomic,copy) NSString *uid;                       //串号
 @property (nonnull,nonatomic,copy) NSString *password;                  //密码
 @property (nonnull,nonatomic,copy) NSString *name;                      //名字
+@property (nonnull,nonatomic,copy) NSString *ssid;                      //ssid
 @property (nonnull,nonatomic,copy) NSNumber *quality;                   //视频质量
 @property (nonnull,nonatomic,copy) NSNumber *turnVideo;                 //画面翻转
 @property (nonnull,nonatomic,copy) NSNumber *placeMode;                 //环境模式

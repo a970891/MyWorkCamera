@@ -26,6 +26,7 @@
     [aCoder encodeObject:_reduceRom forKey:@"reduceRom"];
     [aCoder encodeObject:_rom forKey:@"rom"];
     [aCoder encodeObject:_model forKey:@"model"];
+    [aCoder encodeObject:_ssid forKey:@"ssid"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -46,6 +47,7 @@
         _reduceRom = [aDecoder decodeObjectForKey:@"reduceRom"];
         _rom = [aDecoder decodeObjectForKey:@"rom"];
         _model = [aDecoder decodeObjectForKey:@"model"];
+        _ssid = [aDecoder decodeObjectForKey:@"ssid"];
     }
     return self;
 }
@@ -68,6 +70,7 @@
         self.reduceRom = @0;
         self.rom = @0;
         self.model = @"";
+        self.ssid = @"";
     }
     return self;
 }

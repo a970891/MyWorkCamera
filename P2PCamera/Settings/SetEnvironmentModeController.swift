@@ -17,7 +17,15 @@ class SetEnvironmentModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.selectTem = self.cameraObj.placeMode.integerValue
+        if self.selectTem == -1 {
+            self.selectTem = 0
+        }
+        let cell1 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+        cell1?.accessoryType = .None
+        let cell3 = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0))
+        cell3?.accessoryType = .Checkmark
+        self.tableView.reloadData()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
