@@ -290,7 +290,7 @@ static NSString *const Ccell = @"Ccell";
             obj.name = @"";
             [self.dataSource addObject:obj];
             [self.tableView reloadData];
-            [[CameraManager sharedInstance] insertObject:obj];
+//            [[CameraManager sharedInstance] insertObject:obj];
         }
     }];
 }

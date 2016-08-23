@@ -307,10 +307,10 @@
 -(int)getStorage{
     int ret;
     
-    SMsgAVIoctrlFormatExtStorageReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlFormatExtStorageReq request;
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ, (char *)&request, sizeof(request)) < 0))
     {
-        NSLog(@"list_wifi_ap_failed[%d]", ret);
+        NSLog(@"failed-%d", ret);
         return -1;
     }
     //free(request);
