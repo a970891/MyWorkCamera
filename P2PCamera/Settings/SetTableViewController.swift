@@ -12,6 +12,7 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
 
     var cameraObj:CameraObject!
     var tutkManager:TutkP2PAVClient!
+    var wifis = [wifiObject]()
     
     @IBOutlet weak var qualtyLabel: UILabel!
     @IBOutlet weak var videoTurnLabel: UILabel!
@@ -175,14 +176,10 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
             alert.show()
         }
         if indexPath.section == 2 {
-            let alert = UIAlertView(title: "提示", message: "设置wifi网络", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确认")
-            alert.alertViewStyle = UIAlertViewStyle.LoginAndPasswordInput
-            let f1 = alert.textFieldAtIndex(0)
-            let f2 = alert.textFieldAtIndex(1)
-            f1?.placeholder = "请输入wifi名(ssid)"
-            f2?.placeholder = "请输入wifi密码"
-            alert.tag = 150
-            alert.show()
+            let vc = wifiViewController()
+            vc.wifis = self.wifis
+            vc.tutkManager = tutkManager
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -198,20 +195,6 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
                     SVProgressHUD.showSuccessWithStatus("格式化成功")
                 }
             }
-        }
-        if alertView.tag == 150 {
-            let f1 = alertView.textFieldAtIndex(0)
-            let f2 = alertView.textFieldAtIndex(1)
-            if let f1x = f1?.text, f2x = f2?.text {
-                if f1x.characters.count != 0 && f2x.characters.count != 0 {
-                    SVProgressHUD.showSuccessWithStatus("设置完成!")
-                    self.cameraObj.ssid = f1x
-                    self.wifiLabel.text = f1x
-                    tutkManager.setWifi(f1x, pwd: f2x)
-                    return;
-                }
-            }
-            UIAlertView(title: "提示", message: "ssid或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
         }
     }
     
@@ -230,5 +213,96 @@ extension NSObject {
         let temStoryboard = UIStoryboard(name: storyboardName, bundle: nil)
         let vc = temStoryboard.instantiateViewControllerWithIdentifier(Identifier)
         return vc
+    }
+}
+
+class wifiViewController:UIViewController, UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate {
+    var wifis = [wifiObject]()
+    private var tableView:UITableView!
+    var tutkManager:TutkP2PAVClient!
+    private var selectSsid:String!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView = UITableView(frame: CGRectMake(0, 0, SW, SH-64))
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        tableView.registerClass(wifiCell.classForCoder(), forCellReuseIdentifier: "cell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(tableView)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return wifis.count;
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 60;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! wifiCell
+        cell.setCell(self.wifis[indexPath.row].ssid)
+        return cell;
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.selectSsid = self.wifis[indexPath.row].ssid
+        let alertView = UIAlertView(title: "提示", message: "请输入密码", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+        alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
+        let textField = alertView.textFieldAtIndex(0)
+        textField?.placeholder = "密码"
+        alertView.show()
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        if buttonIndex == 1 {
+            if let textField = alertView.textFieldAtIndex(0) {
+                if let text = textField.text {
+                    if (text as NSString).length != 0 {
+                        tutkManager.setWifi(self.selectSsid, pwd: text)
+                        self.navigationController?.popViewControllerAnimated(true)
+                        return
+                    }
+                }
+            }
+            SVProgressHUD.showErrorWithStatus("密码不能为空!")
+        }
+    }
+
+}
+
+class wifiCell:UITableViewCell {
+    
+    private var titleLabel:UILabel!
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
+        self.selectionStyle = UITableViewCellSelectionStyle.None
+        let bgView = UIView(frame: CGRectMake(0,10,SW,40))
+        bgView.backgroundColor = UIColor.whiteColor()
+        
+        titleLabel = UILabel(frame: CGRectMake(12,0,SW-24,40))
+        titleLabel.backgroundColor = UIColor.whiteColor()
+        titleLabel.textColor = UIColor.blackColor()
+        titleLabel.font = UIFont.systemFontOfSize(14)
+        titleLabel.textAlignment = NSTextAlignment.Left
+        
+        bgView.addSubview(titleLabel)
+        self.addSubview(bgView)
+    }
+    
+    func setCell(text:String) {
+        self.titleLabel.text = text
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

@@ -17,6 +17,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     private var firstShow:Int = 1
     
     private var tutkManager:TutkP2PAVClient!
+    private var wifis = [wifiObject]()
     
     var cameraObj:CameraObject!
     
@@ -50,19 +51,19 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     }
     
     func getCameraInfo() {
-        let a = tutkManager.connect(cameraObj.uid, cameraObj.password)
-        if a != -1 {
-            tutkManager.listWifiAp()
-            tutkManager.getVideoMode()
-            tutkManager.getEnvironmentMode()
-            tutkManager.getMotionDetect()
-            tutkManager.getDeviceInfo()
-            tutkManager.getVideoQuality()
-            tutkManager.getRecordMode()
+        SVProgressHUD.showWithStatus("连接中")
+        tutkManager.connect(self.cameraObj.uid, self.cameraObj.password, success: { 
+            self.tutkManager.listWifiAp()
+            self.tutkManager.getVideoMode()
+            self.tutkManager.getEnvironmentMode()
+            self.tutkManager.getMotionDetect()
+            self.tutkManager.getDeviceInfo()
+            self.tutkManager.getVideoQuality()
+            self.tutkManager.getRecordMode()
             SVProgressHUD.showSuccessWithStatus("连接成功")
-        } else {
-            SVProgressHUD.showErrorWithStatus("连接失败")
-            self.navigationController?.popViewControllerAnimated(true)
+            }) { 
+                SVProgressHUD.showErrorWithStatus("连接失败")
+                self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
     
@@ -113,9 +114,14 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             break;
         }
     }
-    //收到wifi回调
-    func receiveWifi(ssid: String!) {
-        self.cameraObj.ssid = ssid
+    //收到ssid和mode回调
+    func receiveWifi(ssids: [AnyObject]!, modes: [AnyObject]!) {
+        for i in 0 ..< ssids.count {
+            let wifi = wifiObject()
+            wifi.ssid = ssids[i] as! String
+            wifi.mode = modes[i] as! String
+            self.wifis.append(wifi)
+        }
     }
     //收到录像模式回调
     func receiveRecordType(type: Int32) {
@@ -147,7 +153,13 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         if vc.classForCoder == SetTableViewController.classForCoder() {
             (vc as! SetTableViewController).cameraObj = self.cameraObj
             (vc as! SetTableViewController).tutkManager = self.tutkManager
+            (vc as! SetTableViewController).wifis = self.wifis
         }
     }
     
+}
+
+class wifiObject:NSObject {
+    dynamic var ssid:String = ""
+    dynamic var mode:String = ""
 }

@@ -77,7 +77,11 @@
     tutkP2PAVClient.delegate=self;
     //[tutkP2PAVClient connect:uid :passwd];
     //[tutkP2PAVClient listWifiAp];
-    int ret=[tutkP2PAVClient start:uid :passwd];
+    [tutkP2PAVClient start:uid :passwd success:^{
+        
+    } fail:^{
+        
+    }];
     
 }
 
@@ -150,7 +154,11 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NSLog(@"去前台1");
-    int ret=[tutkP2PAVClient start:uid :passwd];
+    [tutkP2PAVClient start:uid :passwd success:^{
+        
+    } fail:^{
+        
+    }];
     _decodeH264=[[DecodeH264 alloc] init];
     _decodeH264.delegate=self;
 }

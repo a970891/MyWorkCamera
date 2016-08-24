@@ -52,7 +52,7 @@
             switch (ioType) {
                 case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
                     SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
-                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
+//                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
                     [self handListWifiAPReponse:wifiList];
                     break;
                 case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
@@ -511,36 +511,43 @@
  */
 -(void) handListWifiAPReponse:(SMsgAVIoctrlListWifiApResp*) wifiList{
     NSMutableArray *ssidArray = [NSMutableArray array];
+    NSMutableArray *modes = [NSMutableArray array];
     for(int i=0;i<sizeof(wifiList->stWifiAp);i++){
         SWifiAp ap=wifiList->stWifiAp[i];
         NSLog(@"ssid=%s,mode=%d=",ap.ssid,ap.mode);
-        if((ap.mode==1 || ap.mode==2) && strlen(ap.ssid)>1){
-            BOOL isFind=NO;
-            for(NSValue *obj in ssidArray){
-                IpcWifiAp tmap;
-                [obj getValue:&tmap];
-                if(strcmp(ap.ssid,tmap.ssid)==0){
-                    isFind=YES;
-                    break;
-                }
-            }
-            if(isFind==NO){
-                IpcWifiAp ipcAp={"", ap.mode,ap.enctype,ap.signal,ap.status};
-                memcpy(ipcAp.ssid, (char *)&ap.ssid, 32);
-                [ssidArray addObject:[NSValue valueWithBytes:&ipcAp objCType:@encode(IpcWifiAp)]];
-            }
-        }
-    }
-    
-    if(delegate !=nil){
-        dispatch_async(dispatch_queue_create("onListWifiApThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-            if ([delegate respondsToSelector:@selector(onListWifiAp:)]) {
-                [delegate onListWifiAp:ssidArray];
-            }
-            
-        });
+        if ([[NSString stringWithFormat:@"%s",ap.ssid] isEqualToString:@""]){
         
+        }else{
+            [ssidArray addObject:[NSString stringWithFormat:@"%s",ap.ssid]];
+            [modes addObject:[NSString stringWithFormat:@"%d",ap.mode]];
+        }
+//        if((ap.mode==1 || ap.mode==2) && strlen(ap.ssid)>1){
+//            BOOL isFind=NO;
+//            for(NSValue *obj in ssidArray){
+//                IpcWifiAp tmap;
+//                [obj getValue:&tmap];
+//                if(strcmp(ap.ssid,tmap.ssid)==0){
+//                    isFind=YES;
+//                    break;
+//                }
+//            }
+//            if(isFind==NO){
+//                IpcWifiAp ipcAp={"", ap.mode,ap.enctype,ap.signal,ap.status};
+//                memcpy(ipcAp.ssid, (char *)&ap.ssid, 32);
+//                [ssidArray addObject:[NSValue valueWithBytes:&ipcAp objCType:@encode(IpcWifiAp)]];
+//            }
+//        }
     }
+    [self.infoDelegate receiveWifi:ssidArray modes:modes];
+//    if(delegate !=nil){
+//        dispatch_async(dispatch_queue_create("onListWifiApThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+//            if ([delegate respondsToSelector:@selector(onListWifiAp:)]) {
+//                [delegate onListWifiAp:ssidArray];
+//            }
+//            
+//        });
+//        
+//    }
 }
 
 -(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
@@ -575,33 +582,38 @@
         if(avIndex < 0)
         {
             printf("avClientStart failed[%d]\n", avIndex);
-            return ;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failed();
+            });
+            return;
         }
-        dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-            [self recv_io_ctrl_loop];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+                [self recv_io_ctrl_loop];
+            });
+            stopFlg=1;
+            succeed();
         });
-        stopFlg=1;
-        return  ;
     });
 }
--(int)start:(NSString *)UID :(NSString *)password{
-    if([self connect:UID :password]<0){
+-(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
+    [self connect:UID :password success:^{
+        if ([self startIpcamStream]>0)
+        {
+            
+            dispatch_queue_t rqueue=dispatch_queue_create("reThreadQueue", DISPATCH_QUEUE_SERIAL);
+            dispatch_async(rqueue, ^{
+                [self receiveVideo];
+            });
+            dispatch_async(dispatch_queue_create("audioThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+                [self receiveAudio];
+            });
+        }
+        succeed();
+    } fail:^{
         NSLog(@"Connect ipc fail");
-        return -1;
-    }
-    if ([self startIpcamStream]>0)
-    {
-        
-        dispatch_queue_t rqueue=dispatch_queue_create("reThreadQueue", DISPATCH_QUEUE_SERIAL);
-        dispatch_async(rqueue, ^{
-            [self receiveVideo];
-        });
-        dispatch_async(dispatch_queue_create("audioThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-            [self receiveAudio];
-        });
-    }
-    
-    return 1;
+        failed();
+    }];
 }
 -(void *) receiveAudio{
     NSLog(@"[thread_ReceiveAudio] Starting...");

@@ -24,7 +24,7 @@ typedef struct
 
 @protocol CameraInfoDelegate <NSObject>
 
-- (void)receiveWifi:(NSString *)ssid;
+- (void)receiveWifi:(NSArray *)ssids modes:(NSArray *)modes;
 - (void)receiveVideoMode:(int)mode;
 - (void)receiveEnvironmentMode:(int)mode;
 - (void)receiveEXTSdCardResult:(int)result;
@@ -46,8 +46,8 @@ typedef struct
 @interface TutkP2PAVClient : NSObject
 +(int) initializeTutk;
 +(void)releaseTutk;
--(int) start:(NSString *) UID : (NSString *) password;
--(int) connect:(NSString *) UID : (NSString *) password;
+-(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
+-(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
 -(void) stopAndCloseSession;
 -(int) closeSession;
 -(void) turn:(ENUM_TURN_CMD)direction;

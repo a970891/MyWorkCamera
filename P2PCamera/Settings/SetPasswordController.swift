@@ -36,12 +36,16 @@ class SetPasswordController: UITableViewController {
                 }
                 if tutkManager.setPassword(p1, p2) != -1 {
                     cameraObj.password = p2
-                    tutkManager.connect(cameraObj.uid, cameraObj.password)
                     CameraManager.sharedInstance().insertObject(cameraObj)
                     SVProgressHUD.showSuccessWithStatus("修改成功")
                 } else {
                     SVProgressHUD.showErrorWithStatus("修改失败")
                 }
+                tutkManager.connect(cameraObj.uid, cameraObj.password, success: {
+                    
+                    }, fail: {
+                        
+                })
                 return;
             }
         }
