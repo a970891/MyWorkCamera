@@ -48,6 +48,7 @@
 @property (nonatomic,assign) BOOL lockASwitch;
 @property (nonatomic,assign) BOOL lockBSwitch;
 @property (nonatomic,assign) BOOL talkSwitch;
+@property (nonatomic,assign) int firstShow;
 
 @end
 
@@ -67,11 +68,20 @@
     self.lockBSwitch = true;
     self.talkSwitch = false;
     
+    _firstShow = 1;
+    
     [super viewDidLoad];
     [self initSetupUI];
     [self initNaviTools];
     [self setupUI];
-    [self setupCamera];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (_firstShow == 1) {
+        _firstShow = 0;
+        [self setupCamera];
+    }
 }
 
 - (void)setupCamera {

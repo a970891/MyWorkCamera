@@ -1,5 +1,8 @@
 
 
+typedef  void(^SUCCESS_BLOCK)(void);
+typedef  void(^FAIL_BLOCK)(void);
+
 typedef enum
 {
     IOCTRL_U=0,

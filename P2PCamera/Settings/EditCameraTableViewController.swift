@@ -14,6 +14,8 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var statusLabel: UILabel!
     
+    private var firstShow:Int = 1
+    
     private var tutkManager:TutkP2PAVClient!
     
     var cameraObj:CameraObject!
@@ -32,7 +34,14 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         self.nameField.text = cameraObj.name
         self.passwordField.text = cameraObj.password
         self.passwordField.enabled = false
-        self.getCameraInfo()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if firstShow == 1 {
+            firstShow = 0
+            self.getCameraInfo()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -50,6 +59,10 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             tutkManager.getDeviceInfo()
             tutkManager.getVideoQuality()
             tutkManager.getRecordMode()
+            SVProgressHUD.showSuccessWithStatus("连接成功")
+        } else {
+            SVProgressHUD.showErrorWithStatus("连接失败")
+            self.navigationController?.popViewControllerAnimated(true)
         }
     }
     
@@ -124,6 +137,10 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         UIAlertView(title: "提示", message: "名字或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
     }
 
+    deinit {
+        tutkManager.closeSession()
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         let vc = segue.destinationViewController
