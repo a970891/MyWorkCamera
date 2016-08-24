@@ -52,14 +52,14 @@
             switch (ioType) {
                 case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
                     SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
-//                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
+                    //                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
                     [self handListWifiAPReponse:wifiList];
                     break;
                 case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
                     //SMsgAVIoctrlSetWifiResp *reponse=(SMsgAVIoctrlSetWifiResp*)trash;
                     //[self handSetWifiResp:reponse];
                     break;
-                //获取视频模式
+                    //获取视频模式
                 case IOTYPE_USER_IPCAM_GET_VIDEOMODE_RESP:;
                     SMsgAVIoctrlGetVideoModeResp *response = (SMsgAVIoctrlGetVideoModeResp *)trash;
                     switch (response->mode) {
@@ -84,7 +84,7 @@
                             break;
                     }
                     break;
-                //获取环境模式
+                    //获取环境模式
                 case IOTYPE_USER_IPCAM_GET_ENVIRONMENT_RESP:;
                     SMsgAVIoctrlGetEnvironmentResp *environment = (SMsgAVIoctrlGetEnvironmentResp *)trash;
                     switch (environment->mode) {
@@ -109,7 +109,7 @@
                             break;
                     }
                     break;
-                //获取移动侦测
+                    //获取移动侦测
                 case IOTYPE_USER_IPCAM_GETMOTIONDETECT_RESP:;
                     SMsgAVIoctrlGetMotionDetectResp *motion = (SMsgAVIoctrlGetMotionDetectResp *)trash;
                     switch (motion->sensitivity) {
@@ -138,7 +138,7 @@
                             break;
                     }
                     break;
-                //获取设备信息
+                    //获取设备信息
                 case IOTYPE_USER_IPCAM_DEVINFO_RESP:;
                     SMsgAVIoctrlDeviceInfoResp * info = (SMsgAVIoctrlDeviceInfoResp *)trash;
                     //型号model
@@ -176,7 +176,7 @@
                             [self.delegate receiveEXTSdCardResult:-1];
                             break;
                     }
-                //获取视频质量
+                    //获取视频质量
                 case IOTYPE_USER_IPCAM_GETSTREAMCTRL_RESP:;
                     SMsgAVIoctrlGetStreamCtrlResq *quality = (SMsgAVIoctrlGetStreamCtrlResq *)trash;
                     switch (quality->quality) {
@@ -209,7 +209,7 @@
                             break;
                     }
                     break;
-                //获取录像模式
+                    //获取录像模式
                 case IOTYPE_USER_IPCAM_GETRECORD_RESP:;
                     SMsgAVIoctrlGetRecordResq *record = (SMsgAVIoctrlGetRecordResq *)trash;
                     switch (record->recordType) {
@@ -342,7 +342,7 @@
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
     }
-//    free(request);
+    //    free(request);
     return 1;
 }
 
@@ -516,86 +516,112 @@
         SWifiAp ap=wifiList->stWifiAp[i];
         NSLog(@"ssid=%s,mode=%d=",ap.ssid,ap.mode);
         if ([[NSString stringWithFormat:@"%s",ap.ssid] isEqualToString:@""]){
-        
+            
         }else{
             [ssidArray addObject:[NSString stringWithFormat:@"%s",ap.ssid]];
             [modes addObject:[NSString stringWithFormat:@"%d",ap.mode]];
         }
-//        if((ap.mode==1 || ap.mode==2) && strlen(ap.ssid)>1){
-//            BOOL isFind=NO;
-//            for(NSValue *obj in ssidArray){
-//                IpcWifiAp tmap;
-//                [obj getValue:&tmap];
-//                if(strcmp(ap.ssid,tmap.ssid)==0){
-//                    isFind=YES;
-//                    break;
-//                }
-//            }
-//            if(isFind==NO){
-//                IpcWifiAp ipcAp={"", ap.mode,ap.enctype,ap.signal,ap.status};
-//                memcpy(ipcAp.ssid, (char *)&ap.ssid, 32);
-//                [ssidArray addObject:[NSValue valueWithBytes:&ipcAp objCType:@encode(IpcWifiAp)]];
-//            }
-//        }
+        //        if((ap.mode==1 || ap.mode==2) && strlen(ap.ssid)>1){
+        //            BOOL isFind=NO;
+        //            for(NSValue *obj in ssidArray){
+        //                IpcWifiAp tmap;
+        //                [obj getValue:&tmap];
+        //                if(strcmp(ap.ssid,tmap.ssid)==0){
+        //                    isFind=YES;
+        //                    break;
+        //                }
+        //            }
+        //            if(isFind==NO){
+        //                IpcWifiAp ipcAp={"", ap.mode,ap.enctype,ap.signal,ap.status};
+        //                memcpy(ipcAp.ssid, (char *)&ap.ssid, 32);
+        //                [ssidArray addObject:[NSValue valueWithBytes:&ipcAp objCType:@encode(IpcWifiAp)]];
+        //            }
+        //        }
     }
     [self.infoDelegate receiveWifi:ssidArray modes:modes];
-//    if(delegate !=nil){
-//        dispatch_async(dispatch_queue_create("onListWifiApThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-//            if ([delegate respondsToSelector:@selector(onListWifiAp:)]) {
-//                [delegate onListWifiAp:ssidArray];
-//            }
-//            
-//        });
-//        
-//    }
+    //    if(delegate !=nil){
+    //        dispatch_async(dispatch_queue_create("onListWifiApThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+    //            if ([delegate respondsToSelector:@selector(onListWifiAp:)]) {
+    //                [delegate onListWifiAp:ssidArray];
+    //            }
+    //
+    //        });
+    //
+    //    }
 }
 
 -(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
     NSLog(@"uid=%@,AVStream Client Starting...",UID);
     
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        int ret;
-        // use IOTC_Connect_ByUID or IOTC_Connect_ByName to connect with device
+    NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        //NSString *aesString = @"your aes key";
-        
-        SID = IOTC_Connect_ByUID((char *)[UID UTF8String]);
-        
-        printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [UID UTF8String], SID);
-        struct st_SInfo Sinfo;
-        ret = IOTC_Session_Check(SID, &Sinfo);
-        
-        if (ret >= 0)
-        {
-            if(Sinfo.Mode == 0)
-                printf("Device is from %s:%d[%s] Mode=P2P\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
-            else if (Sinfo.Mode == 1)
-                printf("Device is from %s:%d[%s] Mode=RLY\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
-            else if (Sinfo.Mode == 2)
-                printf("Device is from %s:%d[%s] Mode=LAN\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+        int on = 1;
+        while ([timeout timeIntervalSinceNow] > 0) {
+//            NSLog(@"%f",[timeout timeIntervalSinceNow]);
+            if (on == 1){
+                on = 0;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    int ret;
+                    // use IOTC_Connect_ByUID or IOTC_Connect_ByName to connect with device
+                    
+                    //NSString *aesString = @"your aes key";
+                    
+                    SID = IOTC_Connect_ByUID((char *)[UID UTF8String]);
+                    
+                    printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [UID UTF8String], SID);
+                    struct st_SInfo Sinfo;
+                    ret = IOTC_Session_Check(SID, &Sinfo);
+                    
+                    if (ret >= 0)
+                    {
+                        if(Sinfo.Mode == 0)
+                            printf("Device is from %s:%d[%s] Mode=P2P\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                        else if (Sinfo.Mode == 1)
+                            printf("Device is from %s:%d[%s] Mode=RLY\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                        else if (Sinfo.Mode == 2)
+                            printf("Device is from %s:%d[%s] Mode=LAN\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                    }
+                    
+                    unsigned int srvType;
+                    avIndex = avClientStart(SID, "admin", [password UTF8String], 20000, &srvType, 0);
+                    printf("Step 3: call avClientStart(%d).......\n", avIndex);
+                    
+                    if(avIndex < 0)
+                    {
+                        printf("avClientStart failed[%d]\n", avIndex);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            failed();
+                        });
+                        return;
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+                            [self recv_io_ctrl_loop];
+                        });
+                        stopFlg=1;
+                        succeed();
+                        return;
+                    });
+                    
+                    
+                });
+            }
+            
+            if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failed();
+                });
+                return;
+            }
         }
         
-        unsigned int srvType;
-        avIndex = avClientStart(SID, "admin", [password UTF8String], 10, &srvType, 0);
-        printf("Step 3: call avClientStart(%d).......\n", avIndex);
-        
-        if(avIndex < 0)
-        {
-            printf("avClientStart failed[%d]\n", avIndex);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                failed();
-            });
-            return;
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-                [self recv_io_ctrl_loop];
-            });
-            stopFlg=1;
-            succeed();
-        });
     });
 }
+/*
+ 
+ */
 -(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
     [self connect:UID :password success:^{
         if ([self startIpcamStream]>0)
