@@ -14,6 +14,8 @@
 #import "OpenALPlayer.h"
 #import "CameraObject.h"
 #import "SVProgressHUD.h"
+#import<CoreMedia/CoreMedia.h>
+#import<AVFoundation/AVFoundation.h>
 /*
  //ZA define
 	IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
@@ -23,7 +25,7 @@
  点击开锁2，就发送指IOTYPE_USER_IPCAM_APP_LOCK2
  */
 
-@interface CameraViewController () <UICollectionViewDelegate>
+@interface CameraViewController () <UICollectionViewDelegate,AVCaptureAudioDataOutputSampleBufferDelegate>
 
 {
     DecodeH264 *_decodeH264;
@@ -49,6 +51,8 @@
 @property (nonatomic,assign) BOOL lockBSwitch;
 @property (nonatomic,assign) BOOL talkSwitch;
 @property (nonatomic,assign) int firstShow;
+@property (nonnull,nonatomic,strong) AVCaptureSession *captureSession;
+@property (nonnull,nonatomic,strong) UILabel *voiceLabel;
 
 @end
 
@@ -74,13 +78,15 @@
     [self initSetupUI];
     [self initNaviTools];
     [self setupUI];
+    [self setupVoiceLabel];
+    [self setVoiceLabelOn];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     if (_firstShow == 1) {
         _firstShow = 0;
-        [self setupCamera];
+//        [self setupCamera];
     }
 }
 
@@ -239,7 +245,9 @@
     
     UIButton *voiceButton = [[UIButton alloc]initWithFrame:CGRectMake((lScreenWidth-25)/2, _slider.frame.origin.y+120, 25, 40)];
     [voiceButton setImage:[UIImage imageNamed:@"camera_voice"] forState:UIControlStateNormal];
-    [voiceButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILongPressGestureRecognizer *longGes = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(sendVoice:)];
+    [voiceButton addGestureRecognizer:longGes];
     voiceButton.tag = 884;
     [self.view addSubview:voiceButton];
 }
@@ -252,7 +260,8 @@
             [tutkP2PAVClient setMute:self.audioSwitch];
             break;
         case 1:
-            
+            //拍照
+            [self cameraButton];
             break;
         case 2:
             [tutkP2PAVClient lock_unlock:1 status:self.lockASwitch];
@@ -265,11 +274,13 @@
             [button setBackgroundImage:[UIImage imageNamed:!self.lockBSwitch ? @"camera_lock":@"camera_unlock"] forState:UIControlStateNormal];
             break;
         default:
-            [tutkP2PAVClient sendVoice:self.talkSwitch];
-            self.talkSwitch = !self.talkSwitch;
+//            [tutkP2PAVClient sendVoice:self.talkSwitch];
+//            self.talkSwitch = !self.talkSwitch;
             break;
     }
 }
+
+
 
 - (void)turn:(UITapGestureRecognizer *)tap {
     NSInteger i = tap.view.tag - 50;
@@ -293,10 +304,6 @@
 
 - (void)plus {
     _slider.value = _slider.value + 0.1;
-}
-
-- (void)voiceButton {
-     [SVProgressHUD showErrorWithStatus:@"功能暂未开放"];
 }
 
 - (void)cameraButton {
@@ -412,5 +419,153 @@
 
 //#========================end UICollectionViewDelegate=====================
 
+
+
+-(void)initVoice
+
+{
+    
+    if(_captureSession)
+        
+    {
+        
+        [_captureSession startRunning];
+        
+    }
+    
+    else
+        
+    {
+        
+        _captureSession= [[AVCaptureSession alloc]init];
+        
+        AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        
+        if(audioDevice) {
+            
+            NSError*error;
+            
+            AVCaptureDeviceInput *audioIn = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+            
+            if ( !error ) {
+                
+                if ([_captureSession canAddInput:audioIn])
+                    
+                    [_captureSession addInput:audioIn];
+                
+                else
+                    
+                    NSLog(@"Couldn't add audio input");
+                
+            }
+            
+            else
+                
+                NSLog(@"Couldn't create audio input");
+            
+        }
+        
+        else
+            
+            NSLog(@"Couldn't create audio capture device");
+        
+        AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc]init];
+        
+        [audioOut setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
+        
+        if ([_captureSession canAddOutput:audioOut]) {
+            
+            [_captureSession addOutput:audioOut];
+            
+            //audioConnection = 
+            
+            [audioOut connectionWithMediaType:AVMediaTypeAudio];
+            
+        }
+        
+        else
+            
+            NSLog(@"Couldn't add audio output");
+        
+//        [audioOut release];
+        
+        [_captureSession startRunning];
+        
+    }
+    
+}
+
+- (void)stopSendVoice{
+    [_captureSession stopRunning];
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    //音频输出
+    NSLog(@"%@",sampleBuffer);
+}
+
+- (void)sendVoice:(UILongPressGestureRecognizer *)gesture {
+    switch (gesture.state) {
+        case UIGestureRecognizerStateBegan:
+            NSLog(@"手势开始");
+            [self showOrHideVoiceLabel:true];
+            break;
+        case UIGestureRecognizerStateEnded:
+            NSLog(@"手势结束");
+            [self showOrHideVoiceLabel:false];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)setupVoiceLabel{
+    _voiceLabel = [[UILabel alloc]initWithFrame:CGRectMake((lScreenWidth-80)/2, 120, 80, 20)];
+    _voiceLabel.text = @"对讲中.";
+    _voiceLabel.textAlignment = NSTextAlignmentCenter;
+    _voiceLabel.backgroundColor = [UIColor whiteColor];
+    _voiceLabel.textColor = [UIColor whiteColor];
+    _voiceLabel.hidden = true;
+    _voiceLabel.layer.cornerRadius = 10;
+    _voiceLabel.clipsToBounds = true;
+    _voiceLabel.font = [UIFont systemFontOfSize:14];
+    [self.view addSubview:_voiceLabel];
+}
+
+- (void)setVoiceLabelOn{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        while (1) {
+            if (_voiceLabel.hidden == false) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([_voiceLabel.text isEqualToString:@"对讲中."]){
+                        _voiceLabel.text = @"对讲中..";
+                    } else if ([_voiceLabel.text isEqualToString:@"对讲中.."]) {
+                        _voiceLabel.text = @"对讲中...";
+                    } else if ([_voiceLabel.text isEqualToString:@"对讲中..."]) {
+                        _voiceLabel.text = @"对讲中.";
+                    }
+                });
+            }
+            sleep(1);
+        }
+    });
+}
+
+- (void)showOrHideVoiceLabel:(BOOL)on {
+    if (on) {
+        [self initVoice];
+        [UIView animateWithDuration:0.25 animations:^{
+            _voiceLabel.hidden = false;
+            _voiceLabel.backgroundColor = [UIColor blackColor];
+        }];
+    } else {
+        [self stopSendVoice];
+        [UIView animateWithDuration:0.25 animations:^{
+            _voiceLabel.backgroundColor = [UIColor whiteColor];
+        } completion:^(BOOL finished) {
+            _voiceLabel.hidden = true;
+        }];
+    }
+}
 
 @end

@@ -28,6 +28,8 @@
 		0438023B1D6B014F00A26C9D /* SetMotionDetectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */; };
 		0438023D1D6B02DD00A26C9D /* SetRecordModeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */; };
 		0438023F1D6B02F600A26C9D /* CameraInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0438023E1D6B02F600A26C9D /* CameraInfoController.swift */; };
+		043802451D70300A00A26C9D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043802441D70300A00A26C9D /* CoreMedia.framework */; };
+		043802471D70301100A26C9D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043802461D70301100A26C9D /* AVFoundation.framework */; };
 		0439D2951D59E73800866590 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2941D59E73800866590 /* QRViewController.swift */; };
 		0439D2971D5B089300866590 /* CameraSwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0439D2961D5B089300866590 /* CameraSwiftViewController.swift */; };
 		046D51BF1D5C559100472619 /* camera_audio.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51B91D5C559100472619 /* camera_audio.png */; };
@@ -232,6 +234,8 @@
 		0438023A1D6B014F00A26C9D /* SetMotionDetectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetMotionDetectController.swift; sourceTree = "<group>"; };
 		0438023C1D6B02DD00A26C9D /* SetRecordModeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRecordModeController.swift; sourceTree = "<group>"; };
 		0438023E1D6B02F600A26C9D /* CameraInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraInfoController.swift; sourceTree = "<group>"; };
+		043802441D70300A00A26C9D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		043802461D70301100A26C9D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0439D2941D59E73800866590 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		0439D2961D5B089300866590 /* CameraSwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSwiftViewController.swift; sourceTree = "<group>"; };
 		046D51B91D5C559100472619 /* camera_audio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_audio.png; sourceTree = "<group>"; };
@@ -606,6 +610,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				043802471D70301100A26C9D /* AVFoundation.framework in Frameworks */,
+				043802451D70300A00A26C9D /* CoreMedia.framework in Frameworks */,
 				619B2A381CBD020100B59660 /* libbz2.1.0.tbd in Frameworks */,
 				6103C55E1CBE84BB002D6937 /* libIOTCAPIs_ALL.a in Frameworks */,
 				619B2A321CBD01B000B59660 /* libiconv.tbd in Frameworks */,
@@ -1476,6 +1482,8 @@
 		F8342D3B830BC51DCBE9D8F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				043802461D70301100A26C9D /* AVFoundation.framework */,
+				043802441D70300A00A26C9D /* CoreMedia.framework */,
 				A29B74D412AC3C4BD58C0083 /* libPods-P2PCamera.a */,
 			);
 			name = Frameworks;
