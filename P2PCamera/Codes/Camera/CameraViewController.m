@@ -16,6 +16,8 @@
 #import "SVProgressHUD.h"
 #import<CoreMedia/CoreMedia.h>
 #import<AVFoundation/AVFoundation.h>
+#import "G711_encode.h"
+#import "AVAPIs.h"
 /*
  //ZA define
 	IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
@@ -500,8 +502,33 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
-    //音频输出
-    NSLog(@"%@",sampleBuffer);
+    //转换成data
+    CMBlockBufferRef blockBufferRef = CMSampleBufferGetDataBuffer(sampleBuffer);
+    size_t length = CMBlockBufferGetDataLength(blockBufferRef);
+    Byte buffer[length];
+    CMBlockBufferCopyDataBytes(blockBufferRef, 0, length, buffer);
+    NSData *inputData = [NSData dataWithBytes:buffer length:length];
+    //g711编码
+    NSUInteger datalength = [inputData length];
+    Byte *byteData = (Byte *)[inputData bytes];
+    short *pPcm = (short *)byteData;
+    int outlen = 0;
+    int len =(int)datalength / 2;
+    Byte * G711Buff = (Byte *)malloc(len);
+    memset(G711Buff,0,len);
+    int i;
+    for (i=0; i<len; i++) {
+        //此处修改转换格式（a-law或u-law）1q
+        G711Buff[i] = _linear2alaw(pPcm[i]);
+    }
+    outlen = i;
+    
+    Byte *sendbuff = (Byte *)G711Buff;
+    NSData * sendData = [[NSData alloc]initWithBytes:sendbuff length:len];
+    
+    //AVAPI_API int  avSendAudioData(int nAVChannelID, const char *cabAudioData, int nAudioDataSize,    const void *cabFrameInfo, int nFrameInfoSize);
+    avSendAudioData()
+//    [self.delegate backVoiceDataWithG711u:sendData];
 }
 
 - (void)sendVoice:(UILongPressGestureRecognizer *)gesture {
