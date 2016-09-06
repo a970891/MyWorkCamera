@@ -601,6 +601,7 @@
                             [self recv_io_ctrl_loop];
                         });
                         stopFlg=1;
+                        self.theAvIndex = avIndex;
                         succeed();
                         return;
                     });

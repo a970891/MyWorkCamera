@@ -44,6 +44,9 @@ typedef struct
 @end
 
 @interface TutkP2PAVClient : NSObject
+
+@property (nonatomic,assign) int theAvIndex;
+
 +(int) initializeTutk;
 +(void)releaseTutk;
 -(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;

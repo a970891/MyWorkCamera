@@ -527,7 +527,7 @@
     NSData * sendData = [[NSData alloc]initWithBytes:sendbuff length:len];
     
     //AVAPI_API int  avSendAudioData(int nAVChannelID, const char *cabAudioData, int nAudioDataSize,    const void *cabFrameInfo, int nFrameInfoSize);
-    avSendAudioData()
+    int ret = avSendAudioData(tutkP2PAVClient.theAvIndex, sendbuff, len,? ,?);
 //    [self.delegate backVoiceDataWithG711u:sendData];
 }
 
