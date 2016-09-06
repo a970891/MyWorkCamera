@@ -10,6 +10,7 @@
 #define __G_711_H_
 
 #include <stdint.h>
+#include <stdio.h>
 
 enum _e_g711_tp
 

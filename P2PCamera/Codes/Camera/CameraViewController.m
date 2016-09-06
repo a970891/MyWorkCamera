@@ -16,7 +16,7 @@
 #import "SVProgressHUD.h"
 #import<CoreMedia/CoreMedia.h>
 #import<AVFoundation/AVFoundation.h>
-#import "G711_encode.h"
+//#import "G711_encode.h"
 #import "AVAPIs.h"
 /*
  //ZA define
@@ -426,75 +426,41 @@
 -(void)initVoice
 
 {
-    
     if(_captureSession)
-        
     {
-        
         [_captureSession startRunning];
-        
     }
-    
     else
-        
     {
-        
         _captureSession= [[AVCaptureSession alloc]init];
-        
         AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-        
         if(audioDevice) {
-            
             NSError*error;
-            
             AVCaptureDeviceInput *audioIn = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
-            
             if ( !error ) {
-                
                 if ([_captureSession canAddInput:audioIn])
-                    
                     [_captureSession addInput:audioIn];
-                
                 else
-                    
                     NSLog(@"Couldn't add audio input");
-                
             }
-            
             else
-                
                 NSLog(@"Couldn't create audio input");
-            
         }
-        
         else
-            
             NSLog(@"Couldn't create audio capture device");
-        
         AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc]init];
         
         [audioOut setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
-        
         if ([_captureSession canAddOutput:audioOut]) {
-            
             [_captureSession addOutput:audioOut];
-            
             //audioConnection = 
             
             [audioOut connectionWithMediaType:AVMediaTypeAudio];
-            
         }
-        
         else
-            
             NSLog(@"Couldn't add audio output");
-        
-//        [audioOut release];
-        
         [_captureSession startRunning];
-        
     }
-    
 }
 
 - (void)stopSendVoice{
@@ -519,7 +485,7 @@
     int i;
     for (i=0; i<len; i++) {
         //此处修改转换格式（a-law或u-law）1q
-        G711Buff[i] = _linear2alaw(pPcm[i]);
+//        G711Buff[i] = _linear2alaw(pPcm[i]);
     }
     outlen = i;
     
@@ -527,7 +493,7 @@
     NSData * sendData = [[NSData alloc]initWithBytes:sendbuff length:len];
     
     //AVAPI_API int  avSendAudioData(int nAVChannelID, const char *cabAudioData, int nAudioDataSize,    const void *cabFrameInfo, int nFrameInfoSize);
-    int ret = avSendAudioData(tutkP2PAVClient.theAvIndex, sendbuff, len,? ,?);
+//    int ret = avSendAudioData(tutkP2PAVClient.theAvIndex, sendbuff, len,? ,?);
 //    [self.delegate backVoiceDataWithG711u:sendData];
 }
 
