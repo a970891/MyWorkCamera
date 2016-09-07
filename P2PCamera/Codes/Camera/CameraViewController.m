@@ -89,7 +89,7 @@
     [super viewDidAppear:animated];
     if (_firstShow == 1) {
         _firstShow = 0;
-//        [self setupCamera];
+        [self setupCamera];
     }
 }
 
@@ -138,6 +138,11 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    _glLayer = nil;
 }
 
 - (void)setupUI{

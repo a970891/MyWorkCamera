@@ -564,6 +564,8 @@
     if ([[Myself sharedInstance].nowConnectCamera isEqualToString:@""]){
         if ([[Myself sharedInstance].nowConnectCamera isEqualToString:UID]){
             //设备相同,不做处理
+            succeed();
+            return;
         } else {
             //设备不同,断开旧有连接
             [self closeSession];
