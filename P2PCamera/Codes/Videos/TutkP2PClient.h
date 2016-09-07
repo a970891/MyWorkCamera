@@ -55,9 +55,9 @@ typedef struct
 -(int) closeSession;
 -(void) turn:(ENUM_TURN_CMD)direction;
 
--(void) setWifi:(IpcWifiAp) ap;
+-(int) setWifi:(IpcWifiAp) ap;
 //获取wifi
--(void)listWifiAp;
+-(int)listWifiAp;
 //获取显示模式
 -(int)getVideoMode;
 //获取环境模式

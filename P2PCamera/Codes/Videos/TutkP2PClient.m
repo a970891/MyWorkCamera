@@ -52,6 +52,11 @@
             switch (ioType) {
                 case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
                     SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
+                    NSLog(@"111111111");
+                    for (int i = 0;i < 32;i++){
+                        NSLog(@"%c",wifiList->stWifiAp->ssid[i]);
+                    }
+                    NSLog(@"2222222222222");
                     //                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
                     [self handListWifiAPReponse:wifiList];
                     break;
