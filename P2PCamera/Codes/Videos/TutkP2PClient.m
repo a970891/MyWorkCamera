@@ -43,7 +43,6 @@
 }
 
 -(int) recv_io_ctrl_loop {
-    
     while (stopFlg) {
         unsigned int ioType;
         char trash[1500];
@@ -55,12 +54,6 @@
             switch (ioType) {
                 case IOTYPE_USER_IPCAM_LISTWIFIAP_RESP:;
                     SMsgAVIoctrlListWifiApResp *wifiList = (SMsgAVIoctrlListWifiApResp *)trash;
-                    NSLog(@"111111111");
-                    for (int i = 0;i < 32;i++){
-                        NSLog(@"%c",wifiList->stWifiAp->ssid[i]);
-                    }
-                    NSLog(@"2222222222222");
-                    //                    [self.infoDelegate receiveWifi:[NSString stringWithFormat:@"%s",wifiList->stWifiAp->ssid]];
                     [self handListWifiAPReponse:wifiList];
                     break;
                 case IOTYPE_USER_IPCAM_SETWIFI_RESP:;
@@ -518,54 +511,27 @@
  }
  */
 -(void) handListWifiAPReponse:(SMsgAVIoctrlListWifiApResp*) wifiList{
-    NSMutableArray *ssidArray = [NSMutableArray array];
-    NSMutableArray *modes = [NSMutableArray array];
-    for(int i=0;i<sizeof(wifiList->stWifiAp);i++){
-        SWifiAp ap=wifiList->stWifiAp[i];
-        NSLog(@"ssid=%s,mode=%d=",ap.ssid,ap.mode);
-        if ([[NSString stringWithFormat:@"%s",ap.ssid] isEqualToString:@""]){
-            
-        }else{
-            [ssidArray addObject:[NSString stringWithFormat:@"%s",ap.ssid]];
-            [modes addObject:[NSString stringWithFormat:@"%d",ap.mode]];
-        }
-        //        if((ap.mode==1 || ap.mode==2) && strlen(ap.ssid)>1){
-        //            BOOL isFind=NO;
-        //            for(NSValue *obj in ssidArray){
-        //                IpcWifiAp tmap;
-        //                [obj getValue:&tmap];
-        //                if(strcmp(ap.ssid,tmap.ssid)==0){
-        //                    isFind=YES;
-        //                    break;
-        //                }
-        //            }
-        //            if(isFind==NO){
-        //                IpcWifiAp ipcAp={"", ap.mode,ap.enctype,ap.signal,ap.status};
-        //                memcpy(ipcAp.ssid, (char *)&ap.ssid, 32);
-        //                [ssidArray addObject:[NSValue valueWithBytes:&ipcAp objCType:@encode(IpcWifiAp)]];
-        //            }
-        //        }
+    NSMutableArray *arr = [[NSMutableArray alloc]init];
+    NSMutableArray *modes = [[NSMutableArray alloc]init];
+    for (int i = 0;i < wifiList->number;i++){
+        NSString *str = [NSString stringWithFormat:@"%s",wifiList->stWifiAp[i].ssid];
+        NSString *mode = [NSString stringWithFormat:@"%c",wifiList->stWifiAp[i].mode];
+        [arr addObject:str];
+        [modes addObject:mode];
     }
-    [self.infoDelegate receiveWifi:ssidArray modes:modes];
-    //    if(delegate !=nil){
-    //        dispatch_async(dispatch_queue_create("onListWifiApThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
-    //            if ([delegate respondsToSelector:@selector(onListWifiAp:)]) {
-    //                [delegate onListWifiAp:ssidArray];
-    //            }
-    //
-    //        });
-    //
-    //    }
+    [self.delegate receiveWifi:arr modes:modes];
 }
 
 -(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
     NSLog(@"uid=%@,AVStream Client Starting...",UID);
     //如果有已经连接的设备时候,先断开设备
-    if ([[Myself sharedInstance].nowConnectCamera isEqualToString:@""]){
-        if ([[Myself sharedInstance].nowConnectCamera isEqualToString:UID]){
-            //设备相同,不做处理
-            succeed();
-            return;
+    if ([[Myself sharedInstance].nowConnectCamera isEqualToString:UID]){
+        //设备相同,返回已连接
+        succeed();
+        return;
+    } else {
+        if ([[Myself sharedInstance].nowConnectCamera isEqualToString:@""]){
+            //无连接设备,不做处理
         } else {
             //设备不同,断开旧有连接
             [self closeSession];

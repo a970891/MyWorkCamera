@@ -28,6 +28,11 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if cameraObj.uid == Myself.sharedInstance().nowConnectCamera {
+            statusLabel.text = "已联机"
+        } else {
+            statusLabel.text = "未联机"
+        }
         tutkManager = Myself.sharedInstance().tutkManager
         tutkManager.infoDelegate = self;
         self.tableView.tableHeaderView = self.tableViewHead
@@ -51,8 +56,9 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     }
     
     func getCameraInfo() {
-        SVProgressHUD.showWithStatus("连接中")
-        tutkManager.connect(self.cameraObj.uid, self.cameraObj.password, success: { 
+//        SVProgressHUD.showWithStatus("连接中")
+        statusLabel.text = "连接中"
+        tutkManager.connect(self.cameraObj.uid, self.cameraObj.password, success: {
             self.tutkManager.listWifiAp()
             self.tutkManager.getVideoMode()
             self.tutkManager.getEnvironmentMode()
@@ -60,10 +66,12 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             self.tutkManager.getDeviceInfo()
             self.tutkManager.getVideoQuality()
             self.tutkManager.getRecordMode()
-            SVProgressHUD.showSuccessWithStatus("连接成功")
-            }) { 
-                SVProgressHUD.showErrorWithStatus("连接失败")
-                self.navigationController?.popToRootViewControllerAnimated(true)
+//            SVProgressHUD.showSuccessWithStatus("连接成功")
+            self.statusLabel.text = "已联机"
+            }) {
+//                SVProgressHUD.showErrorWithStatus("连接失败")
+                self.statusLabel.text = "未联机"
+//                self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
     
@@ -146,6 +154,27 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
 //    deinit {
 //        tutkManager.closeSession()
 //    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            if statusLabel.text == "已联机" {
+                
+            } else {
+                //只有已联机才允许跳转
+                return;
+            }
+            let vc = self.StoryboardWithIdentifier("Settings", Identifier: "the") as! SetTableViewController
+            vc.cameraObj = self.cameraObj
+            vc.tutkManager = self.tutkManager
+            vc.wifis = self.wifis
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.section == 2 {
+            if statusLabel.text == "未联机" {
+                self.getCameraInfo()
+            }
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)

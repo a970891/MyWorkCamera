@@ -177,6 +177,7 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
         }
         if indexPath.section == 2 {
             let vc = wifiViewController()
+            print(vc.wifis);
             vc.wifis = self.wifis
             vc.tutkManager = tutkManager
             self.navigationController?.pushViewController(vc, animated: true)
@@ -224,6 +225,7 @@ class wifiViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.whiteColor()
         tableView = UITableView(frame: CGRectMake(0, 0, SW, SH-64))
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         tableView.registerClass(wifiCell.classForCoder(), forCellReuseIdentifier: "cell")
