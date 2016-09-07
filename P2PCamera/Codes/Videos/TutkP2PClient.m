@@ -560,7 +560,15 @@
 
 -(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
     NSLog(@"uid=%@,AVStream Client Starting...",UID);
-    
+    //如果有已经连接的设备时候,先断开设备
+    if ([[Myself sharedInstance].nowConnectCamera isEqualToString:@""]){
+        if ([[Myself sharedInstance].nowConnectCamera isEqualToString:UID]){
+            //设备相同,不做处理
+        } else {
+            //设备不同,断开旧有连接
+            [self closeSession];
+        }
+    }
     NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
