@@ -7,6 +7,7 @@
 //
 
 #import "InfomationViewController.h"
+#import "P2PCamera-Swift.h"
 
 @interface InfomationViewController ()
 
@@ -32,6 +33,9 @@
 - (void)setupUI{
     [self setMyNavBar];
     self.titleLabel.text = @"信息";
+    if ([Myself getCurrentLanguage]){
+        self.titleLabel.text = @"Info";
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     
     _iconImage = [[UIImageView alloc]initWithFrame:CGRectMake((lScreenWidth-120)/2, 100, 120, 120)];

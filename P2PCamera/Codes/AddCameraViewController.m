@@ -57,6 +57,9 @@ static NSString *const Ccell = @"Ccell";
 - (void)setupUI{
     [self setMyNavBar];
     self.titleLabel.text = @"添加摄影机";
+    if ([Myself getCurrentLanguage]){
+        self.titleLabel.text = @"NewCamera";
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     [self showRightButton];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];

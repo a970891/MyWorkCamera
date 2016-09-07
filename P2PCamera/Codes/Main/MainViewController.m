@@ -54,6 +54,9 @@ static NSString *const mainCell = @"mainCell";
 - (void)setupUI {
     [self setMyNavBar];
     self.titleLabel.text = @"摄像机列表";
+    if ([Myself getCurrentLanguage]){
+        self.titleLabel.text = @"CameraList";
+    }
     [self showRightButton];
     [self.rightButton setTitle:@"" forState:UIControlStateNormal];
 //    [self.rightButton setTitle:@"编辑" forState:UIControlStateNormal];

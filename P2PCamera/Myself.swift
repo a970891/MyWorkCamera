@@ -13,18 +13,27 @@ class Myself: NSObject {
     static private var myself:Myself = Myself()
     var tutkManager:TutkP2PAVClient!
     var nowConnectCamera:String = ""
+    var language:Bool!
+    
+    override init() {
+        super.init()
+        let languages = NSLocale.preferredLanguages()
+        if languages[0] == "en-US" {
+            self.language = true;
+        } else {
+            self.language = false;
+        }
+    }
     
     class func sharedInstance() -> Myself {
         return self.myself;
     }
     
     /**
-     获取本机语言
+     获取本机语言(英文true,中文false)
      */
-    class func getCurrentLanguage() -> String{
-        let languages = NSLocale.preferredLanguages()
-        print(languages[0])
-        return languages[0]
+    class func getCurrentLanguage() -> Bool{
+        return self.sharedInstance().language
     }
     
     /**
