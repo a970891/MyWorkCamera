@@ -28,7 +28,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tutkManager = TutkP2PAVClient()
+        tutkManager = Myself.sharedInstance().tutkManager
         tutkManager.infoDelegate = self;
         self.tableView.tableHeaderView = self.tableViewHead
         self.tableViewHead.TitleLabel.text = cameraObj.uid

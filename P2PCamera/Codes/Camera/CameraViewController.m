@@ -18,6 +18,7 @@
 #import<AVFoundation/AVFoundation.h>
 //#import "G711_encode.h"
 #import "AVAPIs.h"
+#import "P2PCamera-Swift.h"
 /*
  //ZA define
 	IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
@@ -60,9 +61,9 @@
 
 @implementation CameraViewController
 
-- (CameraViewController *)initWithUid:(NSString *)uid password:(NSString *)password {
+- (CameraViewController *)initWithUid:(NSString *)uuid password:(NSString *)password {
     self = [super init];
-    self.kUid = uid;
+    self.kUid = uuid;
     self.password = password;
     return self;
 }
@@ -116,7 +117,7 @@
     [self.video.layer addSublayer:_glLayer];
     
     
-    tutkP2PAVClient=[[TutkP2PAVClient alloc] init];
+    tutkP2PAVClient = [Myself sharedInstance].tutkManager;
     _decodeH264=[[DecodeH264 alloc] init];
     _decodeH264.delegate=self;
     

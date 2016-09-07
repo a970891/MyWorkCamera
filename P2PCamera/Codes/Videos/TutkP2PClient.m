@@ -8,6 +8,7 @@
 #import <sys/time.h>
 #import "g711codec.h"
 #import "OpenALPlayer.h"
+#import "P2PCamera-Swift.h"
 
 #define PT_SPEED 8
 #define AUDIO_BUF_SIZE	1024
@@ -600,6 +601,7 @@
                         printf("avClientStart failed[%d]\n", avIndex);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             failed();
+                            [Myself sharedInstance].nowConnectCamera = @"";
                         });
                         return;
                     }
@@ -610,6 +612,7 @@
                         stopFlg=1;
                         self.theAvIndex = avIndex;
                         succeed();
+                        [Myself sharedInstance].nowConnectCamera = UID;
                         return;
                     });
                     
@@ -620,6 +623,7 @@
             if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     failed();
+                    [Myself sharedInstance].nowConnectCamera = @"";
                 });
                 return;
             }
@@ -634,7 +638,6 @@
     [self connect:UID :password success:^{
         if ([self startIpcamStream]>0)
         {
-            
             dispatch_queue_t rqueue=dispatch_queue_create("reThreadQueue", DISPATCH_QUEUE_SERIAL);
             dispatch_async(rqueue, ^{
                 [self receiveVideo];
