@@ -56,10 +56,10 @@ typedef void (^SearchBlock)(NSString *str);
 -(void) stopAndCloseSession;
 -(int) closeSession;
 -(void) turn:(ENUM_TURN_CMD)direction;
-//搜索摄像头
-- (void)SearchAndConnect:(SearchBlock)searchBlock;
 
 -(int) setWifi:(IpcWifiAp) ap;
+//搜索摄像头
+- (void)SearchAndConnect:(SearchBlock)searchBlock;
 //获取wifi
 -(int)listWifiAp;
 //获取显示模式

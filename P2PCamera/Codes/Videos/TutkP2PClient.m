@@ -843,6 +843,7 @@
     avClientStop(avIndex);
     NSLog(@"avClientStop OK");
     IOTC_Session_Close(SID);
+    [Myself sharedInstance].nowConnectCamera = @"";
     NSLog(@"IOTC_Session_Close OK");
 }
 

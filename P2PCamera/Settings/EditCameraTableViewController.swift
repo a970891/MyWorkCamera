@@ -143,9 +143,9 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         UIAlertView(title: "提示", message: "名字或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
     }
 
-    deinit {
-        tutkManager.closeSession()
-    }
+//    deinit {
+//        tutkManager.closeSession()
+//    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
