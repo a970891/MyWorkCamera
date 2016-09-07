@@ -26,7 +26,7 @@ static NSString *const Ccell = @"Ccell";
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *dataSource;
 @property (nonatomic,strong)NSArray *remoteMovies;
-@property (nonatomic,strong)AudioPlayer *audioPlayer;
+//@property (nonatomic,strong)AudioPlayer *audioPlayer;
 
 @end
 
@@ -35,8 +35,8 @@ static NSString *const Ccell = @"Ccell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    _audioPlayer = [[AudioPlayer alloc] init];
-    [_audioPlayer IOTC_Init];
+//    _audioPlayer = [[AudioPlayer alloc] init];
+//    [_audioPlayer IOTC_Init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -270,7 +270,7 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)searchCamera{
     [self.dataSource removeAllObjects];
-    [_audioPlayer SearchAndConnect:^(NSString *str) {
+    [[Myself sharedInstance].tutkManager SearchAndConnect:^(NSString *str) {
         if ([str isEqualToString:@""] || str == NULL){
             [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
         } else {

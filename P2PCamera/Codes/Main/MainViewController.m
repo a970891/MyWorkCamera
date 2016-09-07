@@ -29,7 +29,7 @@ static NSString *const mainCell = @"mainCell";
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,strong) UISearchBar    *searchBar;
 @property (nonatomic,strong) UIView         *lineView;
-@property (nonatomic,strong) AudioPlayer    *audioPlayer;
+//@property (nonatomic,strong) AudioPlayer    *audioPlayer;
 @property (nonatomic,strong) NSMutableArray *deviceUids;
 @end
 
@@ -41,8 +41,8 @@ static NSString *const mainCell = @"mainCell";
 //    [self initNaviTools];
     [self setupUI];
 //    [self setCameras];
-    _audioPlayer = [[AudioPlayer alloc] init];
-    [_audioPlayer IOTC_Init];
+//    _audioPlayer = [[AudioPlayer alloc] init];
+//    [_audioPlayer IOTC_Init];
     _deviceUids = [[NSMutableArray alloc]init];
 }
 
@@ -87,7 +87,7 @@ static NSString *const mainCell = @"mainCell";
     //清除数据源
     [self.dataSource removeAllObjects];
     [self.deviceUids removeAllObjects];
-    [_audioPlayer SearchAndConnect:^(NSString *str) {
+    [[Myself sharedInstance].tutkManager SearchAndConnect:^(NSString *str) {
         [self.deviceUids addObject:str];
         //获取数据
         self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];

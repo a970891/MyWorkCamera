@@ -18,6 +18,8 @@
 }
 @synthesize delegate;
 
+
+
 +(int) initializeTutk{
     long _tickCount=[self getTickCount];
     unsigned short nUdpPort = (unsigned short)(10000 + _tickCount % 10000);
@@ -973,6 +975,20 @@
             
         default:
             return 8000;
+    }
+}
+
+- (void)SearchAndConnect:(SearchBlock)searchBlock {
+    struct st_LanSearchInfo  p[100];
+    
+    IOTC_Lan_Search(p, 100, 100);
+    
+    for(int i = 0;i < 100;i++) {
+        NSString *str = [NSString stringWithFormat:@"%s",p[i].UID];
+        if (str != NULL && ![str isEqualToString:@""]) {
+            NSLog(@"%@",str);
+            searchBlock(str);
+        }
     }
 }
 

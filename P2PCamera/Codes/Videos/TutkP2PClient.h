@@ -22,6 +22,8 @@ typedef struct
     char passwd[64];            //WIFI password
 }IpcWifiAp;
 
+typedef void (^SearchBlock)(NSString *str);
+
 @protocol CameraInfoDelegate <NSObject>
 
 - (void)receiveWifi:(NSArray *)ssids modes:(NSArray *)modes;
@@ -54,6 +56,8 @@ typedef struct
 -(void) stopAndCloseSession;
 -(int) closeSession;
 -(void) turn:(ENUM_TURN_CMD)direction;
+//搜索摄像头
+- (void)SearchAndConnect:(SearchBlock)searchBlock;
 
 -(int) setWifi:(IpcWifiAp) ap;
 //获取wifi

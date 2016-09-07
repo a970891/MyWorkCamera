@@ -40,6 +40,7 @@
 		046D51C21D5C559100472619 /* camera_unaudio.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BC1D5C559100472619 /* camera_unaudio.png */; };
 		046D51C31D5C559100472619 /* camera_voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BD1D5C559100472619 /* camera_voice.png */; };
 		046D51C41D5C559100472619 /* camera_unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = 046D51BE1D5C559100472619 /* camera_unlock.png */; };
+		0475293E1D7FF4AC0027E3AF /* Myself.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475293D1D7FF4AC0027E3AF /* Myself.swift */; };
 		048074A41CF2B30000F59273 /* CameraObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A31CF2B30000F59273 /* CameraObject.m */; };
 		048074A71CF2C29F00F59273 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A61CF2C29F00F59273 /* CameraManager.m */; };
 		048074AA1CF2C87100F59273 /* BBCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048074A91CF2C87100F59273 /* BBCell.m */; };
@@ -249,6 +250,7 @@
 		046D51BC1D5C559100472619 /* camera_unaudio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_unaudio.png; sourceTree = "<group>"; };
 		046D51BD1D5C559100472619 /* camera_voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_voice.png; sourceTree = "<group>"; };
 		046D51BE1D5C559100472619 /* camera_unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_unlock.png; sourceTree = "<group>"; };
+		0475293D1D7FF4AC0027E3AF /* Myself.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Myself.swift; sourceTree = "<group>"; };
 		048074A21CF2B30000F59273 /* CameraObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraObject.h; sourceTree = "<group>"; };
 		048074A31CF2B30000F59273 /* CameraObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraObject.m; sourceTree = "<group>"; };
 		048074A51CF2C29F00F59273 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
@@ -1471,6 +1473,7 @@
 			children = (
 				04D3BC141D583E84002CF64C /* QRCodeGenerator.h */,
 				04D3BC151D583E84002CF64C /* QRCodeGenerator.m */,
+				0475293D1D7FF4AC0027E3AF /* Myself.swift */,
 				619B2A391CBD0B7600B59660 /* IOTC */,
 				619B29B81CBCF52200B59660 /* libs */,
 				61A67D9D1CBBC21600529961 /* kxmovie */,
@@ -1748,6 +1751,7 @@
 				6136FDF41CC28B33005301AA /* MCAudioBuffer.m in Sources */,
 				0439D2971D5B089300866590 /* CameraSwiftViewController.swift in Sources */,
 				89DA94C51C7A2F27008735CA /* SDWebImageDecoder.m in Sources */,
+				0475293E1D7FF4AC0027E3AF /* Myself.swift in Sources */,
 				89DA94C31C7A2F27008735CA /* SDImageCache.m in Sources */,
 				89DA94E11C7A358B008735CA /* MainViewController.m in Sources */,
 				89DA94C41C7A2F27008735CA /* SDWebImageCompat.m in Sources */,

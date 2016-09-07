@@ -13,6 +13,7 @@
 #import "InfomationViewController.h"
 #import "ZHLTViewController.h"
 #import "TutkP2PClient.h"
+#import "P2PCamera-Swift.h"
 
 @interface AppDelegate ()
 
@@ -25,9 +26,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [TutkP2PAVClient initializeTutk];
-    });
+    [Myself initTutkManager:^{} failed:^{}];
     [self loadTabBar];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
