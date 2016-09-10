@@ -65,7 +65,7 @@ typedef enum
 	AUDIO_CHANNEL_STERO		= 1,
 }ENUM_AUDIO_CHANNEL;
 
-/* Audio Frame: flags =  (samplerate << 2) | (databits << 1) | (channel) */
+/* Audio Frame: flags =  (AUDIO_SAMPLE_8K << 2) | (AUDIO_DATABITS_8 << 1) | (AUDIO_CHANNEL_MONO) */
 
 
 /* Audio/Video Frame Header Info */

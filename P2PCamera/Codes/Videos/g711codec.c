@@ -205,4 +205,3 @@ int g711u_encode(unsigned char g711_data[], const short amp[], int len)
 
     return len;
 }
-

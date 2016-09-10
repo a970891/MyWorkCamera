@@ -8,8 +8,12 @@
 
 #import "BaseVC.h"
 
+typedef void (^SendVoiceBlock)(Byte *buffer,NSData *data);
+
 @interface CameraViewController : BaseVC
 
 - (CameraViewController *)initWithUid:(NSString *)uid password:(NSString *)password;
+
+@property (nonatomic,copy) SendVoiceBlock sendBlock;
 
 @end
