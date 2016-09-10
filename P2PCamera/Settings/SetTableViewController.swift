@@ -222,6 +222,7 @@ class wifiViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     private var tableView:UITableView!
     var tutkManager:TutkP2PAVClient!
     private var selectSsid:String!
+    private var selectNum:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,6 +256,7 @@ class wifiViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.selectSsid = self.wifis[indexPath.row].ssid
+        self.selectNum = indexPath.row
         let alertView = UIAlertView(title: "提示", message: "请输入密码", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
         alertView.alertViewStyle = UIAlertViewStyle.PlainTextInput
         let textField = alertView.textFieldAtIndex(0)
@@ -267,7 +269,7 @@ class wifiViewController:UIViewController, UITableViewDelegate, UITableViewDataS
             if let textField = alertView.textFieldAtIndex(0) {
                 if let text = textField.text {
                     if (text as NSString).length != 0 {
-                        tutkManager.setWifi(self.selectSsid, pwd: text)
+                        tutkManager.setWifi(self.selectSsid, pwd: text, mode: self.wifis[self.selectNum].mode, type: self.wifis[self.selectNum].mode)
                         self.navigationController?.popViewControllerAnimated(true)
                         return
                     }

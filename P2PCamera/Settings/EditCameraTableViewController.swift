@@ -123,12 +123,14 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         }
     }
     //收到ssid和mode回调
-    func receiveWifi(ssids: [AnyObject]!, modes: [AnyObject]!) {
+    func receiveWifi(ssids: [AnyObject]!, modes: [AnyObject]!, types: [AnyObject]!) {
         for i in 0 ..< ssids.count {
             let wifi = wifiObject()
             wifi.ssid = ssids[i] as! String
             wifi.mode = modes[i] as! String
+            wifi.type = types[i] as! String
             self.wifis.append(wifi)
+            print(wifi.ssid)
         }
     }
     //收到录像模式回调
@@ -191,4 +193,5 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
 class wifiObject:NSObject {
     dynamic var ssid:String = ""
     dynamic var mode:String = ""
+    dynamic var type:String = ""
 }

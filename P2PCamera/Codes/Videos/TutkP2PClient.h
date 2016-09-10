@@ -26,7 +26,7 @@ typedef void (^SearchBlock)(NSString *str);
 
 @protocol CameraInfoDelegate <NSObject>
 
-- (void)receiveWifi:(NSArray *)ssids modes:(NSArray *)modes;
+- (void)receiveWifi:(NSArray *)ssids modes:(NSArray *)modes types:(NSArray *)types;
 - (void)receiveVideoMode:(int)mode;
 - (void)receiveEnvironmentMode:(int)mode;
 - (void)receiveEXTSdCardResult:(int)result;
@@ -78,7 +78,7 @@ typedef void (^SearchBlock)(NSString *str);
 -(int)getRecordMode;
 
 //设置wifi
-- (int)setWifi:(NSString *)ssid pwd:(NSString *)pswd;
+- (int)setWifi:(NSString *)ssid pwd:(NSString *)pswd mode:(NSString *)mode type:(NSString *)type;
 //设置密码
 - (int)setPassword:(NSString *)oldPasswd :(NSString *)newPasswd;
 //设置显示模式
