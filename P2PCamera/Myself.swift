@@ -11,12 +11,10 @@ import UIKit
 class Myself: NSObject {
     
     static private var myself:Myself = Myself()
-    var tutkManager:TutkP2PAVClient!
-    var nowConnectCamera:String = ""
+    private var nowConnectCamera = [String]()
+    private var nowTutkManagers = [String:TutkP2PAVClient]()
     var language:Bool!
-    var m_avIndex:Int = -1
     var s_avIndex:Int = -1
-    var SID:Int = 0
     
     override init() {
         super.init()
@@ -46,7 +44,6 @@ class Myself: NSObject {
         dispatch_async(dispatch_get_global_queue(0, 0)) { 
             if TutkP2PAVClient.initializeTutk() != -1 {
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.sharedInstance().tutkManager = TutkP2PAVClient()
                     succeed()
                 })
             } else {
@@ -54,6 +51,50 @@ class Myself: NSObject {
                     failed()
                 })
             }
+        }
+    }
+    
+    /**
+     寻找设备是否已连接
+     */
+    func findUID(uid:String) ->Bool {
+        return self.nowConnectCamera.contains(uid)
+    }
+    
+    /**
+     在已连接设备中插入对应UID
+     */
+    func insertUID(uid:String) {
+        if self.findUID(uid) {
+            return
+        } else {
+            self.nowConnectCamera.append(uid)
+        }
+    }
+    
+    /**
+     在已连接设备中删除对应UID
+     */
+    func deleteUID(uid:String) {
+        if self.findUID(uid) {
+            for i in 0 ..< self.nowConnectCamera.count {
+                if uid == self.nowConnectCamera[i] {
+                    self.nowConnectCamera.removeAtIndex(i)
+                }
+            }
+        }
+    }
+    
+    /**
+     根据uid搜索对应的tutkmanager
+     */
+    func findManagerWithUID(uid:String) -> TutkP2PAVClient{
+        if let manager = self.nowTutkManagers[uid] {
+            return manager
+        } else {
+            let manager = TutkP2PAVClient()
+            self.nowTutkManagers[uid] = manager
+            return manager
         }
     }
     

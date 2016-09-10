@@ -15,7 +15,7 @@
 #define VIDEO_BUF_SIZE	2000000
 
 @implementation TutkP2PAVClient{
-    int avIndex,SID,stopFlg;
+    int avIndex,SID,stopFlg,avStopFlg;
 }
 @synthesize delegate;
 
@@ -46,9 +46,10 @@
     while (stopFlg) {
         unsigned int ioType;
         char trash[1500];
-        int ret = avRecvIOCtrl(avIndex, &ioType, trash, sizeof(trash), 10000);
-        if(ret < 0) {
-            printf("avRecvIOCtrl[%d][%d]\n", ret, avIndex);
+        int ret = avRecvIOCtrl(_avIndex, &ioType, trash, sizeof(trash), 10000);
+        if(ret < 0 && ret != -20011) {
+            [[Myself sharedInstance] deleteUID:_UID];
+            printf("avRecvIOCtrl[%d][%d]\n", ret, _avIndex);
             break;
         }else {
             switch (ioType) {
@@ -242,7 +243,7 @@
     int ret;
     
     SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_LISTWIFIAP_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_LISTWIFIAP_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -256,8 +257,8 @@
     int ret;
     
     SMsgAVIoctrlGetVideoModeReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    request.channel = avIndex;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
+    request.channel = _avIndex;
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -270,8 +271,8 @@
     int ret;
     
     SMsgAVIoctrlGetEnvironmentReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    request.channel = avIndex;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
+    request.channel = _avIndex;
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_GET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -284,8 +285,8 @@
     int ret;
     
     SMsgAVIoctrlGetMotionDetectReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    request.channel = avIndex;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
+    request.channel = _avIndex;
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_GETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -298,7 +299,7 @@
     int ret;
     
     SMsgAVIoctrlDeviceInfoReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_DEVINFO_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_DEVINFO_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -311,7 +312,7 @@
     int ret;
     
     SMsgAVIoctrlFormatExtStorageReq request;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_FORMATEXTSTORAGE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"failed-%d", ret);
         return -1;
@@ -324,8 +325,8 @@
     int ret;
     
     SMsgAVIoctrlGetStreamCtrlReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    request.channel = avIndex;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
+    request.channel = _avIndex;
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_GETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -338,8 +339,8 @@
     int ret;
     
     SMsgAVIoctrlGetRecordReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
-    request.channel = avIndex;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
+    request.channel = _avIndex;
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_GETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);
         return -1;
@@ -355,21 +356,6 @@
 /*
  设置WIFI
  */
--(int) setWifi:(IpcWifiAp) ap{
-    SMsgAVIoctrlSetWifiReq request; //= (SMsgAVIoctrlSetWifiReq *)malloc(sizeof(SMsgAVIoctrlSetWifiReq));
-    strcpy((char *)request.ssid, ap.ssid);
-    request.enctype=ap.enctype;
-    request.mode=ap.mode;
-    strcpy((char *)request.password, ap.passwd);
-    NSLog(@"set wifi ssid=%s,password=%s,request.enctype=%d",request.ssid,request.password,request.enctype);
-    int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETWIFI_REQ, (char *)&request, sizeof(request)) < 0))
-    {
-        NSLog(@"set_wifi_ap_failed[%d]", ret);
-        return -1;
-    }
-    return ret;
-}
 - (int)setWifi:(NSString *)ssid pwd:(NSString *)pswd mode:(NSString *)mode type:(NSString *)type{
     SMsgAVIoctrlSetWifiReq request; //= (SMsgAVIoctrlSetWifiReq *)malloc(sizeof(SMsgAVIoctrlSetWifiReq));
     strcpy((char *)request.ssid, [ssid cStringUsingEncoding:[NSString defaultCStringEncoding]]);
@@ -378,7 +364,7 @@
     strcpy((char *)request.password, [pswd cStringUsingEncoding:[NSString defaultCStringEncoding]]);
     NSLog(@"set wifi ssid=%s,password=%s,request.enctype=%d",request.ssid,request.password,request.enctype);
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETWIFI_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SETWIFI_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_wifi_ap_failed[%d]", ret);
         return -1;
@@ -391,7 +377,7 @@
     strcpy(request.newpasswd, [newPasswd UTF8String]);
     strcpy(request.oldpasswd, [oldPasswd UTF8String]);
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETPASSWORD_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SETPASSWORD_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_ipc_password_failed[%d]", ret);
         return -1;
@@ -402,10 +388,10 @@
 // 0正常, 1 倒转 , 2镜像 , 3 倒转和镜像
 -(int)setVideoMode:(int) video_mod{
     SMsgAVIoctrlSetVideoModeReq request;
-    request.channel=avIndex;
+    request.channel=_avIndex;
     request.mode=video_mod;
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_video_mode_failed[%d]", ret);
         return -1;
@@ -415,10 +401,10 @@
 //设置环境模式
 - (int)setEnvironmentMode:(int)mode{
     SMsgAVIoctrlSetEnvironmentReq request;
-    request.channel=avIndex;
+    request.channel=_avIndex;
     request.mode=mode;
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SET_ENVIRONMENT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_video_mode_failed[%d]", ret);
         return -1;
@@ -428,10 +414,10 @@
 //设置视频质量
 -(int)setQuality:(int)quality{
     SMsgAVIoctrlSetStreamCtrlReq request;
-    request.channel=avIndex;
+    request.channel=_avIndex;
     request.quality=quality;
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SETSTREAMCTRL_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_video_quality_failed[%d]", ret);
         return -1;
@@ -441,11 +427,11 @@
 //设置移动侦测
 - (int)setMotionDetece:(int)mode{
     SMsgAVIoctrlSetMotionDetectReq request;
-    request.channel = avIndex;
+    request.channel = _avIndex;
     request.sensitivity = mode;
     
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SETMOTIONDETECT_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_video_quality_failed[%d]", ret);
         return -1;
@@ -455,11 +441,11 @@
 //设置录像模式
 - (int)setRecordMode:(int)mode{
     SMsgAVIoctrlSetRecordReq request;
-    request.channel = avIndex;
+    request.channel = _avIndex;
     request.recordType = mode;
     
     int ret;
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SETRECORD_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"set_video_quality_failed[%d]", ret);
         return -1;
@@ -469,17 +455,17 @@
 //设置禁音
 - (int)setMute:(BOOL)on{
     SMsgAVIoctrlAVStream request;
-    request.channel = avIndex;
+    request.channel = _avIndex;
     int ret;
     
     if (on) {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_AUDIOSTART, (char *)&request, sizeof(request)) < 0))
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_AUDIOSTART, (char *)&request, sizeof(request)) < 0))
         {
             NSLog(@"set_video_quality_failed[%d]", ret);
             return -1;
         }
     } else {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_AUDIOSTOP, (char *)&request, sizeof(request)) < 0))
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_AUDIOSTOP, (char *)&request, sizeof(request)) < 0))
         {
             NSLog(@"set_video_quality_failed[%d]", ret);
             return -1;
@@ -488,20 +474,31 @@
     
     return 1;
 }
+/**
+ 关闭音频视频
+ */
+- (void)closeAV{
+    avStopFlg = 0;
+    SMsgAVIoctrlAVStream request;
+    request.channel = _avIndex;
+    avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_AUDIOSTOP, (char *)&request, sizeof(request));
+    avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_STOP,(char *)&request, sizeof(request));
+    NSLog(@"%d",_avIndex);
+}
 //对讲
 - (int)sendVoice:(BOOL)on{
     SMsgAVIoctrlAVStream request;
-    request.channel = avIndex;
+    request.channel = _avIndex;
     int ret;
     
     if (on) {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SPEAKERSTART, (char *)&request, sizeof(request)) < 0))
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SPEAKERSTART, (char *)&request, sizeof(request)) < 0))
         {
             NSLog(@"set_video_quality_failed[%d]", ret);
             return -1;
         }
     } else {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_SPEAKERSTOP, (char *)&request, sizeof(request)) < 0))
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_SPEAKERSTOP, (char *)&request, sizeof(request)) < 0))
         {
             NSLog(@"set_video_quality_failed[%d]", ret);
             return -1;
@@ -511,21 +508,7 @@
     return 1;
 }
 
-/*
- -(void) handSetWifiResp:(SMsgAVIoctrlSetWifiResp *) reponse{
- NSLog(@"Tutk set wifi resp=%d",reponse->result);
- if(delegate !=nil){
- BOOL rs=YES;
- if(reponse->result!=0){
- rs=NO;
- }
- dispatch_async(dispatch_get_global_queue(0, 0), ^{
- [delegate onReceivedSetWifiResp:rs];
- });
- 
- }
- }
- */
+//处理wifi列表
 -(void) handListWifiAPReponse:(SMsgAVIoctrlListWifiApResp*) wifiList{
     NSMutableArray *arr = [[NSMutableArray alloc]init];
     NSMutableArray *modes = [[NSMutableArray alloc]init];
@@ -541,20 +524,14 @@
     [self.infoDelegate receiveWifi:arr modes:modes types:types];
 }
 
--(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
-    NSLog(@"uid=%@,AVStream Client Starting...",UID);
-    //如果有已经连接的设备时候,先断开设备
-    if ([[Myself sharedInstance].nowConnectCamera isEqualToString:UID]){
-        //设备相同,返回已连接
+-(void)connectsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
+    NSLog(@"uid=%@,AVStream Client Starting...",_UID);
+    //如果已经连接,则返回成功
+    if ([[Myself sharedInstance] findUID:_UID]) {
         succeed();
+        stopFlg=1;
+        avStopFlg=1;
         return;
-    } else {
-        if ([[Myself sharedInstance].nowConnectCamera isEqualToString:@""]){
-            //无连接设备,不做处理
-        } else {
-            //设备不同,断开旧有连接
-            [self closeSession];
-        }
     }
     NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
     
@@ -562,7 +539,6 @@
         
         int on = 1;
         while ([timeout timeIntervalSinceNow] > 0) {
-//            NSLog(@"%f",[timeout timeIntervalSinceNow]);
             if (on == 1){
                 on = 0;
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -571,10 +547,10 @@
                     
                     //NSString *aesString = @"your aes key";
                     
-                    SID = IOTC_Connect_ByUID((char *)[UID UTF8String]);
-                    [Myself sharedInstance].SID = SID;
+                    SID = IOTC_Connect_ByUID((char *)[_UID UTF8String]);
+                    _SID = SID;
                     
-                    printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [UID UTF8String], SID);
+                    printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [_UID UTF8String], SID);
                     struct st_SInfo Sinfo;
                     ret = IOTC_Session_Check(SID, &Sinfo);
                     
@@ -589,27 +565,28 @@
                     }
                     
                     unsigned int srvType;
-                    avIndex = avClientStart(SID, "admin", [password UTF8String], 20000, &srvType, 0);
-                    printf("Step 3: call avClientStart(%d).......\n", avIndex);
+                    avIndex = avClientStart(SID, "admin", [_password UTF8String], 20000, &srvType, 0);
+                    _avIndex = avIndex;
+                    printf("Step 3: call avClientStart(%d).......\n", _avIndex);
                     
-                    if(avIndex < 0)
+                    if(_avIndex < 0)
                     {
-                        printf("avClientStart failed[%d]\n", avIndex);
+                        printf("avClientStart failed[%d]\n", _avIndex);
                         dispatch_async(dispatch_get_main_queue(), ^{
                             failed();
-                            [Myself sharedInstance].nowConnectCamera = @"";
+                            [[Myself sharedInstance] deleteUID:_UID];
                         });
                         return;
                     }
+                    //连接成功
                     dispatch_async(dispatch_get_main_queue(), ^{
                         dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
                             [self recv_io_ctrl_loop];
                         });
                         stopFlg=1;
-                        self.theAvIndex = avIndex;
-                        [Myself sharedInstance].m_avIndex = avIndex;
+                        avStopFlg=1;
+                        [[Myself sharedInstance] insertUID:_UID];
                         succeed();
-                        [Myself sharedInstance].nowConnectCamera = UID;
                         return;
                     });
                     
@@ -620,7 +597,7 @@
             if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     failed();
-                    [Myself sharedInstance].nowConnectCamera = @"";
+                    [[Myself sharedInstance] deleteUID:_UID];
                 });
                 return;
             }
@@ -631,8 +608,8 @@
 /*
  
  */
--(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
-    [self connect:UID :password success:^{
+-(void)startAndPlayAVsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
+    [self connectsuccess:^{
         if ([self startIpcamStream]>0)
         {
             dispatch_queue_t rqueue=dispatch_queue_create("reThreadQueue", DISPATCH_QUEUE_SERIAL);
@@ -659,9 +636,9 @@
     
     FRAMEINFO_t frameInfo;
     
-    while (stopFlg)
+    while (avStopFlg)
     {
-        ret = avCheckAudioBuf(avIndex);
+        ret = avCheckAudioBuf(_avIndex);
         if (ret < 0) break;
         if (ret < 3) // determined by audio frame rate
         {
@@ -669,7 +646,7 @@
             continue;
         }
         
-        ret = avRecvAudioData(avIndex, buf, AUDIO_BUF_SIZE, (char *)&frameInfo, sizeof(FRAMEINFO_t), &frmNo);
+        ret = avRecvAudioData(_avIndex, buf, AUDIO_BUF_SIZE, (char *)&frameInfo, sizeof(FRAMEINFO_t), &frmNo);
         
         if(ret == AV_ER_SESSION_CLOSE_BY_REMOTE)
         {
@@ -698,13 +675,13 @@
         
         int format = 0;
         nDatabits = (int)(frameInfo.flags >> 1 & 1);
-        if (nDatabits == AUDIO_DATABITS_8 && avIndex == AUDIO_CHANNEL_MONO)
+        if (nDatabits == AUDIO_DATABITS_8 && _avIndex == AUDIO_CHANNEL_MONO)
             format = AL_FORMAT_MONO8;
-        else if (nDatabits == AUDIO_DATABITS_8 && avIndex == AUDIO_CHANNEL_STERO)
+        else if (nDatabits == AUDIO_DATABITS_8 && _avIndex == AUDIO_CHANNEL_STERO)
             format = AL_FORMAT_STEREO8;
-        else if (nDatabits == AUDIO_DATABITS_16 && avIndex == AUDIO_CHANNEL_MONO)
+        else if (nDatabits == AUDIO_DATABITS_16 && _avIndex == AUDIO_CHANNEL_MONO)
             format = AL_FORMAT_MONO16;
-        else if (nDatabits == AUDIO_DATABITS_16 && avIndex == AUDIO_CHANNEL_STERO)
+        else if (nDatabits == AUDIO_DATABITS_16 && _avIndex == AUDIO_CHANNEL_STERO)
             format = AL_FORMAT_STEREO16;
         else
             format = AL_FORMAT_MONO16;
@@ -742,12 +719,12 @@
     FRAMEINFO_t frameInfo;
     srand((unsigned)time(NULL));
     
-    while (stopFlg)
+    while (avStopFlg)
     {
         
-        //ret = avRecvFrameData(avIndex, buf, VIDEO_BUF_SIZE, (char *)&frameInfo, sizeof(FRAMEINFO_t), &frmNo);
+        //ret = avRecvFrameData(_avIndex, buf, VIDEO_BUF_SIZE, (char *)&frameInfo, sizeof(FRAMEINFO_t), &frmNo);
         memset(buf, 0, VIDEO_BUF_SIZE);
-        ret= avRecvFrameData2(avIndex, buf, VIDEO_BUF_SIZE, &outBufSize,
+        ret= avRecvFrameData2(_avIndex, buf, VIDEO_BUF_SIZE, &outBufSize,
                               &outFrmSize,  (char *)&frameInfo, sizeof(FRAMEINFO_t),
                               &outFrmInfoSize, &frmNo);
         /**/
@@ -827,26 +804,25 @@
         
     }
     free(buf);
-    [self closeSession];
-    
+//    [self closeAV];
     NSLog(@"[thread_ReceiveVideo] thread exit");
     return 0;
 }
 
 -(void) closeSession{
     stopFlg=0;
-    avClientStop(avIndex);
+    avClientStop(_avIndex);
     NSLog(@"avClientStop OK");
     IOTC_Session_Close(SID);
-    [Myself sharedInstance].nowConnectCamera = @"";
+    [[Myself sharedInstance] deleteUID:_UID];
     NSLog(@"IOTC_Session_Close OK");
 }
 
 -(int) startIpcamStream {
     int ret;
     unsigned short val = 0;
-    
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_INNER_SND_DATA_DELAY, (char *)&val, sizeof(unsigned short)) < 0))
+    NSLog(@"%d",_avIndex);
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_INNER_SND_DATA_DELAY, (char *)&val, sizeof(unsigned short)) < 0))
     {
         NSLog(@"start_ipcam_stream_failed[%d]", ret);
         return 0;
@@ -854,13 +830,13 @@
     
     SMsgAVIoctrlAVStream ioMsg;
     memset(&ioMsg, 0, sizeof(SMsgAVIoctrlAVStream));
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_START, (char *)&ioMsg, sizeof(SMsgAVIoctrlAVStream)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_START, (char *)&ioMsg, sizeof(SMsgAVIoctrlAVStream)) < 0))
     {
         NSLog(@"start_ipcam_stream_failed[%d]", ret);
         return 0;
     }
     
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_AUDIOSTART, (char *)&ioMsg, sizeof(SMsgAVIoctrlAVStream)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_AUDIOSTART, (char *)&ioMsg, sizeof(SMsgAVIoctrlAVStream)) < 0))
     {
         NSLog(@"start_ipcam_stream_failed[%d]", ret);
         return 0;
@@ -887,7 +863,7 @@
 -(void) turn:(ENUM_TURN_CMD)direction{
     int ret;
     SMsgAVIoctrlPtzCmd *request = (SMsgAVIoctrlPtzCmd *)malloc(sizeof(SMsgAVIoctrlPtzCmd));
-    request->channel = avIndex;
+    request->channel = _avIndex;
     request->speed = PT_SPEED;
     request->point = 0;
     request->limit = 0;
@@ -905,7 +881,7 @@
         request->control = AVIOCTRL_PTZ_RIGHT;
     }
     
-    if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_PTZ_COMMAND, (char *)request, sizeof(request)) < 0))
+    if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_PTZ_COMMAND, (char *)request, sizeof(request)) < 0))
     {
         NSLog(@"send IOTYPE_USER_IPCAM_PTZ_COMMAND fail [%d]", ret);
         
@@ -921,11 +897,11 @@
     request->nControl = status;
     request->nNeedKey = 0;
     if (lockIndex == 1) {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_APP_LOCK1, (char *)request, sizeof(request)) < 0)) {
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_APP_LOCK1, (char *)request, sizeof(request)) < 0)) {
             NSLog(@"发送A锁定指令失败[%d]",ret);
         }
     } else {
-        if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_APP_LOCK2, (char *)request, sizeof(request)) < 0)) {
+        if ((ret = avSendIOCtrl(_avIndex, IOTYPE_USER_IPCAM_APP_LOCK2, (char *)request, sizeof(request)) < 0)) {
             NSLog(@"发送B锁定指令失败[%d]",ret);
         }
     }

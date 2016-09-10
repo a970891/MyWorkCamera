@@ -42,22 +42,27 @@ typedef void (^SearchBlock)(NSString *str);
 -(void)onReceivedBPFrame:(uint8_t*) data : (int) length;
 -(void)onReceivedAudio:(char*) data : (int) length : (unsigned int) rate : (unsigned int)format;
 -(void)onConnectionFail:(NSString*) error;
--(void)onListWifiAp:(NSMutableArray *) aps;
 @end
 
 @interface TutkP2PAVClient : NSObject
 
-@property (nonatomic,assign) int theAvIndex;
+@property (nonatomic,copy) NSString *UID;
+@property (nonatomic,copy) NSString *password;
+@property (nonatomic,assign) int SID;
+@property (nonatomic,assign) int avIndex;
 
+//初始化
 +(int) initializeTutk;
+//释放
 +(void)releaseTutk;
--(void)start:(NSString *)UID :(NSString *)password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
--(void) connect:(NSString *) UID : (NSString *) password success:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
+//连接并播放
+-(void)startAndPlayAVsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
+//连接
+-(void) connectsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed;
+//关闭线程
 -(void) stopAndCloseSession;
--(int) closeSession;
--(void) turn:(ENUM_TURN_CMD)direction;
-
--(int) setWifi:(IpcWifiAp) ap;
+//关闭视频和音频
+- (void)closeAV;
 //搜索摄像头
 - (void)SearchAndConnect:(SearchBlock)searchBlock;
 //获取wifi

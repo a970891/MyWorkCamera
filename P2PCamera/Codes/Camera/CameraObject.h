@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TutkP2PClient.h"
 
 @interface CameraObject : NSObject <NSCoding>
 
@@ -26,5 +27,6 @@
 @property (nonnull,nonatomic,copy) NSNumber *reduceRom;                 //剩余空间
 @property (nonnull,nonatomic,copy) NSNumber *rom;                       //总空间
 @property (nonnull,nonatomic,copy) NSString *connectStatus;             //连接状态
+@property (nonnull,nonatomic,strong) TutkP2PAVClient *tutkManager;
 
 @end

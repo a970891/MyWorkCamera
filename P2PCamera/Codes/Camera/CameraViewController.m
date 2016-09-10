@@ -58,15 +58,17 @@
 @property (nonatomic,assign) int firstShow;
 @property (nonnull,nonatomic,strong) AVCaptureSession *captureSession;
 @property (nonnull,nonatomic,strong) UILabel *voiceLabel;
+@property (nonatomic,strong) CameraObject *cameraObject;
 
 @end
 
 @implementation CameraViewController
 
-- (CameraViewController *)initWithUid:(NSString *)uuid password:(NSString *)password {
+- (CameraViewController *)initWithObject:(CameraObject *)object {
     self = [super init];
-    self.kUid = uuid;
-    self.password = password;
+    self.kUid = object.uid;
+    self.password = object.password;
+    self.cameraObject = object;
     return self;
 }
 
@@ -119,16 +121,12 @@
     [self.video.layer addSublayer:_glLayer];
     
     
-    tutkP2PAVClient = [Myself sharedInstance].tutkManager;
+    tutkP2PAVClient = self.cameraObject.tutkManager;
     _decodeH264=[[DecodeH264 alloc] init];
     _decodeH264.delegate=self;
     
     tutkP2PAVClient.delegate=self;
-    [tutkP2PAVClient start:uid :passwd success:^{
-        
-    } fail:^{
-        
-    }];
+    [tutkP2PAVClient startAndPlayAVsuccess:^{} fail:^{}];
 
 }
 
@@ -144,6 +142,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self.cameraObject.tutkManager closeAV];
     _glLayer = nil;
 }
 
@@ -293,19 +292,7 @@
 
 
 - (void)turn:(UITapGestureRecognizer *)tap {
-    NSInteger i = tap.view.tag - 50;
-    if (i == 1) {
-        [tutkP2PAVClient turn:1];
-    }
-    if (i == 2) {
-        [tutkP2PAVClient turn:0];
-    }
-    if (i == 3) {
-        [tutkP2PAVClient turn:2];
-    }
-    if (i == 4) {
-        [tutkP2PAVClient turn:3];
-    }
+    
 }
 
 - (void)reduce {
@@ -347,7 +334,6 @@
 }
 
 - (void)leftButtonAction {
-    [tutkP2PAVClient stopAndCloseSession];
     [self.navigationController popViewControllerAnimated:true];
 }
 
@@ -392,17 +378,6 @@
     _glLayer.pixelBuffer = pixelBuffer;
 }
 
--(void)onListWifiAp:(NSMutableArray *) aps{
-    [tutkP2PAVClient closeSession];
-    [NSThread sleepForTimeInterval:5];
-    for(NSValue *obj in aps){
-        IpcWifiAp ap;
-        [obj getValue:&ap];
-        NSLog(@"%s",ap.ssid);
-        
-    }
-}
-
 //#======================end  decodeH264Delegate=================================
 
 //#======================= start UICollectionViewDelegate===================
@@ -418,11 +393,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NSLog(@"去前台1");
-    [tutkP2PAVClient start:uid :passwd success:^{
-        
-    } fail:^{
-        
-    }];
+    [tutkP2PAVClient startAndPlayAVsuccess:^{} fail:^{}];
     _decodeH264=[[DecodeH264 alloc] init];
     _decodeH264.delegate=self;
 }
@@ -430,17 +401,14 @@
 //#========================end UICollectionViewDelegate=====================
 
 - (void)sendVoice{
-    int nChSpeech = 1;
     [Myself sharedInstance].s_avIndex = -1;  // 对讲通道的avIndex
     char buffer[320];
     char out_buff[1024];
-    short *pbuffer = (short *)buffer;
     FRAMEINFO_t framInfo;
     memset(buffer,0,sizeof(buffer));
     memset(out_buff, 0, sizeof(out_buff));
     memset(&framInfo, 0 , sizeof(FRAMEINFO_t));
-    ([Myself sharedInstance].s_avIndex = avServStart([Myself sharedInstance].SID,nil,nil,10,0,1));
-    NSLog(@"%d",[Myself sharedInstance].s_avIndex);
+    ([Myself sharedInstance].s_avIndex = avServStart(self.cameraObject.tutkManager.SID,nil,nil,10,0,1));
     if ([Myself sharedInstance].s_avIndex >= 0) {
         //开启手机输入
         [self initVoice];

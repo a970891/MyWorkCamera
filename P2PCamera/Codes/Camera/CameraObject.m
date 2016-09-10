@@ -74,6 +74,7 @@
         self.model = @"";
         self.ssid = @"";
         self.connectStatus = @"";
+        self.tutkManager = [[TutkP2PAVClient alloc]init];
     }
     return self;
 }

@@ -7,12 +7,13 @@
 //
 
 #import "BaseVC.h"
+#import "CameraObject.h"
 
 typedef void (^SendVoiceBlock)(Byte *buffer,NSData *data);
 
 @interface CameraViewController : BaseVC
 
-- (CameraViewController *)initWithUid:(NSString *)uid password:(NSString *)password;
+- (CameraViewController *)initWithObject:(CameraObject *)object;
 
 @property (nonatomic,copy) SendVoiceBlock sendBlock;
 

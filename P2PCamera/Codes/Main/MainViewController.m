@@ -29,21 +29,13 @@ static NSString *const mainCell = @"mainCell";
 @property (nonatomic,strong) NSMutableArray *dataSource;
 @property (nonatomic,strong) UISearchBar    *searchBar;
 @property (nonatomic,strong) UIView         *lineView;
-//@property (nonatomic,strong) AudioPlayer    *audioPlayer;
-@property (nonatomic,strong) NSMutableArray *deviceUids;
 @end
 
 @implementation MainViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self initSetupUI];
-//    [self initNaviTools];
     [self setupUI];
-//    [self setCameras];
-//    _audioPlayer = [[AudioPlayer alloc] init];
-//    [_audioPlayer IOTC_Init];
-    _deviceUids = [[NSMutableArray alloc]init];
 }
 
 - (void)IOTCtest{
@@ -59,21 +51,11 @@ static NSString *const mainCell = @"mainCell";
     }
     [self showRightButton];
     [self.rightButton setTitle:@"" forState:UIControlStateNormal];
-//    [self.rightButton setTitle:@"编辑" forState:UIControlStateNormal];
     self.view.backgroundColor = [UIColor whiteColor];
-//    [self.view addSubview:self.searchBar];
     [self.view addSubview:self.lineView];
     [self.view addSubview:self.myTableView];
-//    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, lScreenWidth, lScreenHeight-64)];
-//    _scrollView.backgroundColor = [UIColor clearColor];
-//    _scrollView.contentSize = CGSizeMake(lScreenWidth, _scrollView.frame.size.height);
-//    [self.view addSubview:_scrollView];
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(lScreenWidth-12-24, 30, 24, 24)];
-//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [button setTitle:@"二维码" forState:UIControlStateNormal];
-//    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-//    button.titleLabel.font = [UIFont systemFontOfSize:13];
     [button setImage:[UIImage imageNamed:@"icon_set"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(popAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
@@ -89,16 +71,6 @@ static NSString *const mainCell = @"mainCell";
     [super viewWillAppear:animated];
     //清除数据源
     [self.dataSource removeAllObjects];
-    [self.deviceUids removeAllObjects];
-    [[Myself sharedInstance].tutkManager SearchAndConnect:^(NSString *str) {
-        [self.deviceUids addObject:str];
-        //获取数据
-        self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
-        //刷新界面
-        if (self.dataSource.count != 0) {
-            [self.myTableView reloadData];
-        }
-    }];
     //获取数据
     self.dataSource = [NSMutableArray arrayWithArray:[[CameraManager sharedInstance] findAllObjects]];
     //刷新界面
@@ -107,25 +79,16 @@ static NSString *const mainCell = @"mainCell";
     }
 }
 
-- (void)setCameras {
-    for(int i=0;i<4;i++){
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(10, 30+90*i, lScreenWidth-20, 60);
-        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [button setTitle:@"UNDEFINED..." forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        button.layer.borderWidth = 1;
-        button.layer.borderColor = [UIColor whiteColor].CGColor;
-        [_scrollView addSubview:button];
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    //尝试连接
+    for (int i = 0;i<self.dataSource.count;i++){
+        CameraObject *object = self.dataSource[i];
+        object.tutkManager = [[Myself sharedInstance] findManagerWithUID:object.uid];
+        object.tutkManager.UID = object.uid;
+        object.tutkManager.password = object.password;
+        [object.tutkManager connectsuccess:^{} fail:^{}];
     }
-    
-    _setButton = [[UIImageView alloc]initWithFrame:CGRectMake(10, 30+90*4, lScreenWidth-20, 40)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(setButton:)];
-    [_setButton addGestureRecognizer:tap];
-    _setButton.userInteractionEnabled = YES;
-    _setButton.image = [UIImage imageNamed:@"pull_down"];
-    _setButton.contentMode = UIViewContentModeScaleAspectFit;
-    [_scrollView addSubview:_setButton];
 }
 
 - (UITableView *)myTableView{
@@ -242,14 +205,7 @@ static NSString *const mainCell = @"mainCell";
     CameraObject *object = self.dataSource[indexPath.row];
     
     //判断是否在线
-    BOOL on = false;
-    for (NSString *str in self.deviceUids) {
-        if ([object.uid isEqualToString:str]) {
-            on = true;
-            break;
-        }
-    }
-    [cell setOnlineStatus:on name:object.name];
+//    [cell setOnlineStatus:on name:object.name];
     [cell setCell:object];
     cell.lComplection = ^(NSInteger m){
         if (object.password == NULL || [object.password isEqualToString:@""]) {
@@ -264,7 +220,7 @@ static NSString *const mainCell = @"mainCell";
             [alert show];
             return;
         }
-        CameraViewController *cameraVC = [[CameraViewController alloc]initWithUid:object.uid password:object.password];
+        CameraViewController *cameraVC = [[CameraViewController alloc]initWithObject:object];
         self.navigationController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:cameraVC animated:YES];
     };
@@ -281,7 +237,7 @@ static NSString *const mainCell = @"mainCell";
     [self.myTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CameraObject *object = self.dataSource[indexPath.row];
-    CameraViewController *cameraVC = [[CameraViewController alloc]initWithUid:object.uid password:object.password];
+    CameraViewController *cameraVC = [[CameraViewController alloc]initWithObject:object];
     [self.navigationController pushViewController:cameraVC animated:YES];
 }
 

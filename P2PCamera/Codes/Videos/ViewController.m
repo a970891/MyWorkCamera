@@ -77,11 +77,11 @@
     tutkP2PAVClient.delegate=self;
     //[tutkP2PAVClient connect:uid :passwd];
     //[tutkP2PAVClient listWifiAp];
-    [tutkP2PAVClient start:uid :passwd success:^{
-        
-    } fail:^{
-        
-    }];
+//    [tutkP2PAVClient start:uid :passwd success:^{
+//        
+//    } fail:^{
+//        
+//    }];
     
 }
 
@@ -128,17 +128,6 @@
     _glLayer.pixelBuffer = pixelBuffer;
 }
 
--(void)onListWifiAp:(NSMutableArray *) aps{
-    [tutkP2PAVClient closeSession];
-    [NSThread sleepForTimeInterval:5];
-    for(NSValue *obj in aps){
-        IpcWifiAp ap;
-        [obj getValue:&ap];
-        NSLog(@"%s",ap.ssid);
-        
-    }
-}
-
 //#======================end  decodeH264Delegate=================================
 
 //#======================= start UICollectionViewDelegate===================
@@ -154,11 +143,11 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NSLog(@"去前台1");
-    [tutkP2PAVClient start:uid :passwd success:^{
-        
-    } fail:^{
-        
-    }];
+//    [tutkP2PAVClient start:uid :passwd success:^{
+//        
+//    } fail:^{
+//        
+//    }];
     _decodeH264=[[DecodeH264 alloc] init];
     _decodeH264.delegate=self;
 }

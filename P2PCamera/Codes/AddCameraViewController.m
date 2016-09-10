@@ -273,7 +273,7 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)searchCamera{
     [self.dataSource removeAllObjects];
-    [[Myself sharedInstance].tutkManager SearchAndConnect:^(NSString *str) {
+    [[[TutkP2PAVClient alloc]init] SearchAndConnect:^(NSString *str) {
         if ([str isEqualToString:@""] || str == NULL){
             [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
         } else {

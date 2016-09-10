@@ -28,12 +28,8 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cameraObj.uid == Myself.sharedInstance().nowConnectCamera {
-            statusLabel.text = "已联机"
-        } else {
-            statusLabel.text = "未联机"
-        }
-        tutkManager = Myself.sharedInstance().tutkManager
+        statusLabel.text = Myself.sharedInstance().findUID(self.cameraObj.uid) ? "已联机" : "未联机"
+        tutkManager = cameraObj.tutkManager;
         tutkManager.infoDelegate = self;
         self.tableView.tableHeaderView = self.tableViewHead
         self.tableViewHead.TitleLabel.text = cameraObj.uid
@@ -56,9 +52,8 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     }
     
     func getCameraInfo() {
-//        SVProgressHUD.showWithStatus("连接中")
         statusLabel.text = "连接中"
-        tutkManager.connect(self.cameraObj.uid, self.cameraObj.password, success: {
+        tutkManager.connectsuccess({
             self.tutkManager.listWifiAp()
             self.tutkManager.getVideoMode()
             self.tutkManager.getEnvironmentMode()
@@ -66,13 +61,10 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             self.tutkManager.getDeviceInfo()
             self.tutkManager.getVideoQuality()
             self.tutkManager.getRecordMode()
-//            SVProgressHUD.showSuccessWithStatus("连接成功")
             self.statusLabel.text = "已联机"
-            }) {
-//                SVProgressHUD.showErrorWithStatus("连接失败")
+            }, fail: {
                 self.statusLabel.text = "未联机"
-//                self.navigationController?.popToRootViewControllerAnimated(true)
-        }
+        })
     }
     
     //Mark************* cameraInfoDelegate *************
