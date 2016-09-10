@@ -255,7 +255,8 @@
 -(int)getVideoMode{
     int ret;
     
-    SMsgAVIoctrlListWifiApReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    SMsgAVIoctrlGetVideoModeReq request; //= (SMsgAVIoctrlListWifiApReq *)malloc(sizeof(SMsgAVIoctrlListWifiApReq));
+    request.channel = avIndex;
     if ((ret = avSendIOCtrl(avIndex, IOTYPE_USER_IPCAM_GET_VIDEOMODE_REQ, (char *)&request, sizeof(request)) < 0))
     {
         NSLog(@"list_wifi_ap_failed[%d]", ret);

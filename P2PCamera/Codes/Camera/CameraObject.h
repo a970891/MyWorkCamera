@@ -25,5 +25,6 @@
 @property (nonnull,nonatomic,copy) NSString *firm;                      //厂商
 @property (nonnull,nonatomic,copy) NSNumber *reduceRom;                 //剩余空间
 @property (nonnull,nonatomic,copy) NSNumber *rom;                       //总空间
+@property (nonnull,nonatomic,copy) NSString *connectStatus;             //连接状态
 
 @end

@@ -27,6 +27,7 @@
     [aCoder encodeObject:_rom forKey:@"rom"];
     [aCoder encodeObject:_model forKey:@"model"];
     [aCoder encodeObject:_ssid forKey:@"ssid"];
+    [aCoder encodeObject:_connectStatus forKey:@"connectStatus"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -48,6 +49,7 @@
         _rom = [aDecoder decodeObjectForKey:@"rom"];
         _model = [aDecoder decodeObjectForKey:@"model"];
         _ssid = [aDecoder decodeObjectForKey:@"ssid"];
+        _connectStatus = [aDecoder decodeObjectForKey:@"connectStatus"];
     }
     return self;
 }
@@ -71,6 +73,7 @@
         self.rom = @0;
         self.model = @"";
         self.ssid = @"";
+        self.connectStatus = @"";
     }
     return self;
 }
