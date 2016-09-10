@@ -441,11 +441,9 @@
     memset(&framInfo, 0 , sizeof(FRAMEINFO_t));
     ([Myself sharedInstance].s_avIndex = avServStart([Myself sharedInstance].SID,nil,nil,10,0,1));
     NSLog(@"%d",[Myself sharedInstance].s_avIndex);
-    NSLog(@"22222");
     if ([Myself sharedInstance].s_avIndex >= 0) {
         //开启手机输入
         [self initVoice];
-        int nLen = 0;
         framInfo.codec_id = MEDIA_CODEC_AUDIO_SPEEX;
         framInfo.flags = (AUDIO_SAMPLE_8K << 2) | (AUDIO_DATABITS_16 << 1) | AUDIO_CHANNEL_MONO;//AUDIO_CHANNEL_MONO
         framInfo.cam_index = 0;
@@ -454,14 +452,13 @@
         _sendBlock = ^(Byte *bbuffer,NSData *data){
             char bufferA[200];
             for (int i = 0 ;i < 200 ;i ++) {
-                int j = (int)(i*5.12);
+                int j = (int)(i*data.length/200);
                 bufferA[i] = bbuffer[j];
             }
             NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
             NSTimeInterval time=[dat timeIntervalSince1970]*1000;
             FRAMEINFO_t theFrame = framInfo;
             theFrame.timestamp = time;
-            NSLog(@"%d",[data length]);
             int a = avSendAudioData([Myself sharedInstance].s_avIndex, bufferA, 200, &theFrame, sizeof(FRAMEINFO_t));
             NSLog(@"%d",a);
         };
@@ -523,6 +520,8 @@
     NSData *inputData = [NSData dataWithBytes:buffer length:length];
     //g711编码
     NSUInteger datalength = [inputData length];
+    NSLog(@"1111111");
+    NSLog(@"%lu",(unsigned long)datalength);
     Byte *byteData = (Byte *)[inputData bytes];
     short *pPcm = (short *)byteData;
     int outlen = 0;
