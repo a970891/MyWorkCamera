@@ -14,6 +14,9 @@ class Myself: NSObject {
     var tutkManager:TutkP2PAVClient!
     var nowConnectCamera:String = ""
     var language:Bool!
+    var m_avIndex:Int = -1
+    var s_avIndex:Int = -1
+    var SID:Int = 0
     
     override init() {
         super.init()

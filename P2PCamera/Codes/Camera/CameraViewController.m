@@ -8,6 +8,7 @@
 
 #import "CameraViewController.h"
 #import "AAPLEAGLLayer.h"
+#import "AVFRAMEINFO.h"
 #import "TutkP2pClient.h"
 #import "DecodeH264.h"
 #import "Yp420PixelConverter.h"
@@ -19,6 +20,7 @@
 //#import "G711_encode.h"
 #import "AVAPIs.h"
 #import "P2PCamera-Swift.h"
+#import "g711.h"
 /*
  //ZA define
 	IOTYPE_USER_IPCAM_DEVICE_TO_CLIENT		= 0x04F1,	// device send data to client
@@ -427,11 +429,46 @@
 
 //#========================end UICollectionViewDelegate=====================
 
+- (void)sendVoice{
+    int nChSpeech = 1;
+    [Myself sharedInstance].s_avIndex = -1;  // 对讲通道的avIndex
+    char buffer[320];
+    char out_buff[1024];
+    short *pbuffer = (short *)buffer;
+    FRAMEINFO_t framInfo;
+    memset(buffer,0,sizeof(buffer));
+    memset(out_buff, 0, sizeof(out_buff));
+    memset(&framInfo, 0 , sizeof(FRAMEINFO_t));
+    ([Myself sharedInstance].s_avIndex = avServStart([Myself sharedInstance].SID,nil,nil,10,0,1));
+    NSLog(@"%d",[Myself sharedInstance].s_avIndex);
+    NSLog(@"22222");
+    if ([Myself sharedInstance].s_avIndex >= 0) {
+        //开启手机输入
+        [self initVoice];
+        int nLen = 0;
+        framInfo.codec_id = MEDIA_CODEC_AUDIO_SPEEX;
+        framInfo.flags = (AUDIO_SAMPLE_8K << 2) | (AUDIO_DATABITS_16 << 1) | AUDIO_CHANNEL_MONO;//AUDIO_CHANNEL_MONO
+        framInfo.cam_index = 0;
+        framInfo.onlineNum = 0;
 
+        _sendBlock = ^(Byte *bbuffer,NSData *data){
+            char bufferA[200];
+            for (int i = 0 ;i < 200 ;i ++) {
+                int j = (int)(i*5.12);
+                bufferA[i] = bbuffer[j];
+            }
+            NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+            NSTimeInterval time=[dat timeIntervalSince1970]*1000;
+            FRAMEINFO_t theFrame = framInfo;
+            theFrame.timestamp = time;
+            NSLog(@"%d",[data length]);
+            int a = avSendAudioData([Myself sharedInstance].s_avIndex, bufferA, 200, &theFrame, sizeof(FRAMEINFO_t));
+            NSLog(@"%d",a);
+        };
+    }
+}
 
--(void)initVoice
-
-{
+-(void)initVoice {
     if(_captureSession)
     {
         [_captureSession startRunning];
@@ -439,7 +476,9 @@
     else
     {
         _captureSession= [[AVCaptureSession alloc]init];
+        _captureSession.sessionPreset = AVCaptureSessionPresetLow;
         AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        
         if(audioDevice) {
             NSError*error;
             AVCaptureDeviceInput *audioIn = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
@@ -454,13 +493,12 @@
         }
         else
             NSLog(@"Couldn't create audio capture device");
-        AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc]init];
         
+        AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc]init];
+
         [audioOut setSampleBufferDelegate:self queue:dispatch_get_main_queue()];
         if ([_captureSession canAddOutput:audioOut]) {
             [_captureSession addOutput:audioOut];
-            //audioConnection = 
-            
             [audioOut connectionWithMediaType:AVMediaTypeAudio];
         }
         else
@@ -470,6 +508,9 @@
 }
 
 - (void)stopSendVoice{
+    if ([Myself sharedInstance].s_avIndex > 0){
+        avServStop([Myself sharedInstance].s_avIndex);
+    }
     [_captureSession stopRunning];
 }
 
@@ -491,18 +532,14 @@
     int i;
     for (i=0; i<len; i++) {
         //此处修改转换格式（a-law或u-law）1q
-//        G711Buff[i] = _linear2alaw(pPcm[i]);
+        G711Buff[i] = linear2alaw(pPcm[i]);
     }
     outlen = i;
-    
+//
     Byte *sendbuff = (Byte *)G711Buff;
     NSData * sendData = [[NSData alloc]initWithBytes:sendbuff length:len];
-    
-    //AVAPI_API int  avSendAudioData(int nAVChannelID, const char *cabAudioData, int nAudioDataSize,    const void *cabFrameInfo, int nFrameInfoSize);
-//    int ret = avSendAudioData(tutkP2PAVClient.theAvIndex, sendbuff, len,? ,?);
-//    [self.delegate backVoiceDataWithG711u:sendData];
+    _sendBlock(sendbuff,sendData);
 }
-
 - (void)sendVoice:(UILongPressGestureRecognizer *)gesture {
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan:
@@ -552,13 +589,16 @@
 
 - (void)showOrHideVoiceLabel:(BOOL)on {
     if (on) {
-        [self initVoice];
+        [tutkP2PAVClient sendVoice:true];
+        [self sendVoice];
         [UIView animateWithDuration:0.25 animations:^{
             _voiceLabel.hidden = false;
             _voiceLabel.backgroundColor = [UIColor blackColor];
         }];
     } else {
         [self stopSendVoice];
+        //发送结束指令
+        [tutkP2PAVClient sendVoice:false];
         [UIView animateWithDuration:0.25 animations:^{
             _voiceLabel.backgroundColor = [UIColor whiteColor];
         } completion:^(BOOL finished) {

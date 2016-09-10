@@ -171,7 +171,7 @@ static void didDecompress( void *decompressionOutputRefCon, void *sourceFrameRef
         
         
         NSData *ndata1 = [NSData dataWithBytes: buf length:30];
-        NSLog(@"5%@",ndata1);
+//        NSLog(@"5%@",ndata1);
 
         
         NSInteger _size=ret;

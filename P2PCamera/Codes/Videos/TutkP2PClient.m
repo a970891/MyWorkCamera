@@ -587,6 +587,7 @@
                     //NSString *aesString = @"your aes key";
                     
                     SID = IOTC_Connect_ByUID((char *)[UID UTF8String]);
+                    [Myself sharedInstance].SID = SID;
                     
                     printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [UID UTF8String], SID);
                     struct st_SInfo Sinfo;
@@ -621,6 +622,7 @@
                         });
                         stopFlg=1;
                         self.theAvIndex = avIndex;
+                        [Myself sharedInstance].m_avIndex = avIndex;
                         succeed();
                         [Myself sharedInstance].nowConnectCamera = UID;
                         return;
@@ -817,8 +819,6 @@
             NSLog(@"%s,%d","got an IFrame, draw it",ret);
             
         }
-        
-        
         if(frameInfo.flags == IPC_FRAME_FLAG_PBFRAME){
             if(ret>0 && error_count==0){
                 if(delegate !=NULL){
