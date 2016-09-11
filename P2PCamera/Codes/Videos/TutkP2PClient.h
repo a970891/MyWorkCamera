@@ -50,6 +50,8 @@ typedef void (^SearchBlock)(NSString *str);
 @property (nonatomic,copy) NSString *password;
 @property (nonatomic,assign) int SID;
 @property (nonatomic,assign) int avIndex;
+@property (nonatomic,copy) NSString *name;
+@property (nonatomic,copy) NSString *push;
 
 //初始化
 +(int) initializeTutk;

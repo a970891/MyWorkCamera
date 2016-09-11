@@ -44,10 +44,11 @@
 
 -(int) recv_io_ctrl_loop {
     while (stopFlg) {
+        sleep(0.1);
         unsigned int ioType;
         char trash[1500];
         int ret = avRecvIOCtrl(_avIndex, &ioType, trash, sizeof(trash), 10000);
-        if(ret < 0 && ret != -20011) {
+        if(ret < 0) {
             [[Myself sharedInstance] deleteUID:_UID];
             printf("avRecvIOCtrl[%d][%d]\n", ret, _avIndex);
             break;
@@ -230,6 +231,54 @@
                             [self.infoDelegate receiveRecordType:-1];
                             break;
                     }
+                case IOTYPE_USER_IPCAM_EVENT_REPORT:;
+                    SMsgAVIoctrlEvent *event = (SMsgAVIoctrlEvent *)trash;
+                    switch (event->event) {
+                        case AVIOCTRL_EVENT_ALL:
+                          
+                            break;
+                        case AVIOCTRL_EVENT_MOTIONDECT:
+                            [ActionManager insertAction:@"移动侦测报警" uid:_UID name:_name];
+                            [self sendNotificationWithAction:@"移动侦测报警"];
+                            break;
+                        case AVIOCTRL_EVENT_VIDEOLOST:
+                            [ActionManager insertAction:@"视频丢失报警" uid:_UID name:_name];
+                            [self sendNotificationWithAction:@"视频丢失报警"];
+                            break;
+                        case AVIOCTRL_EVENT_IOALARM:
+                            [ActionManager insertAction:@"IO联动报警" uid:_UID name:_name];
+                            [self sendNotificationWithAction:@"IO联动报警"];
+                            break;
+                        case AVIOCTRL_EVENT_MOTIONPASS:
+                            
+                            break;
+                        case AVIOCTRL_EVENT_VIDEORESUME:
+                            
+                            break;
+                        case AVIOCTRL_EVENT_IOALARMPASS:
+                            
+                            break;
+                        case AVIOCTRL_EVENT_EXPT_REBOOT:
+                            
+                            break;
+                            /*
+                             AVIOCTRL_EVENT_ALL					= 0x00,	// all event type(general APP-->IPCamera)
+                             AVIOCTRL_EVENT_MOTIONDECT			= 0x01,	// motion detect start//==s==
+                             AVIOCTRL_EVENT_VIDEOLOST			= 0x02,	// video lost alarm
+                             AVIOCTRL_EVENT_IOALARM				= 0x03, // io alarmin start //---s--
+                             
+                             AVIOCTRL_EVENT_MOTIONPASS			= 0x04, // motion detect end  //==e==
+                             AVIOCTRL_EVENT_VIDEORESUME			= 0x05,	// video resume
+                             AVIOCTRL_EVENT_IOALARMPASS			= 0x06, // IO alarmin end   //---e--
+                             
+                             AVIOCTRL_EVENT_EXPT_REBOOT			= 0x10, // system exception reboot
+                             AVIOCTRL_EVENT_SDFAULT				= 0x11, // sd record exception
+                             */
+                        default:
+                            break;
+                    }
+                    
+                    
                 default:;
             }
             
@@ -965,6 +1014,33 @@
             searchBlock(str);
         }
     }
+}
+
+- (void)sendNotificationWithAction:(NSString *)str {
+    if ([_push isEqualToString:@"0"]){
+        return;
+    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //本地推送
+        UILocalNotification*notification = [[UILocalNotification alloc]init];
+        if (notification != nil) {
+            //触发时间
+            notification.fireDate = [NSDate date];
+            //时区
+            notification.timeZone = [NSTimeZone defaultTimeZone];
+            //重复周期
+//            notification.repeatInterval = kCFCalendarUnitDay;
+            //默认消息声音
+            notification.soundName = UILocalNotificationDefaultSoundName;
+            //消息体
+            notification.alertBody = str;
+            //角标数
+            notification.applicationIconBadgeNumber = 0;
+            NSDictionary*info = [NSDictionary dictionaryWithObject:self.name forKey:@"actionCamera"];
+            notification.userInfo = info;
+            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+        }
+    });
 }
 
 @end

@@ -28,6 +28,7 @@
     [aCoder encodeObject:_model forKey:@"model"];
     [aCoder encodeObject:_ssid forKey:@"ssid"];
     [aCoder encodeObject:_connectStatus forKey:@"connectStatus"];
+    [aCoder encodeObject:_push forKey:@"push"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -50,6 +51,7 @@
         _model = [aDecoder decodeObjectForKey:@"model"];
         _ssid = [aDecoder decodeObjectForKey:@"ssid"];
         _connectStatus = [aDecoder decodeObjectForKey:@"connectStatus"];
+        _push = [aDecoder decodeObjectForKey:@"push"];
     }
     return self;
 }
@@ -75,6 +77,7 @@
         self.ssid = @"";
         self.connectStatus = @"";
         self.tutkManager = [[TutkP2PAVClient alloc]init];
+        self.push = @"0";
     }
     return self;
 }

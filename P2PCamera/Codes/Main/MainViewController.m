@@ -87,6 +87,8 @@ static NSString *const mainCell = @"mainCell";
         object.tutkManager = [[Myself sharedInstance] findManagerWithUID:object.uid];
         object.tutkManager.UID = object.uid;
         object.tutkManager.password = object.password;
+        object.tutkManager.name = object.name;
+        object.tutkManager.push = object.push;
         [object.tutkManager connectsuccess:^{} fail:^{}];
     }
 }

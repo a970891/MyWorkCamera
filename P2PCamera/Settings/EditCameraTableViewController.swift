@@ -13,6 +13,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var pushSwitch: UISwitch!
     
     private var firstShow:Int = 1
     
@@ -36,6 +37,8 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         self.nameField.text = cameraObj.name
         self.passwordField.text = cameraObj.password
         self.passwordField.enabled = false
+        self.pushSwitch.on = self.cameraObj.push == "0"
+        pushSwitch.addTarget(self, action: #selector(EditCameraTableViewController.modifedPushSet(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -65,6 +68,11 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             }, fail: {
                 self.statusLabel.text = "未联机"
         })
+    }
+    
+    func modifedPushSet(pushSwitch:UISwitch) {
+        self.cameraObj.push = pushSwitch.on ? "1" : "0"
+        CameraManager.sharedInstance().insertObject(self.cameraObj)
     }
     
     //Mark************* cameraInfoDelegate *************

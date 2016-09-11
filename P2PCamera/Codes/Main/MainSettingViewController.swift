@@ -50,7 +50,7 @@ class MainSettingViewController: UIViewController,UITableViewDelegate,UITableVie
     
     // MARK : tableViewDelegate
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

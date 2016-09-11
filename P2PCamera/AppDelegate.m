@@ -29,6 +29,7 @@
     [Myself initTutkManager:^{} failed:^{}];
     [self loadTabBar];
     self.window.backgroundColor = [UIColor whiteColor];
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];//注册本地推送
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -36,7 +37,7 @@
 - (void)loadTabBar
 {
     NSArray *VCnames = @[@"MainViewController",
-                         @"ActionViewController",
+                         @"CamActionViewController",
                          @"AddCameraViewController",
                          @"InfomationViewController"];
     NSMutableArray *VCtitles = @[@"摄像机",@"事件",@"新增摄像机",@"信息"];
@@ -47,15 +48,33 @@
     NSArray *VCimagesAct = @[@"icon_home_select",@"icon_mine_select",@"icon_special_select",@"icon_search_select"];
     NSMutableArray *viewControllers = [[NSMutableArray alloc]init];
     for (NSInteger i=0; i<4; i++) {
+        if (i != 1) {
         UIViewController *view = [[NSClassFromString(VCnames[i]) alloc]init];
         view.tabBarItem.title = VCtitles[i];
         view.tabBarItem.image = [UIImage imageNamed:VCimages[i]];
         view.tabBarItem.selectedImage = [UIImage imageNamed:VCimagesAct[i]];
         UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:view];
         [viewControllers addObject:nav];
+        } else {
+            UIViewController *view = [[CamActionViewController alloc]init];
+            view.tabBarItem.title = VCtitles[i];
+            view.tabBarItem.image = [UIImage imageNamed:VCimages[i]];
+            view.tabBarItem.selectedImage = [UIImage imageNamed:VCimagesAct[i]];
+            UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:view];
+            [viewControllers addObject:nav];
+        }
     }
     self.zhltVC.viewControllers = viewControllers;
     self.window.rootViewController = self.zhltVC;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    
+    NSString *str = notification.alertBody;
+    NSString *title = [notification.userInfo objectForKey:@"actionCamera"];
+    NSString *main = [NSString stringWithFormat:@"%@: %@",str,title];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"摄像机报警" message:main delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (ZHLTViewController *)zhltVC

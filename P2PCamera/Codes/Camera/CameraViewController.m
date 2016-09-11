@@ -303,16 +303,18 @@
     _slider.value = _slider.value + 0.1;
 }
 
+//截屏/保存图片/相册
 - (void)cameraButton {
-    [SVProgressHUD showWithStatus:@"保存中"];
-    //获取屏幕图像
-    UIGraphicsBeginImageContext(_glLayer.frame.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [_glLayer renderInContext:context];
-    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    //保存到相册
-    [self saveImageToPhotos:theImage];
+    [self snapshot:self.video];
+//    [SVProgressHUD showWithStatus:@"保存中"];
+//    //获取屏幕图像
+//    UIGraphicsBeginImageContext(_glLayer.frame.size);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    [_glLayer renderInContext:context];
+//    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    //保存到相册
+//    [self saveImageToPhotos:theImage];
 }
 
 - (void)lockButton {
@@ -384,7 +386,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     NSLog(@"去后台");
-    [tutkP2PAVClient stopAndCloseSession];
+    [tutkP2PAVClient closeAV];
     [_decodeH264 clearH264Deocder];
 }
 
@@ -572,6 +574,17 @@
             _voiceLabel.hidden = true;
         }];
     }
+}
+
+
+//截屏
+- (UIImage *)snapshot:(UIView *)view{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, YES, 0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self saveImageToPhotos:image];
+    return image;
 }
 
 @end

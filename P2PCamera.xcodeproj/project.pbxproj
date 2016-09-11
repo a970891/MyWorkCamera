@@ -203,6 +203,8 @@
 		B77091121C88981800736155 /* QRItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B770910D1C88981800736155 /* QRItem.m */; };
 		B77091131C88981800736155 /* QRMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B770910F1C88981800736155 /* QRMenu.m */; };
 		B77091141C88981800736155 /* QRView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77091111C88981800736155 /* QRView.m */; };
+		D3EF90B41D8474110044058D /* CamActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF90B31D8474110044058D /* CamActionViewController.swift */; };
+		D3EF90B61D8476500044058D /* ActionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EF90B51D8476500044058D /* ActionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -607,6 +609,8 @@
 		B770910F1C88981800736155 /* QRMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRMenu.m; sourceTree = "<group>"; };
 		B77091101C88981800736155 /* QRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRView.h; sourceTree = "<group>"; };
 		B77091111C88981800736155 /* QRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRView.m; sourceTree = "<group>"; };
+		D3EF90B31D8474110044058D /* CamActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CamActionViewController.swift; sourceTree = "<group>"; };
+		D3EF90B51D8476500044058D /* ActionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1363,6 +1367,8 @@
 			children = (
 				B77090A51C85DB5800736155 /* ActionViewController.h */,
 				B77090A61C85DB5800736155 /* ActionViewController.m */,
+				D3EF90B31D8474110044058D /* CamActionViewController.swift */,
+				D3EF90B51D8476500044058D /* ActionManager.swift */,
 			);
 			name = Action;
 			sourceTree = "<group>";
@@ -1729,6 +1735,7 @@
 				B77091061C8891BC00736155 /* AddDetailViewController.m in Sources */,
 				89DA94CB1C7A2F27008735CA /* UIImage+GIF.m in Sources */,
 				B73225F71C96FEAD00C1EB8E /* MASViewConstraint.m in Sources */,
+				D3EF90B41D8474110044058D /* CamActionViewController.swift in Sources */,
 				89DA94CA1C7A2F27008735CA /* UIButton+WebCache.m in Sources */,
 				048074B51CF579B900F59273 /* EditCameraHead.swift in Sources */,
 				B77090F11C85F1FE00736155 /* MainTableViewCell.m in Sources */,
@@ -1764,6 +1771,7 @@
 				B73225F61C96FEAD00C1EB8E /* MASViewAttribute.m in Sources */,
 				89DA94C71C7A2F27008735CA /* SDWebImageDownloaderOperation.m in Sources */,
 				0422DC8C1D5882DD000F6F6A /* MainSettingTableViewCell.swift in Sources */,
+				D3EF90B61D8476500044058D /* ActionManager.swift in Sources */,
 				048074B91CF579B900F59273 /* SetExtension.swift in Sources */,
 				89DA94581C7A2CFC008735CA /* main.m in Sources */,
 				6136FDF61CC28B33005301AA /* MCAudioFileStream.m in Sources */,
