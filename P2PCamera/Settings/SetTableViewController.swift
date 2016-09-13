@@ -170,6 +170,52 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
     }
  
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
+        print(indexPath.section)
+        if indexPath.section == 0 {
+            let vc = self.StoryboardWithIdentifier("Settings", Identifier: "thea") as! SetPasswordController
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A2") as! SetQualityController
+                vc.cameraObj = cameraObj
+                vc.tutkManager = tutkManager
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            if indexPath.row == 1 {
+                let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A3") as! SetVideoModeController
+                vc.cameraObj = cameraObj
+                vc.tutkManager = tutkManager
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            if indexPath.row == 2 {
+                let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A4") as! SetEnvironmentModeController
+                vc.cameraObj = cameraObj
+                vc.tutkManager = tutkManager
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        if indexPath.section == 3 {
+            let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A5") as! SetMotionDetectController
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.section == 4 {
+            let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A6") as! SetRecordModeController
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        if indexPath.section == 6 {
+            let vc = self.StoryboardWithIdentifier("Settings", Identifier: "A7") as! CameraInfoController
+            vc.cameraObj = cameraObj
+            vc.tutkManager = tutkManager
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         if indexPath.section == 5 {
             let alert = UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("S_formatSD", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_cancel", comment:""), otherButtonTitles: NSLocalizedString("A_sure", comment:""))
             alert.tag = 140
@@ -177,7 +223,6 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
         }
         if indexPath.section == 2 {
             let vc = wifiViewController()
-            print(vc.wifis);
             vc.wifis = self.wifis
             vc.tutkManager = tutkManager
             self.navigationController?.pushViewController(vc, animated: true)

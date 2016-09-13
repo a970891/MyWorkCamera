@@ -17,7 +17,11 @@ class SetVideoModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showNaviBackButton()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         self.selectTem = self.cameraObj.videoMode.integerValue
         if self.selectTem == -1 {
             self.selectTem = 0
@@ -30,7 +34,7 @@ class SetVideoModeController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tutkManager.setVideoMode(Int32(indexPath.row))
+        cameraObj.tutkManager.setVideoMode(Int32(indexPath.row))
         cameraObj.videoMode = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
@@ -46,6 +50,7 @@ class SetVideoModeController: UITableViewController {
         if (setClosure != nil) {
             self.setClosure!(index: indexPath.row)
         }
+        self.popBtnAction()
     }
 
 }

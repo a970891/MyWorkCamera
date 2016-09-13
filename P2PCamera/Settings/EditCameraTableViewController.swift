@@ -72,6 +72,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     func modifedPushSet(pushSwitch:UISwitch) {
         self.cameraObj.push = pushSwitch.on ? "1" : "0"
+        self.cameraObj.tutkManager.push = pushSwitch.on ? "1" : "0"
         CameraManager.sharedInstance().insertObject(self.cameraObj)
     }
     

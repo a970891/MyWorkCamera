@@ -17,7 +17,6 @@ class SetQualityController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showNaviBackButton()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -35,7 +34,7 @@ class SetQualityController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tutkManager.setQuality(Int32(indexPath.row))
+        cameraObj.tutkManager.setQuality(Int32(indexPath.row))
         cameraObj.quality = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
@@ -51,6 +50,7 @@ class SetQualityController: UITableViewController {
         if (setClosure != nil) {
             self.setClosure!(index: indexPath.row)
         }
+        self.popBtnAction()
     }
 
 }

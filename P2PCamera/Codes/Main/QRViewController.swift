@@ -57,10 +57,8 @@ extension UIViewController {
     }
     
     func showNaviBackButton() {
-        let button = UIButton (frame: CGRectMake(12,SH-12-40,40,40))
-        button.setImage(UIImage(named: "backBtn"), forState: UIControlState.Normal)
-        button.addTarget(self, action: #selector(UIViewController.popBtnAction), forControlEvents: UIControlEvents.TouchUpInside)
-        let bbtn = UIBarButtonItem(customView: button)
-        self.navigationItem.backBarButtonItem = bbtn
+        let btn = UIBarButtonItem(image: UIImage(named: "backBtn"), style: UIBarButtonItemStyle.Done, target: self, action: #selector(UIViewController.popBtnAction))
+            
+        self.navigationItem.backBarButtonItem = btn
     }
 }

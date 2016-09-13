@@ -17,7 +17,12 @@ class SetRecordModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showNaviBackButton()
+        
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.selectTem = self.cameraObj.recordMode.integerValue
         if self.selectTem == -1 {
             self.selectTem = 0
@@ -30,7 +35,7 @@ class SetRecordModeController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tutkManager.setRecordMode(Int32(indexPath.row))
+        cameraObj.tutkManager.setRecordMode(Int32(indexPath.row))
         cameraObj.recordMode = NSNumber(integer:indexPath.row)
         if indexPath.row != selectTem{
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectTem, inSection: 0)){
@@ -46,6 +51,7 @@ class SetRecordModeController: UITableViewController {
         if (setClosure != nil) {
             self.setClosure!(index: indexPath.row)
         }
+        self.popBtnAction()
     }
 
 }

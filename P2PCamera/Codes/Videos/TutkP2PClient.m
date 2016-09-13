@@ -238,15 +238,15 @@
                           
                             break;
                         case AVIOCTRL_EVENT_MOTIONDECT:
-                            [ActionManager insertAction:@"移动侦测报警" uid:_UID name:_name];
+                            [ActionManager insertAction:NSLocalizedString(@"event_1", @"") uid:_UID name:_name];
                             [self sendNotificationWithAction:NSLocalizedString(@"event_1", @"")];
                             break;
                         case AVIOCTRL_EVENT_VIDEOLOST:
-                            [ActionManager insertAction:@"视频丢失报警" uid:_UID name:_name];
+                            [ActionManager insertAction:NSLocalizedString(@"event_2", @"") uid:_UID name:_name];
                             [self sendNotificationWithAction:NSLocalizedString(@"event_2", @"")];
                             break;
                         case AVIOCTRL_EVENT_IOALARM:
-                            [ActionManager insertAction:@"IO联动报警" uid:_UID name:_name];
+                            [ActionManager insertAction:NSLocalizedString(@"event_3", @"") uid:_UID name:_name];
                             [self sendNotificationWithAction:NSLocalizedString(@"event_3", @"")];
                             break;
                         case AVIOCTRL_EVENT_MOTIONPASS:
@@ -261,19 +261,6 @@
                         case AVIOCTRL_EVENT_EXPT_REBOOT:
                             
                             break;
-                            /*
-                             AVIOCTRL_EVENT_ALL					= 0x00,	// all event type(general APP-->IPCamera)
-                             AVIOCTRL_EVENT_MOTIONDECT			= 0x01,	// motion detect start//==s==
-                             AVIOCTRL_EVENT_VIDEOLOST			= 0x02,	// video lost alarm
-                             AVIOCTRL_EVENT_IOALARM				= 0x03, // io alarmin start //---s--
-                             
-                             AVIOCTRL_EVENT_MOTIONPASS			= 0x04, // motion detect end  //==e==
-                             AVIOCTRL_EVENT_VIDEORESUME			= 0x05,	// video resume
-                             AVIOCTRL_EVENT_IOALARMPASS			= 0x06, // IO alarmin end   //---e--
-                             
-                             AVIOCTRL_EVENT_EXPT_REBOOT			= 0x10, // system exception reboot
-                             AVIOCTRL_EVENT_SDFAULT				= 0x11, // sd record exception
-                             */
                         default:
                             break;
                     }
