@@ -1,0 +1,243 @@
+
+/* Class = "UILabel"; text = "水平翻转(镜像)"; ObjectID = "0Gl-mM-DfJ"; */
+"0Gl-mM-DfJ.text" = "水平翻转(镜像)";
+
+/* Class = "UILabel"; text = "移动侦测"; ObjectID = "0Vd-7e-bca"; */
+"0Vd-7e-bca.text" = "移动侦测";
+
+/* Class = "UILabel"; text = "0 MB"; ObjectID = "1pO-YI-70u"; */
+"1pO-YI-70u.text" = "0 MB";
+
+/* Class = "UILabel"; text = "录像模式"; ObjectID = "29T-Yh-lSL"; */
+"29T-Yh-lSL.text" = "录像模式";
+
+/* Class = "UIBarButtonItem"; title = "确认"; ObjectID = "3lv-eG-vUD"; */
+"3lv-eG-vUD.title" = "确认";
+
+/* Class = "UILabel"; text = "WIFi网络"; ObjectID = "50A-H8-van"; */
+"50A-H8-van.text" = "WIFi网络";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "68b-IP-uTM"; */
+"68b-IP-uTM.title" = "返回";
+
+/* Class = "UIBarButtonItem"; title = "保存"; ObjectID = "6Og-NE-WKp"; */
+"6Og-NE-WKp.title" = "保存";
+
+/* Class = "UILabel"; text = "夜间模式"; ObjectID = "7JD-sJ-IYt"; */
+"7JD-sJ-IYt.text" = "夜间模式";
+
+/* Class = "UILabel"; text = "推送开关"; ObjectID = "7WG-b0-oqX"; */
+"7WG-b0-oqX.text" = "推送开关";
+
+/* Class = "UILabel"; text = "新密码"; ObjectID = "7eF-8w-uPH"; */
+"7eF-8w-uPH.text" = "新密码";
+
+/* Class = "UILabel"; text = "最高"; ObjectID = "9UF-bG-Ofh"; */
+"9UF-bG-Ofh.text" = "最高";
+
+/* Class = "UITextField"; placeholder = "密码确认"; ObjectID = "9gc-5a-nwb"; */
+"9gc-5a-nwb.placeholder" = "密码确认";
+
+/* Class = "UILabel"; text = "关闭"; ObjectID = "9ur-Lp-RNb"; */
+"9ur-Lp-RNb.text" = "关闭";
+
+/* Class = "UILabel"; text = "格式化SD卡"; ObjectID = "BHb-hx-Qvk"; */
+"BHb-hx-Qvk.text" = "格式化SD卡";
+
+/* Class = "UILabel"; text = "视频质量"; ObjectID = "ESk-ZE-ml6"; */
+"ESk-ZE-ml6.text" = "视频质量";
+
+/* Class = "UILabel"; text = "高"; ObjectID = "EwR-f5-8eK"; */
+"EwR-f5-8eK.text" = "高";
+
+/* Class = "UILabel"; text = "BOYUN"; ObjectID = "Fq1-O3-XWd"; */
+"Fq1-O3-XWd.text" = "BOYUN";
+
+/* Class = "UINavigationItem"; title = "录像模式"; ObjectID = "Gd0-Aj-SJa"; */
+"Gd0-Aj-SJa.title" = "录像模式";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "HWc-X9-Uaw"; */
+"HWc-X9-Uaw.title" = "返回";
+
+/* Class = "UITextField"; placeholder = "新密码"; ObjectID = "Hb1-dJ-cgS"; */
+"Hb1-dJ-cgS.placeholder" = "新密码";
+
+/* Class = "UILabel"; text = "全部空间"; ObjectID = "Hvm-yR-Rui"; */
+"Hvm-yR-Rui.text" = "全部空间";
+
+/* Class = "UINavigationItem"; title = "摄像机信息"; ObjectID = "Hxb-eA-Q15"; */
+"Hxb-eA-Q15.title" = "摄像机信息";
+
+/* Class = "UILabel"; text = "室内模式(50Hz)"; ObjectID = "JOV-lt-8ZT"; */
+"JOV-lt-8ZT.text" = "室内模式(50Hz)";
+
+/* Class = "UILabel"; text = "版本"; ObjectID = "Mof-nI-hku"; */
+"Mof-nI-hku.text" = "版本";
+
+/* Class = "UILabel"; text = "翻转及镜像"; ObjectID = "NNK-Wa-c9K"; */
+"NNK-Wa-c9K.text" = "翻转及镜像";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "PG5-Pr-zCC"; */
+"PG5-Pr-zCC.title" = "返回";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "QCh-kp-3cj"; */
+"QCh-kp-3cj.title" = "返回";
+
+/* Class = "UILabel"; text = "画面翻转"; ObjectID = "QPN-L2-bzy"; */
+"QPN-L2-bzy.text" = "画面翻转";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "Svk-nu-Yhz"; */
+"Svk-nu-Yhz.title" = "返回";
+
+/* Class = "UILabel"; text = "室内模式(60Hz)"; ObjectID = "T7q-hn-Arm"; */
+"T7q-hn-Arm.text" = "室内模式(60Hz)";
+
+/* Class = "UINavigationItem"; title = "画面翻转"; ObjectID = "UDT-Xg-eGx"; */
+"UDT-Xg-eGx.title" = "画面翻转";
+
+/* Class = "UINavigationItem"; title = "移动侦测"; ObjectID = "UKO-vp-b65"; */
+"UKO-vp-b65.title" = "移动侦测";
+
+/* Class = "UILabel"; text = "室内模式(50Hz)"; ObjectID = "UnE-qi-OC5"; */
+"UnE-qi-OC5.text" = "室内模式(50Hz)";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "UsS-IR-fBK"; */
+"UsS-IR-fBK.title" = "返回";
+
+/* Class = "UILabel"; text = "1.0.0.3"; ObjectID = "W5Q-bG-3SH"; */
+"W5Q-bG-3SH.text" = "1.0.0.3";
+
+/* Class = "UINavigationItem"; title = "编辑摄像机"; ObjectID = "WXB-Bb-dMh"; */
+"WXB-Bb-dMh.title" = "编辑摄像机";
+
+/* Class = "UINavigationItem"; title = "安全密码"; ObjectID = "Xke-aN-c8j"; */
+"Xke-aN-c8j.title" = "安全密码";
+
+/* Class = "UILabel"; text = "ipcamera 720P"; ObjectID = "Xn7-rX-G8z"; */
+"Xn7-rX-G8z.text" = "ipcamera 720P";
+
+/* Class = "UILabel"; text = "正常"; ObjectID = "ZPY-f4-sl3"; */
+"ZPY-f4-sl3.text" = "正常";
+
+/* Class = "UILabel"; text = "无"; ObjectID = "a3b-kw-cb2"; */
+"a3b-kw-cb2.text" = "无";
+
+/* Class = "UINavigationItem"; title = "视频质量"; ObjectID = "ajW-53-GsI"; */
+"ajW-53-GsI.title" = "视频质量";
+
+/* Class = "UILabel"; text = "已联机"; ObjectID = "an5-Bg-zUK"; */
+"an5-Bg-zUK.text" = "已联机";
+
+/* Class = "UILabel"; text = "关闭"; ObjectID = "bvy-Sd-xg7"; */
+"bvy-Sd-xg7.text" = "关闭";
+
+/* Class = "UILabel"; text = "翻转镜像"; ObjectID = "c1c-sd-Mh7"; */
+"c1c-sd-Mh7.text" = "翻转镜像";
+
+/* Class = "UILabel"; text = "垂直翻转"; ObjectID = "dc8-5v-TCb"; */
+"dc8-5v-TCb.text" = "垂直翻转";
+
+/* Class = "UILabel"; text = "高"; ObjectID = "ddM-Bm-Zrl"; */
+"ddM-Bm-Zrl.text" = "高";
+
+/* Class = "UILabel"; text = "低"; ObjectID = "dj1-N2-vnW"; */
+"dj1-N2-vnW.text" = "低";
+
+/* Class = "UILabel"; text = "参数设置"; ObjectID = "dmN-CP-Umz"; */
+"dmN-CP-Umz.text" = "参数设置";
+
+/* Class = "UINavigationItem"; title = "参数设置"; ObjectID = "eV8-DT-OGN"; */
+"eV8-DT-OGN.title" = "参数设置";
+
+/* Class = "UILabel"; text = "型号"; ObjectID = "edO-hF-yUx"; */
+"edO-hF-yUx.text" = "型号";
+
+/* Class = "UILabel"; text = "最低"; ObjectID = "fb8-xW-Xii"; */
+"fb8-xW-Xii.text" = "最低";
+
+/* Class = "UILabel"; text = "关闭"; ObjectID = "gNI-zh-83V"; */
+"gNI-zh-83V.text" = "关闭";
+
+/* Class = "UILabel"; text = "报警"; ObjectID = "gd4-eR-iNV"; */
+"gd4-eR-iNV.text" = "报警";
+
+/* Class = "UILabel"; text = "密码"; ObjectID = "glP-sf-ZlH"; */
+"glP-sf-ZlH.text" = "密码";
+
+/* Class = "UILabel"; text = "0 MB"; ObjectID = "hQ3-YH-A8K"; */
+"hQ3-YH-A8K.text" = "0 MB";
+
+/* Class = "UILabel"; text = "重新连接"; ObjectID = "i65-sQ-PJg"; */
+"i65-sQ-PJg.text" = "重新连接";
+
+/* Class = "UILabel"; text = "最高"; ObjectID = "iuF-RD-h8s"; */
+"iuF-RD-h8s.text" = "最高";
+
+/* Class = "UITextField"; placeholder = "旧密码"; ObjectID = "joH-nK-ZGz"; */
+"joH-nK-ZGz.placeholder" = "旧密码";
+
+/* Class = "UILabel"; text = "室外模式"; ObjectID = "juH-tI-kLT"; */
+"juH-tI-kLT.text" = "室外模式";
+
+/* Class = "UILabel"; text = "适中"; ObjectID = "mpo-py-A3p"; */
+"mpo-py-A3p.text" = "适中";
+
+/* Class = "UITextField"; text = "摄像机"; ObjectID = "nnN-sD-aw5"; */
+"nnN-sD-aw5.text" = "摄像机";
+
+/* Class = "UILabel"; text = "环境模式"; ObjectID = "oKB-dF-01D"; */
+"oKB-dF-01D.text" = "环境模式";
+
+/* Class = "UILabel"; text = "低"; ObjectID = "oWU-FS-5ba"; */
+"oWU-FS-5ba.text" = "低";
+
+/* Class = "UINavigationItem"; title = "环境模式"; ObjectID = "oxC-k8-zfw"; */
+"oxC-k8-zfw.title" = "环境模式";
+
+/* Class = "UIBarButtonItem"; title = "取消"; ObjectID = "pzk-UY-87V"; */
+"pzk-UY-87V.title" = "取消";
+
+/* Class = "UILabel"; text = "安全密码"; ObjectID = "qxL-Ub-5bj"; */
+"qxL-Ub-5bj.text" = "安全密码";
+
+/* Class = "UILabel"; text = "摄像机信息"; ObjectID = "rcw-vM-6Kb"; */
+"rcw-vM-6Kb.text" = "摄像机信息";
+
+/* Class = "UILabel"; text = "可用空间"; ObjectID = "tIi-OI-x5U"; */
+"tIi-OI-x5U.text" = "可用空间";
+
+/* Class = "UILabel"; text = "全景"; ObjectID = "tXw-ui-laQ"; */
+"tXw-ui-laQ.text" = "全景";
+
+/* Class = "UILabel"; text = "适中"; ObjectID = "v7U-iR-jr8"; */
+"v7U-iR-jr8.text" = "适中";
+
+/* Class = "UILabel"; text = "名称"; ObjectID = "vS7-kJ-bg0"; */
+"vS7-kJ-bg0.text" = "名称";
+
+/* Class = "UILabel"; text = "关闭"; ObjectID = "vYS-MP-I3h"; */
+"vYS-MP-I3h.text" = "关闭";
+
+/* Class = "UILabel"; text = "高"; ObjectID = "w1j-VZ-9Fg"; */
+"w1j-VZ-9Fg.text" = "高";
+
+/* Class = "UILabel"; text = "厂商"; ObjectID = "wD6-zY-azW"; */
+"wD6-zY-azW.text" = "厂商";
+
+/* Class = "UILabel"; text = "确认"; ObjectID = "wMb-Hb-E5z"; */
+"wMb-Hb-E5z.text" = "确认";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "wi2-b6-wJz"; */
+"wi2-b6-wJz.title" = "Item";
+
+/* Class = "UITextField"; text = "123456"; ObjectID = "wqC-84-EYx"; */
+"wqC-84-EYx.text" = "123456";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "xyo-LX-eyC"; */
+"xyo-LX-eyC.title" = "Item";
+
+/* Class = "UILabel"; text = "旧密码"; ObjectID = "y69-fm-Acf"; */
+"y69-fm-Acf.text" = "旧密码";
+
+/* Class = "UIBarButtonItem"; title = "返回"; ObjectID = "zER-vq-gTe"; */
+"zER-vq-gTe.title" = "返回";

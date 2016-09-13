@@ -160,12 +160,12 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            if statusLabel.text == NSLocalizedString("connected", comment:"") {
-                
-            } else {
-                //只有已联机才允许跳转
-                return;
-            }
+//            if statusLabel.text == NSLocalizedString("connected", comment:"") {
+//                
+//            } else {
+//                //只有已联机才允许跳转
+//                return;
+//            }
             let vc = self.StoryboardWithIdentifier("Settings", Identifier: "the") as! SetTableViewController
             vc.cameraObj = self.cameraObj
             vc.tutkManager = self.tutkManager

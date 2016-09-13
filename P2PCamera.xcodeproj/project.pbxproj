@@ -46,12 +46,12 @@
 		048074B51CF579B900F59273 /* EditCameraHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074AE1CF579B900F59273 /* EditCameraHead.swift */; };
 		048074B61CF579B900F59273 /* EditCameraHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048074AF1CF579B900F59273 /* EditCameraHead.xib */; };
 		048074B71CF579B900F59273 /* EditCameraTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B01CF579B900F59273 /* EditCameraTableViewController.swift */; };
-		048074B81CF579B900F59273 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048074B11CF579B900F59273 /* Settings.storyboard */; };
 		048074B91CF579B900F59273 /* SetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B21CF579B900F59273 /* SetExtension.swift */; };
 		048074BA1CF579B900F59273 /* SetSelectorTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B31CF579B900F59273 /* SetSelectorTV.swift */; };
 		048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B41CF579B900F59273 /* SetTableViewController.swift */; };
 		048074E01CF5914F00F59273 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 048074DF1CF5914F00F59273 /* 120.png */; };
 		04A9ADDF1D87C14C0096BC6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04A9ADE11D87C14C0096BC6A /* Localizable.strings */; };
+		04A9ADE41D87F6AA0096BC6A /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A9ADE61D87F6AA0096BC6A /* Settings.storyboard */; };
 		04CBFE6F1D585CAE00D04429 /* MainSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */; };
 		04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3BC101D582B9D002CF64C /* camera_logo.png */; };
 		04D3BC131D583970002CF64C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC121D583970002CF64C /* QRCodeViewController.swift */; };
@@ -260,7 +260,6 @@
 		048074AE1CF579B900F59273 /* EditCameraHead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCameraHead.swift; sourceTree = "<group>"; };
 		048074AF1CF579B900F59273 /* EditCameraHead.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditCameraHead.xib; sourceTree = "<group>"; };
 		048074B01CF579B900F59273 /* EditCameraTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCameraTableViewController.swift; sourceTree = "<group>"; };
-		048074B11CF579B900F59273 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		048074B21CF579B900F59273 /* SetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetExtension.swift; sourceTree = "<group>"; };
 		048074B31CF579B900F59273 /* SetSelectorTV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetSelectorTV.swift; sourceTree = "<group>"; };
 		048074B41CF579B900F59273 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +268,9 @@
 		04A9ADE01D87C14C0096BC6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04A9ADE21D87C14E0096BC6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		04A9ADE31D87C15F0096BC6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		04A9ADE51D87F6AA0096BC6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		04A9ADED1D87F7700096BC6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		04A9ADEE1D87F7740096BC6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Settings.strings"; sourceTree = "<group>"; };
 		04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingViewController.swift; sourceTree = "<group>"; };
 		04D3BC101D582B9D002CF64C /* camera_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_logo.png; sourceTree = "<group>"; };
 		04D3BC121D583970002CF64C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -702,7 +704,7 @@
 				048074AE1CF579B900F59273 /* EditCameraHead.swift */,
 				048074AF1CF579B900F59273 /* EditCameraHead.xib */,
 				048074B01CF579B900F59273 /* EditCameraTableViewController.swift */,
-				048074B11CF579B900F59273 /* Settings.storyboard */,
+				04A9ADE61D87F6AA0096BC6A /* Settings.storyboard */,
 				048074B21CF579B900F59273 /* SetExtension.swift */,
 				048074B31CF579B900F59273 /* SetSelectorTV.swift */,
 				048074B41CF579B900F59273 /* SetTableViewController.swift */,
@@ -1571,7 +1573,7 @@
 			files = (
 				046D51C41D5C559100472619 /* camera_unlock.png in Resources */,
 				B7091FCE1C8F24D4006A37A1 /* settings_1.png in Resources */,
-				048074B81CF579B900F59273 /* Settings.storyboard in Resources */,
+				04A9ADE41D87F6AA0096BC6A /* Settings.storyboard in Resources */,
 				B77090ED1C85E2DC00736155 /* icon_search.png in Resources */,
 				89574B2F1C7A603D00A7E7A6 /* settings.png in Resources */,
 				B724F8801C906F4900DFDAC8 /* exit_1.png in Resources */,
@@ -1811,6 +1813,16 @@
 				04A9ADE31D87C15F0096BC6A /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		04A9ADE61D87F6AA0096BC6A /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04A9ADE51D87F6AA0096BC6A /* Base */,
+				04A9ADED1D87F7700096BC6A /* en */,
+				04A9ADEE1D87F7740096BC6A /* zh-Hans */,
+			);
+			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
