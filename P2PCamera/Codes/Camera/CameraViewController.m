@@ -145,7 +145,7 @@
 }
 
 - (void)setupUI{
-    [self setTitleText:@"camera"];
+    [self setTitleText:self.cameraObject.name];
     _video = [[UIView alloc]initWithFrame:CGRectMake(10, 64+30, lScreenWidth-20, (lScreenWidth-20)/480*320)];
     _video.backgroundColor = [UIColor whiteColor];
     _video.layer.borderWidth = 1;
@@ -278,8 +278,6 @@
             [button setBackgroundImage:[UIImage imageNamed:!self.lockBSwitch ? @"camera_lock":@"camera_unlock"] forState:UIControlStateNormal];
             break;
         default:
-//            [tutkP2PAVClient sendVoice:self.talkSwitch];
-//            self.talkSwitch = !self.talkSwitch;
             break;
     }
 }
@@ -301,19 +299,10 @@
 //截屏/保存图片/相册
 - (void)cameraButton {
     [self snapshot:self.video];
-//    [SVProgressHUD showWithStatus:@"保存中"];
-//    //获取屏幕图像
-//    UIGraphicsBeginImageContext(_glLayer.frame.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    [_glLayer renderInContext:context];
-//    UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    //保存到相册
-//    [self saveImageToPhotos:theImage];
 }
 
 - (void)lockButton {
-    [SVProgressHUD showErrorWithStatus:@"功能暂未开放"];
+//    [SVProgressHUD showErrorWithStatus:@"功能暂未开放"];
 }
 
 - (void)saveImageToPhotos:(UIImage*)savedImage {
@@ -324,9 +313,9 @@
 
 - (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo {
     if(error != NULL){
-        [SVProgressHUD showErrorWithStatus:@"保存图片失败"];
+        [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"C_save_fai", @"")];
     }else{
-        [SVProgressHUD showSuccessWithStatus:@"保存图片成功"];
+        [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"C_save_suc", @"")];
     }
 }
 
@@ -485,8 +474,6 @@
     NSData *inputData = [NSData dataWithBytes:buffer length:length];
     //g711编码
     NSUInteger datalength = [inputData length];
-    NSLog(@"1111111");
-    NSLog(@"%lu",(unsigned long)datalength);
     Byte *byteData = (Byte *)[inputData bytes];
     short *pPcm = (short *)byteData;
     int outlen = 0;
@@ -521,7 +508,7 @@
 
 - (void)setupVoiceLabel{
     _voiceLabel = [[UILabel alloc]initWithFrame:CGRectMake((lScreenWidth-80)/2, 120, 80, 20)];
-    _voiceLabel.text = @"对讲中.";
+    _voiceLabel.text = NSLocalizedString(@"C_Speaking1", @"");
     _voiceLabel.textAlignment = NSTextAlignmentCenter;
     _voiceLabel.backgroundColor = [UIColor whiteColor];
     _voiceLabel.textColor = [UIColor whiteColor];
@@ -537,12 +524,12 @@
         while (1) {
             if (_voiceLabel.hidden == false) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if ([_voiceLabel.text isEqualToString:@"对讲中."]){
-                        _voiceLabel.text = @"对讲中..";
-                    } else if ([_voiceLabel.text isEqualToString:@"对讲中.."]) {
-                        _voiceLabel.text = @"对讲中...";
-                    } else if ([_voiceLabel.text isEqualToString:@"对讲中..."]) {
-                        _voiceLabel.text = @"对讲中.";
+                    if ([_voiceLabel.text isEqualToString:NSLocalizedString(@"C_Speaking1", @"")]){
+                        _voiceLabel.text = NSLocalizedString(@"C_Speaking2", @"");
+                    } else if ([_voiceLabel.text isEqualToString:NSLocalizedString(@"C_Speaking2", @"")]) {
+                        _voiceLabel.text =NSLocalizedString(@"C_Speaking3", @"");
+                    } else if ([_voiceLabel.text isEqualToString:NSLocalizedString(@"C_Speaking3", @"")]) {
+                        _voiceLabel.text = NSLocalizedString(@"C_Speaking1", @"");
                     }
                 });
             }

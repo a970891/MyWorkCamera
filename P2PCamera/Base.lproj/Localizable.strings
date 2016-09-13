@@ -21,7 +21,11 @@
 "default_name"  =   "Camera";
 
 //cameras
-"C_Speaking"    =   "Speaking";
+"C_Speaking1"    =   "Speaking.";
+"C_Speaking2"    =   "Speaking..";
+"C_Speaking3"    =   "Speaking...";
+"C_save_suc"    =   "Save Image Succeed";
+"C_save_fai"    =   "Save Image Failed";
 
 //events
 "event_1"       =   "Motion_Detect_Warning";
@@ -31,12 +35,16 @@
 //new
 "N_add"         =   "Add";
 "N_QRCode"      =   "QRCode";
-"N_Find"        =   "Find";
-"N_Camera"      =   "cameras";
+"N_Find"        =   "Find: ";
+"N_Camera"      =   " camera";
 "N_pleaseInsert"=   "please insert camera's uid & password";
 "N_uid_P"       =   "please insert uid";
 "N_psd_P"       =   "please insert password";
 "N_notFindCam"  =   "Did not find any cameras";
+
+"N_setcam"      =   "Please set camera";
+"N_insertName"  =   "Please insert camera name";
+"N_insertPsd"   =   "Please insert camera password";
 
 //info
 "info_appV"     =   "APP_Version:1.1.0";
@@ -48,6 +56,20 @@
 "A_sure"        =   "OK";
 "A_notNull"     =   "uid/name can't be Null";
 "A_camWarm"     =   "CameraWarning!";
+
 "A_delete_sure" =   "Delete this camera?";
 "A_psd_Null"    =   "Password can't be Null";
 "A_psd_set"     =   "Please set camera password";
+
+//status
+"connecting"    =   "connecting";
+"connected"     =   "connected succes";
+"connectFail"   =   "not connected";
+
+//camera_set
+"S_formatSuc"   =   "Format Succeed";
+"S_formatFai"   =   "Format Failed";
+"S_changeFai"   =   "Modify Failed";
+"S_changeSuc"   =   "Modify Succeed";
+"S_oldWrong"    =   "Old password wrong";
+"S_twiceWrong"  =   "the new password is not same with the old one";

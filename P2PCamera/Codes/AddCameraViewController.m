@@ -152,14 +152,14 @@ static NSString *const Ccell = @"Ccell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CameraObject *object = self.dataSource[indexPath.row];
     if([object.password isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"N_setcam", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
         alert.tag = 102;
         [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
         UITextField *textField1 = [alert textFieldAtIndex:0];
         UITextField *textField2 = [alert textFieldAtIndex:1];
-        textField1.placeholder = @"请输入名字";
+        textField1.placeholder = NSLocalizedString(@"N_insertName", @"");
         textField1.uid = object.uid;
-        textField2.placeholder = @"请输入密码";
+        textField2.placeholder = NSLocalizedString(@"N_insertPsd", @"");
         [alert show];
     } else {
         return;
@@ -177,7 +177,7 @@ static NSString *const Ccell = @"Ccell";
     UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:Ccell];
     if (self.label==nil) {
         self.label = [[UILabel alloc]initWithFrame:CGRectMake(10*AUTO_WIDTH, 0, 160*AUTO_WIDTH, 20*AUTO_HEIGHT)];
-        self.label.text = [NSString stringWithFormat:@"找到%lu个摄像机",(unsigned long)[self.dataSource count]];
+        self.label.text = [NSString stringWithFormat:@"%@%lu%@",NSLocalizedString(@"N_Find", @""),(unsigned long)[self.dataSource count],NSLocalizedString(@"N_Camera", @"")];
         self.label.font = [UIFont systemFontOfSize:12];
         [headerView addSubview:self.label];
     }
@@ -190,14 +190,14 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)addBtnClicked:(UIButton *)btn{
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入摄像头uid和密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"N_pleaseInsert", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
     [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
     alert.tag = 101;
     UITextField *textField1 = [alert textFieldAtIndex:0];
     UITextField *textField2 = [alert textFieldAtIndex:1];
     
-    textField1.placeholder = @"请输入uid";
-    textField2.placeholder = @"请输入连接密码";
+    textField1.placeholder = NSLocalizedString(@"N_uid_P", @"");
+    textField2.placeholder = NSLocalizedString(@"N_psd_P", @"");
     
     [alert show];
 }
@@ -211,7 +211,7 @@ static NSString *const Ccell = @"Ccell";
             UITextField *textField1 = [alertView textFieldAtIndex:0];
             UITextField *textField2 = [alertView textFieldAtIndex:1];
             if ([textField1.text length] == 0 || [textField2.text length] == 0){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"名字或密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_notNull", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_sure", @"") otherButtonTitles:nil, nil];
                 [alert show];
             } else {
                 CameraObject *object = [[CameraObject alloc]init];
@@ -230,7 +230,8 @@ static NSString *const Ccell = @"Ccell";
             UITextField *textField1 = [alertView textFieldAtIndex:0];
             UITextField *textField2 = [alertView textFieldAtIndex:1];
             if ([textField2.text length] == 0 || [textField1.text length] == 0){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"名字或密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                UIAlertView *alert =  [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_notNull", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_sure", @"") otherButtonTitles:nil, nil];
+
                 [alert show];
             } else {
                 CameraObject *object = [[CameraObject alloc]init];
@@ -269,7 +270,7 @@ static NSString *const Ccell = @"Ccell";
     [self.dataSource removeAllObjects];
     [[[TutkP2PAVClient alloc]init] SearchAndConnect:^(NSString *str) {
         if ([str isEqualToString:@""] || str == NULL){
-            [SVProgressHUD showErrorWithStatus:@"未找到摄像头"];
+            [SVProgressHUD showErrorWithStatus:NSLocalizedString(@"N_notFindCam", @"")];
         } else {
             
             NSArray *arr = [[CameraManager sharedInstance] findAllObjects];

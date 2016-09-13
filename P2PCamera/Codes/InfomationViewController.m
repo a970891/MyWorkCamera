@@ -32,10 +32,7 @@
 
 - (void)setupUI{
     [self setMyNavBar];
-    self.titleLabel.text = @"信息";
-    if ([Myself getCurrentLanguage]){
-        self.titleLabel.text = @"Info";
-    }
+    self.titleLabel.text = NSLocalizedString(@"title_info", @"");
     self.view.backgroundColor = [UIColor whiteColor];
     
     _iconImage = [[UIImageView alloc]initWithFrame:CGRectMake((lScreenWidth-120)/2, 100, 120, 120)];
@@ -43,7 +40,7 @@
     
     _label = [[UILabel alloc]initWithFrame:CGRectMake(0, 240, lScreenWidth, 20)];
     _label.textColor = [UIColor lightGrayColor];
-    _label.text = @"APP版本号:1.0.0";
+    _label.text = NSLocalizedString(@"info_appV", @"");
     _label.font = [UIFont systemFontOfSize:15];
     _label.textAlignment = NSTextAlignmentCenter;
     

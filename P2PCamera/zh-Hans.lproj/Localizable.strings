@@ -32,11 +32,15 @@
 "N_add"         =   "新增";
 "N_QRCode"      =   "二维码";
 "N_Find"        =   "找到";
-"N_Camera"      =   "摄像头";
+"N_Camera"      =   "个摄像机";
 "N_pleaseInsert"=   "请输入摄像头UID和密码";
 "N_uid_P"       =   "请输入UID";
 "N_psd_P"       =   "请输入密码";
 "N_notFindCam"  =   "未找到摄像头";
+
+"N_setcam"      =   "Please set camera";
+"N_insertName"  =   "Please insert camera name";
+"N_insertPsd"   =   "Please insert camera password";
 
 //info
 "info_appV"     =   "APP版本:1.1.0";
@@ -47,3 +51,21 @@
 "A_cancel"      =   "取消";
 "A_sure"        =   "好";
 "A_notNull"     =   "UID或名字不能为空";
+"A_camWarm"     =   "CameraWarning!";
+
+"A_delete_sure" =   "Delete this camera?";
+"A_psd_Null"    =   "Password can't be Null";
+"A_psd_set"     =   "Please set camera password";
+
+//status
+"connecting"    =   "connecting";
+"connected"     =   "connected succes";
+"connectFail"   =   "not connected";
+
+//camera_set
+"S_formatSuc"   =   "Format Succeed";
+"S_formatFai"   =   "Format Failed";
+"S_changeFai"   =   "Modify Failed";
+"S_changeSuc"   =   "Modify Succeed";
+"S_oldWrong"    =   "Old password wrong";
+"S_twiceWrong"  =   "the new password is not same with the old one";

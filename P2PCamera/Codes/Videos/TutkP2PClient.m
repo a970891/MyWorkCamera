@@ -239,15 +239,15 @@
                             break;
                         case AVIOCTRL_EVENT_MOTIONDECT:
                             [ActionManager insertAction:@"移动侦测报警" uid:_UID name:_name];
-                            [self sendNotificationWithAction:@"移动侦测报警"];
+                            [self sendNotificationWithAction:NSLocalizedString(@"event_1", @"")];
                             break;
                         case AVIOCTRL_EVENT_VIDEOLOST:
                             [ActionManager insertAction:@"视频丢失报警" uid:_UID name:_name];
-                            [self sendNotificationWithAction:@"视频丢失报警"];
+                            [self sendNotificationWithAction:NSLocalizedString(@"event_2", @"")];
                             break;
                         case AVIOCTRL_EVENT_IOALARM:
                             [ActionManager insertAction:@"IO联动报警" uid:_UID name:_name];
-                            [self sendNotificationWithAction:@"IO联动报警"];
+                            [self sendNotificationWithAction:NSLocalizedString(@"event_3", @"")];
                             break;
                         case AVIOCTRL_EVENT_MOTIONPASS:
                             

@@ -27,23 +27,23 @@ class SetPasswordController: UITableViewController {
         if let p1 = oldPassword.text, p2 = newPassword.text, p3 = newPassword2.text {
             if p1.characters.count != 0 && p2.characters.count != 0 && p3.characters.count != 0 {
                 if p1 != cameraObj.password {
-                    UIAlertView(title: "提示", message: "旧密码错误", delegate: self, cancelButtonTitle: "好").show()
+                    UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("S_oldWrong", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_sure", comment:"")).show()
                     return;
                 }
                 if p2 != p3 {
-                    UIAlertView(title: "提示", message: "两次输入的密码不一致", delegate: self, cancelButtonTitle: "好").show()
+                    UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("S_twiceWrong", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_sure", comment:"")).show()
                     return;
                 }
                 if tutkManager.setPassword(p1, p2) != -1 {
                     cameraObj.password = p2
                     CameraManager.sharedInstance().insertObject(cameraObj)
-                    SVProgressHUD.showSuccessWithStatus("修改成功")
+                    SVProgressHUD.showSuccessWithStatus(NSLocalizedString("S_changeSuc", comment:""))
                 } else {
-                    SVProgressHUD.showErrorWithStatus("修改失败")
+                    SVProgressHUD.showErrorWithStatus(NSLocalizedString("S_changeFai", comment:""))
                 }
                 return;
             }
         }
-        UIAlertView(title: "提示", message: "密码不能为空", delegate: self, cancelButtonTitle: "好").show()
+        UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("A_psd_Null", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_sure", comment:"")).show()
     }
 }

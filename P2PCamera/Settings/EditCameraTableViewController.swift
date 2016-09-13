@@ -29,7 +29,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        statusLabel.text = Myself.sharedInstance().findUID(self.cameraObj.uid) ? "已联机" : "未联机"
+        statusLabel.text = Myself.sharedInstance().findUID(self.cameraObj.uid) ? NSLocalizedString("connected", comment:"") : NSLocalizedString("connectFail", comment:"")
         tutkManager = cameraObj.tutkManager;
         tutkManager.infoDelegate = self;
         self.tableView.tableHeaderView = self.tableViewHead
@@ -55,7 +55,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     }
     
     func getCameraInfo() {
-        statusLabel.text = "连接中"
+        statusLabel.text = NSLocalizedString("connecting", comment:"")
         tutkManager.connectsuccess({
             self.tutkManager.listWifiAp()
             self.tutkManager.getVideoMode()
@@ -64,9 +64,9 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             self.tutkManager.getDeviceInfo()
             self.tutkManager.getVideoQuality()
             self.tutkManager.getRecordMode()
-            self.statusLabel.text = "已联机"
+            self.statusLabel.text = NSLocalizedString("connected", comment:"")
             }, fail: {
-                self.statusLabel.text = "未联机"
+                self.statusLabel.text = NSLocalizedString("connectFail", comment:"")
         })
     }
     
@@ -97,11 +97,11 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         switch result {
         case 0:
             //成功
-            SVProgressHUD.showErrorWithStatus("格式化成功")
+            SVProgressHUD.showErrorWithStatus(NSLocalizedString("S_formatSuc", comment:""))
             break;
         default:
             //失败
-            SVProgressHUD.showErrorWithStatus("格式化失败")
+            SVProgressHUD.showErrorWithStatus(NSLocalizedString("S_formatFai", comment:""))
             break;
         }
     }
@@ -150,7 +150,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
                 }
             }
         }
-        UIAlertView(title: "提示", message: "名字或密码不能为空", delegate: self, cancelButtonTitle: "好").show()
+        UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("A_notNull", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_sure", comment:"")).show()
     }
 
 //    deinit {
@@ -159,7 +159,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
-            if statusLabel.text == "已联机" {
+            if statusLabel.text == NSLocalizedString("connected", comment:"") {
                 
             } else {
                 //只有已联机才允许跳转
@@ -172,7 +172,7 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         if indexPath.section == 2 {
-            if statusLabel.text == "未联机" {
+            if statusLabel.text == NSLocalizedString("connectFail", comment:"") {
                 self.getCameraInfo()
             }
         }

@@ -24,7 +24,7 @@ class CamActionViewController: UIViewController,UITableViewDelegate, UITableView
         line.backgroundColor = UIColor.lightGrayColor()
         
         titleLabel = UILabel(frame: CGRectMake(0,20,SW,44))
-        titleLabel.text = Myself.getCurrentLanguage() ? "Actions" : "事件"
+        titleLabel.text = NSLocalizedString("title_event", comment: "")
         titleLabel.font = UIFont.systemFontOfSize(18)
         titleLabel.textAlignment = NSTextAlignment.Center
         titleLabel.textColor = UIColor.blackColor()

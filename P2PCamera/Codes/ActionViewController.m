@@ -31,10 +31,7 @@ static NSString *const Acell = @"Acell";
 
 - (void)setupUI{
     [self setMyNavBar];
-    self.titleLabel.text = @"事件(暂未开放)";
-    if ([Myself getCurrentLanguage]){
-        self.titleLabel.text = @"Actions(closed)";
-    }
+    self.titleLabel.text = NSLocalizedString(@"title_event", @"");
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
 }
