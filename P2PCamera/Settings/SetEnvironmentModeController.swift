@@ -17,6 +17,7 @@ class SetEnvironmentModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showNaviBackButton()
         self.selectTem = self.cameraObj.placeMode.integerValue
         if self.selectTem == -1 {
             self.selectTem = 0

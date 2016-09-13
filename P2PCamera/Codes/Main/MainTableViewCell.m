@@ -44,7 +44,7 @@
 
 - (UIImageView *)rightImageView{
     if (!_rightImageView) {
-        _rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(280*AUTO_WIDTH, 15*AUTO_HEIGHT, 30*AUTO_WIDTH, 30*AUTO_HEIGHT)];
+        _rightImageView = [[UIImageView alloc]initWithFrame:CGRectMake(270*AUTO_WIDTH, 7.5*AUTO_HEIGHT, 45*AUTO_WIDTH, 45*AUTO_HEIGHT)];
         _rightImageView.contentMode = UIViewContentModeScaleAspectFill;
         _rightImageView.userInteractionEnabled = YES;
         _rightImageView.image = [UIImage imageNamed:@"jinggao1"];

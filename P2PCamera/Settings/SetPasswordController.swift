@@ -20,7 +20,7 @@ class SetPasswordController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    
+        self.showNaviBackButton()
     }
 
     @IBAction func savaAction2(sender: AnyObject) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 typealias selectorClosure=(index:Int)->()
 class SetSelectorTV: UITableViewController{
     
@@ -15,7 +16,7 @@ class SetSelectorTV: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.showNaviBackButton()
     }
     
     override func didReceiveMemoryWarning() {

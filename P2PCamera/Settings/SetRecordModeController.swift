@@ -17,6 +17,7 @@ class SetRecordModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showNaviBackButton()
         self.selectTem = self.cameraObj.recordMode.integerValue
         if self.selectTem == -1 {
             self.selectTem = 0

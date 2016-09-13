@@ -24,7 +24,7 @@ class CameraInfoController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.showNaviBackButton()
     }
     
     override func viewWillAppear(animated: Bool) {

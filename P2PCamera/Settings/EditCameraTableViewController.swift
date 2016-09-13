@@ -36,8 +36,8 @@ class EditCameraTableViewController: UITableViewController,CameraInfoDelegate {
         self.tableViewHead.TitleLabel.text = cameraObj.uid
         self.nameField.text = cameraObj.name
         self.passwordField.text = cameraObj.password
-        self.passwordField.enabled = false
-        self.pushSwitch.on = self.cameraObj.push == "0"
+        self.passwordField.enabled = true
+        self.pushSwitch.on = !(self.cameraObj.push == "0")
         pushSwitch.addTarget(self, action: #selector(EditCameraTableViewController.modifedPushSet(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     

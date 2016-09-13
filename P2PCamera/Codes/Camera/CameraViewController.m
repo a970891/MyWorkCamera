@@ -180,9 +180,6 @@
     
     [self.view addSubview:lineA];
     [self.view addSubview:lineB];
-//    [self.view addSubview:plus];
-//    [self.view addSubview:reduce];
-//    [self.view addSubview:_slider];
     [self.view addSubview:_video];
     
     

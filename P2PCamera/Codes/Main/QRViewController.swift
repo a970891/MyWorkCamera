@@ -35,10 +35,32 @@ class QRViewController: UIViewController {
         titleLabel.textColor = UIColor.blackColor()
         self.view.addSubview(titleLabel)
         titleLabel.textAlignment = NSTextAlignment.Center
+        self.showBackButton()
     }
     
     func popAction() {
         self.navigationController?.popViewControllerAnimated(true)
     }
 
+}
+
+extension UIViewController {
+    func showBackButton() {
+        let button = UIButton (frame: CGRectMake(12,SH-12-40,40,40))
+        button.setImage(UIImage(named: "backBtn"), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(UIViewController.popBtnAction), forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(button)
+    }
+    
+    func popBtnAction() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func showNaviBackButton() {
+        let button = UIButton (frame: CGRectMake(12,SH-12-40,40,40))
+        button.setImage(UIImage(named: "backBtn"), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(UIViewController.popBtnAction), forControlEvents: UIControlEvents.TouchUpInside)
+        let bbtn = UIBarButtonItem(customView: button)
+        self.navigationItem.backBarButtonItem = bbtn
+    }
 }

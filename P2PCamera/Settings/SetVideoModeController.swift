@@ -17,6 +17,7 @@ class SetVideoModeController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showNaviBackButton()
         self.selectTem = self.cameraObj.videoMode.integerValue
         if self.selectTem == -1 {
             self.selectTem = 0
