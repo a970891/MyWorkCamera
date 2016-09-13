@@ -1,5 +1,4 @@
 
-
 typedef  void(^SUCCESS_BLOCK)(void);
 typedef  void(^FAIL_BLOCK)(void);
 
@@ -52,6 +51,7 @@ typedef void (^SearchBlock)(NSString *str);
 @property (nonatomic,assign) int avIndex;
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSString *push;
+@property (nonatomic,strong) NSString *status;
 
 //初始化
 +(int) initializeTutk;

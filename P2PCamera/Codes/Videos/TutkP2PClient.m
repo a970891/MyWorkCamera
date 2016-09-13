@@ -577,11 +577,20 @@
     NSLog(@"uid=%@,AVStream Client Starting...",_UID);
     //如果已经连接,则返回成功
     if ([[Myself sharedInstance] findUID:_UID]) {
-        succeed();
         stopFlg=1;
         avStopFlg=1;
+        self.status = @"2";
+        NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
+                                                                     object:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        succeed();
         return;
     }
+    if ([self.status isEqualToString:@"1"]){
+        //已经有连接线程
+        return;
+    }
+    self.status = @"1";
     NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -622,6 +631,7 @@
                     {
                         printf("avClientStart failed[%d]\n", _avIndex);
                         dispatch_async(dispatch_get_main_queue(), ^{
+                            self.status = @"0";
                             failed();
                             [[Myself sharedInstance] deleteUID:_UID];
                         });
@@ -635,6 +645,10 @@
                         stopFlg=1;
                         avStopFlg=1;
                         [[Myself sharedInstance] insertUID:_UID];
+                        self.status = @"2";
+                        NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
+                                                                                     object:nil];
+                        [[NSNotificationCenter defaultCenter] postNotification:notification];
                         succeed();
                         return;
                     });
@@ -645,6 +659,7 @@
             
             if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.status = @"0";
                     failed();
                     [[Myself sharedInstance] deleteUID:_UID];
                 });

@@ -87,14 +87,13 @@
     [self setupUI];
     [self setupVoiceLabel];
     [self setVoiceLabelOn];
+    [self setupCamera];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startVideo) name:@"connect_success" object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    if (_firstShow == 1) {
-        _firstShow = 0;
-        [self setupCamera];
-    }
+- (void)startVideo {
+    [tutkP2PAVClient startAndPlayAVsuccess:^{} fail:^{}];
 }
 
 - (void)setupCamera {
@@ -126,7 +125,6 @@
     _decodeH264.delegate=self;
     
     tutkP2PAVClient.delegate=self;
-    [tutkP2PAVClient startAndPlayAVsuccess:^{} fail:^{}];
 
 }
 
@@ -143,7 +141,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.cameraObject.tutkManager closeAV];
-    _glLayer = nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"connect_success" object:nil];
 }
 
 - (void)setupUI{

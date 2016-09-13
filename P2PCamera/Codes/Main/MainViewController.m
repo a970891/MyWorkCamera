@@ -89,6 +89,7 @@ static NSString *const mainCell = @"mainCell";
         object.tutkManager.password = object.password;
         object.tutkManager.name = object.name;
         object.tutkManager.push = object.push;
+        object.tutkManager.status = object.connectStatus;
         [object.tutkManager connectsuccess:^{} fail:^{}];
     }
 }
@@ -220,6 +221,11 @@ static NSString *const mainCell = @"mainCell";
             textField2.placeholder = @"请输入密码";
             textField1.enabled = false;
             [alert show];
+            return;
+        }
+        if (![object.connectStatus isEqualToString:@"0"]){
+            //如果摄像头未连接,则必须先连接
+            [object.tutkManager connectsuccess:^{} fail:^{}];
             return;
         }
         CameraViewController *cameraVC = [[CameraViewController alloc]initWithObject:object];
