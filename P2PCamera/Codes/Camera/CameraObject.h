@@ -26,7 +26,7 @@
 @property (nonnull,nonatomic,copy) NSString *firm;                      //厂商
 @property (nonnull,nonatomic,copy) NSNumber *reduceRom;                 //剩余空间
 @property (nonnull,nonatomic,copy) NSNumber *rom;                       //总空间
-@property (nonnull,nonatomic,copy) NSString *connectStatus;             //连接状态
+@property (nonnull,nonatomic,copy) NSMutableString *connectStatus;             //连接状态
 @property (nonnull,nonatomic,copy) NSString *push;                      //推送开关
 @property (nonnull,nonatomic,strong) TutkP2PAVClient *tutkManager;
 

@@ -63,7 +63,7 @@
 
 //status
 "connecting"    =   "connecting";
-"connected"     =   "connected succes";
+"connected"     =   "connected";
 "connectFail"   =   "not connected";
 
 //camera_set

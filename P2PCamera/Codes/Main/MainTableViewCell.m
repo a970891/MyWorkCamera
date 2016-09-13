@@ -8,6 +8,8 @@
 
 #import "MainTableViewCell.h"
 #import "BasicDefinetion.h"
+#import "P2PCamera-Swift.h"
+
 @implementation MainTableViewCell
 
 - (void)awakeFromNib {
@@ -56,7 +58,7 @@
 
 - (UILabel *)firstLabel{
     if (!_firstLabel) {
-        _firstLabel = [[UILabel alloc]initWithFrame:CGRectMake(90*AUTO_WIDTH, 10*AUTO_HEIGHT, 120*AUTO_WIDTH, 20*AUTO_HEIGHT)];
+        _firstLabel = [[UILabel alloc]initWithFrame:CGRectMake(90*AUTO_WIDTH, 10*AUTO_HEIGHT, 200*AUTO_WIDTH, 20*AUTO_HEIGHT)];
         _firstLabel.font = [UIFont systemFontOfSize:17];
     }
     return _firstLabel;
@@ -96,12 +98,21 @@
 }
 
 - (void)setCell:(CameraObject *)object{
-    self.firstLabel.text = object.name;
+    NSString *status = @"";
+    NSString *nowStatus = [[Myself sharedInstance]findStatusWithUid:object.uid];
+    if ([nowStatus isEqualToString:@"0"]) {
+        status = NSLocalizedString(@"connectFail", @"");
+    } else if ([nowStatus isEqualToString:@"1"]) {
+        status = NSLocalizedString(@"connecting", @"");
+    } else {
+        status = NSLocalizedString(@"connected", @"");
+    }
+    self.firstLabel.text = [NSString stringWithFormat:@"%@(%@)",object.name,status];
     self.secondLabel.text = [NSString stringWithFormat:@"UID:%@",object.uid];
 }
 
 - (void)setOnlineStatus:(BOOL)on name:(NSString *)name {
-    _firstLabel.text = on ? [NSString stringWithFormat:@"%@(在线)",name] : [NSString stringWithFormat:@"%@(离线)",name];
+//    _firstLabel.text = on ? [NSString stringWithFormat:@"%@(在线)",name] : [NSString stringWithFormat:@"%@(离线)",name];
 }
 
 @end

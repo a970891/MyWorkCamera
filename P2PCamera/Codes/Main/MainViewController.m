@@ -87,7 +87,9 @@ static NSString *const mainCell = @"mainCell";
         object.tutkManager.name = object.name;
         object.tutkManager.push = object.push;
         object.tutkManager.status = object.connectStatus;
-        [object.tutkManager connectsuccess:^{} fail:^{}];
+        [object.tutkManager connecting:^{
+            [self.myTableView reloadData];
+        }];
     }
 }
 
@@ -203,32 +205,12 @@ static NSString *const mainCell = @"mainCell";
     MainTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:mainCell forIndexPath:indexPath];
 
     CameraObject *object = self.dataSource[indexPath.row];
-    
-    //判断是否在线
-//    [cell setOnlineStatus:on name:object.name];
     [cell setCell:object];
-    cell.lComplection = ^(NSInteger m){
-        if (object.password == NULL || [object.password isEqualToString:@""]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_psd_set", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
-            alert.tag = 102;
-            [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
-            UITextField *textField1 = [alert textFieldAtIndex:0];
-            UITextField *textField2 = [alert textFieldAtIndex:1];
-            textField1.text = object.uid;
-            textField2.placeholder = NSLocalizedString(@"A_psd_set", @"");
-            textField1.enabled = false;
-            [alert show];
-            return;
-        }
-        if (![object.connectStatus isEqualToString:@"0"]){
-            //如果摄像头未连接,则必须先连接
-            [object.tutkManager connectsuccess:^{} fail:^{}];
-            return;
-        }
-        CameraViewController *cameraVC = [[CameraViewController alloc]initWithObject:object];
-        self.navigationController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:cameraVC animated:YES];
-    };
+    //****
+    cell.lComplection = ^(NSInteger m){};//已废弃API
+    //****
+    
+    //设置点击事件
     cell.rComplection = ^(NSInteger n){
         EditCameraTableViewController *vc = (EditCameraTableViewController *)[self StoryboardWithIdentifier:@"Settings" Identifier:@"EditCamera"];
         vc.hidesBottomBarWhenPushed = true;
@@ -240,8 +222,26 @@ static NSString *const mainCell = @"mainCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.myTableView deselectRowAtIndexPath:indexPath animated:YES];
-    
     CameraObject *object = self.dataSource[indexPath.row];
+    if (object.password == NULL || [object.password isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_psd_set", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
+        alert.tag = 102;
+        [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        UITextField *textField1 = [alert textFieldAtIndex:0];
+        UITextField *textField2 = [alert textFieldAtIndex:1];
+        textField1.text = object.uid;
+        textField2.placeholder = NSLocalizedString(@"A_psd_set", @"");
+        textField1.enabled = false;
+        [alert show];
+        return;
+    }
+    if (![object.connectStatus isEqualToString:@"0"]){
+        //如果摄像头未连接,则必须先连接
+        [object.tutkManager connecting:^{
+            [self.myTableView reloadData];
+        }];
+        return;
+    }
     CameraViewController *cameraVC = [[CameraViewController alloc]initWithObject:object];
     [self.navigationController pushViewController:cameraVC animated:YES];
 }

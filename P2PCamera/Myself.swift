@@ -13,6 +13,7 @@ class Myself: NSObject {
     static private var myself:Myself = Myself()
     private var nowConnectCamera = [String]()
     private var nowTutkManagers = [String:TutkP2PAVClient]()
+    private var nowCameras = [String:String]()
     var language:Bool!
     var s_avIndex:Int = -1
     
@@ -96,6 +97,37 @@ class Myself: NSObject {
             self.nowTutkManagers[uid] = manager
             return manager
         }
+    }
+    
+    /**
+     根据UID插入摄像头连接状态
+     */
+    func insertCameraWithStatus(uid:String,status:Int) {
+        //摄像头已存在记录
+        for i in 0 ..< self.nowCameras.keys.count {
+            let key = (self.nowCameras as NSDictionary).allKeys[i] as! String
+            if key == uid {
+                self.nowCameras[key] = String(status)
+                return
+            }
+        }
+        //未存在记录
+        self.nowCameras[uid] = "0"
+    }
+    
+    /**
+     根据UID获取摄像头连接状态
+     */
+    func findStatusWithUid(uid:String) -> String {
+        //摄像头已存在记录
+        for i in 0 ..< self.nowCameras.keys.count {
+            let key = (self.nowCameras as NSDictionary).allKeys[i] as! String
+            if key == uid {
+                return self.nowCameras[key]!
+            }
+        }
+        //未存在记录
+        return "0"
     }
     
 }

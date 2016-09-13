@@ -1,6 +1,8 @@
+#import <Foundation/Foundation.h>
 
 typedef  void(^SUCCESS_BLOCK)(void);
 typedef  void(^FAIL_BLOCK)(void);
+typedef  void(^CONNECT_BLOCK)(void);
 
 typedef enum
 {
@@ -51,7 +53,7 @@ typedef void (^SearchBlock)(NSString *str);
 @property (nonatomic,assign) int avIndex;
 @property (nonatomic,copy) NSString *name;
 @property (nonatomic,copy) NSString *push;
-@property (nonatomic,strong) NSString *status;
+@property (nonatomic,strong) NSMutableString *status;
 
 //初始化
 +(int) initializeTutk;
@@ -102,6 +104,8 @@ typedef void (^SearchBlock)(NSString *str);
 - (int)setMute:(BOOL)on;
 //对讲
 - (int)sendVoice:(BOOL)on;
+//带实时连接block的connect
+-(void)connecting:(CONNECT_BLOCK)connecting;
 
 - (void)lock_unlock:(int)lockIndex status:(BOOL)status;//加锁解锁
 @property (nonatomic,retain) id delegate;

@@ -1,5 +1,4 @@
 
-#import <Foundation/Foundation.h>
 #import "TutkP2PClient.h"
 #import "IOTCAPIs.h"
 #import "AVAPIs.h"
@@ -559,25 +558,28 @@
     }
     [self.infoDelegate receiveWifi:arr modes:modes types:types];
 }
-
--(void)connectsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
+//连接*************
+-(void)connecting:(CONNECT_BLOCK)connecting{
     NSLog(@"uid=%@,AVStream Client Starting...",_UID);
     //如果已经连接,则返回成功
     if ([[Myself sharedInstance] findUID:_UID]) {
         stopFlg=1;
         avStopFlg=1;
-        self.status = @"2";
+//        [self.status remo]
+        [self setConnectStatus:2];
         NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
                                                                      object:nil];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
-        succeed();
+        connecting();
         return;
     }
     if ([self.status isEqualToString:@"1"]){
         //已经有连接线程
+        connecting();
         return;
     }
-    self.status = @"1";
+    [self setConnectStatus:1];
+    connecting();
     NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -618,7 +620,103 @@
                     {
                         printf("avClientStart failed[%d]\n", _avIndex);
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            self.status = @"0";
+                            [self setConnectStatus:0];
+                            connecting();
+                            [[Myself sharedInstance] deleteUID:_UID];
+                        });
+                        return;
+                    }
+                    //连接成功
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        dispatch_async(dispatch_queue_create("recvIoResponseThreadQueue", DISPATCH_QUEUE_SERIAL), ^{
+                            [self recv_io_ctrl_loop];
+                        });
+                        stopFlg=1;
+                        avStopFlg=1;
+                        [[Myself sharedInstance] insertUID:_UID];
+                        [self setConnectStatus:2];
+                        NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
+                                                                                     object:nil];
+                        [[NSNotificationCenter defaultCenter] postNotification:notification];
+                        connecting();
+                        return;
+                    });
+                    
+                    
+                });
+            }
+            
+            if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self setConnectStatus:0];
+                    connecting();
+                    [[Myself sharedInstance] deleteUID:_UID];
+                });
+                return;
+            }
+        }
+        
+    });
+}
+-(void)connectsuccess:(SUCCESS_BLOCK)succeed fail:(FAIL_BLOCK)failed{
+    NSLog(@"uid=%@,AVStream Client Starting...",_UID);
+    //如果已经连接,则返回成功
+    if ([[Myself sharedInstance] findUID:_UID]) {
+        stopFlg=1;
+        avStopFlg=1;
+        [self setConnectStatus:2];
+        NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
+                                                                     object:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        succeed();
+        return;
+    }
+    if ([self.status isEqualToString:@"1"]){
+        //已经有连接线程
+        return;
+    }
+    [self setConnectStatus:1];
+    NSDate *timeout = [[NSDate alloc]initWithTimeIntervalSinceNow:10];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        int on = 1;
+        while ([timeout timeIntervalSinceNow] > 0) {
+            if (on == 1){
+                on = 0;
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    int ret;
+                    // use IOTC_Connect_ByUID or IOTC_Connect_ByName to connect with device
+                    
+                    //NSString *aesString = @"your aes key";
+                    
+                    SID = IOTC_Connect_ByUID((char *)[_UID UTF8String]);
+                    _SID = SID;
+                    
+                    printf("Step 2: call IOTC_Connect_ByUID2(%s) ret(%d).......\n", [_UID UTF8String], SID);
+                    struct st_SInfo Sinfo;
+                    ret = IOTC_Session_Check(SID, &Sinfo);
+                    
+                    if (ret >= 0)
+                    {
+                        if(Sinfo.Mode == 0)
+                            printf("Device is from %s:%d[%s] Mode=P2P\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                        else if (Sinfo.Mode == 1)
+                            printf("Device is from %s:%d[%s] Mode=RLY\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                        else if (Sinfo.Mode == 2)
+                            printf("Device is from %s:%d[%s] Mode=LAN\n",Sinfo.RemoteIP, Sinfo.RemotePort, Sinfo.UID);
+                    }
+                    
+                    unsigned int srvType;
+                    avIndex = avClientStart(SID, "admin", [_password UTF8String], 20000, &srvType, 0);
+                    _avIndex = avIndex;
+                    printf("Step 3: call avClientStart(%d).......\n", _avIndex);
+                    
+                    if(_avIndex < 0)
+                    {
+                        printf("avClientStart failed[%d]\n", _avIndex);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self setConnectStatus:0];
                             failed();
                             [[Myself sharedInstance] deleteUID:_UID];
                         });
@@ -632,7 +730,7 @@
                         stopFlg=1;
                         avStopFlg=1;
                         [[Myself sharedInstance] insertUID:_UID];
-                        self.status = @"2";
+                        [self setConnectStatus:2];
                         NSNotification *notification = [NSNotification notificationWithName:@"connect_success"
                                                                                      object:nil];
                         [[NSNotificationCenter defaultCenter] postNotification:notification];
@@ -646,7 +744,7 @@
             
             if ([timeout timeIntervalSinceNow] <= 1 && stopFlg != 1) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.status = @"0";
+                    [self setConnectStatus:0];
                     failed();
                     [[Myself sharedInstance] deleteUID:_UID];
                 });
@@ -1043,6 +1141,10 @@
             [[UIApplication sharedApplication] scheduleLocalNotification:notification];
         }
     });
+}
+
+- (void)setConnectStatus:(int)a {
+    [[Myself sharedInstance] insertCameraWithStatus:self.UID status:a];
 }
 
 @end

@@ -68,14 +68,14 @@
         self.placeMode = @0;
         self.motionDetect = @0;
         self.recordMode = @0;
-        self.videoMode = @"";
+        self.videoMode = @"Camera";
         self.cameraVersion = @"";
         self.firm = @"";
         self.reduceRom = @0;
         self.rom = @0;
         self.model = @"";
         self.ssid = @"";
-        self.connectStatus = @"";
+        self.connectStatus = @"0";
         self.tutkManager = [[TutkP2PAVClient alloc]init];
         self.push = @"0";
     }
