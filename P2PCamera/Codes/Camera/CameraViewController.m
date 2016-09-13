@@ -125,7 +125,7 @@
     _decodeH264.delegate=self;
     
     tutkP2PAVClient.delegate=self;
-
+    [self startVideo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
