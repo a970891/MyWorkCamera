@@ -73,3 +73,36 @@
 "S_changeSuc"   =   "修改失败";
 "S_oldWrong"    =   "旧密码错误";
 "S_twiceWrong"  =   "两次输入的密码不一致";
+
+
+"S_qualty1"     =   "最高";
+"S_qualty2"     =   "高";
+"S_qualty3"     =   "适中";
+"S_qualty4"     =   "低";
+"S_qualty5"     =   "最低";
+"S_qualty6"     =   "未知";
+
+"S_Wifi_close"  =   "关闭";
+
+"S_detect1"     =   "关闭";
+"S_detect2"     =   "低";
+"S_detect3"     =   "适中";
+"S_detect4"     =   "高";
+"S_detect5"     =   "最高";
+
+"S_env1"        =   "室内50HZ模式";
+"S_env2"        =   "室内60HZ模式";
+"S_env3"        =   "室外模式";
+"S_env4"        =   "夜间模式";
+
+"S_videoTurn1"  =   "正常";
+"S_videoTurn2"  =   "垂直翻转";
+"S_videoTurn3"  =   "水平翻转(镜像)";
+"S_videoTurn4"  =   "翻转镜像";
+
+"S_record1"     =   "关闭";
+"S_record2"     =   "全景模式";
+"S_record3"     =   "警报模式";
+"S_record4"     =   "普通模式";
+
+"S_formatSD"    =   "是否格式化SD卡";
