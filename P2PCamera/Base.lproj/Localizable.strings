@@ -1,0 +1,53 @@
+/* 
+  InfoPlist.strings
+  P2PCamera
+
+  Created by mac on 16/9/13.
+  Copyright © 2016年 Lu. All rights reserved.
+*/
+//main
+"barT_camera"   =   "Cameras";
+"barT_events"   =   "Events";
+"barT_new"      =   "New";
+"barT_info"     =   "Info";
+"title_camera"  =   "CameraList";
+"title_event"   =   "Camera Actions";
+"title_new"     =   "Add Camera";
+"title_info"    =   "Camera Info";
+
+//base
+"password"      =   "password";
+"delete"        =   "delete";
+"default_name"  =   "Camera";
+
+//cameras
+"C_Speaking"    =   "Speaking";
+
+//events
+"event_1"       =   "Motion_Detect_Warning";
+"event_2"       =   "Video_Lost_Warning";
+"event_3"       =   "IO_Alarm_Warning";
+
+//new
+"N_add"         =   "Add";
+"N_QRCode"      =   "QRCode";
+"N_Find"        =   "Find";
+"N_Camera"      =   "cameras";
+"N_pleaseInsert"=   "please insert camera's uid & password";
+"N_uid_P"       =   "please insert uid";
+"N_psd_P"       =   "please insert password";
+"N_notFindCam"  =   "Did not find any cameras";
+
+//info
+"info_appV"     =   "APP_Version:1.1.0";
+
+
+//alert
+"A_title"       =   "Attention";
+"A_cancel"      =   "Cancel";
+"A_sure"        =   "OK";
+"A_notNull"     =   "uid/name can't be Null";
+"A_camWarm"     =   "CameraWarning!";
+"A_delete_sure" =   "Delete this camera?";
+"A_psd_Null"    =   "Password can't be Null";
+"A_psd_set"     =   "Please set camera password";

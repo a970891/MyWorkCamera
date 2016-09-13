@@ -45,10 +45,7 @@ static NSString *const mainCell = @"mainCell";
 #pragma mark - Setter & Getter
 - (void)setupUI {
     [self setMyNavBar];
-    self.titleLabel.text = @"摄像机列表";
-    if ([Myself getCurrentLanguage]){
-        self.titleLabel.text = @"CameraList";
-    }
+    self.titleLabel.text = NSLocalizedString(@"title_camera", @"");
     [self showRightButton];
     [self.rightButton setTitle:@"" forState:UIControlStateNormal];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -143,7 +140,7 @@ static NSString *const mainCell = @"mainCell";
 
 //删除按钮点击事件
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确认要删除该摄像机吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_delete_sure", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
     alertView.tag = 9999+indexPath.row;
     [alertView show];
     
@@ -159,7 +156,7 @@ static NSString *const mainCell = @"mainCell";
             UITextField *textField1 = [alertView textFieldAtIndex:0];
             UITextField *textField2 = [alertView textFieldAtIndex:1];
             if ([textField2.text length] == 0){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_psd_Null", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_sure", @"") otherButtonTitles:nil, nil];
                 [alert show];
             } else {
                 CameraObject *object = [[CameraObject alloc]init];
@@ -212,13 +209,13 @@ static NSString *const mainCell = @"mainCell";
     [cell setCell:object];
     cell.lComplection = ^(NSInteger m){
         if (object.password == NULL || [object.password isEqualToString:@""]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头密码" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_psd_set", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
             alert.tag = 102;
             [alert setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
             UITextField *textField1 = [alert textFieldAtIndex:0];
             UITextField *textField2 = [alert textFieldAtIndex:1];
             textField1.text = object.uid;
-            textField2.placeholder = @"请输入密码";
+            textField2.placeholder = NSLocalizedString(@"A_psd_set", @"");
             textField1.enabled = false;
             [alert show];
             return;

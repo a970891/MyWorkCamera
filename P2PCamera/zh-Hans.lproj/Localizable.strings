@@ -1,0 +1,49 @@
+/* 
+  InfoPlist.strings
+  P2PCamera
+
+  Created by mac on 16/9/13.
+  Copyright © 2016年 Lu. All rights reserved.
+*/
+//main
+"barT_camera"   =   "摄像头";
+"barT_events"   =   "事件";
+"barT_new"      =   "添加";
+"barT_info"     =   "信息";
+"title_camera"  =   "摄像头列表";
+"title_event"   =   "摄像头事件";
+"title_new"     =   "新增摄像头";
+"title_info"    =   "摄像头信息";
+
+//base
+"password"      =   "密码";
+"delete"        =   "删除";
+"default_name"  =   "摄像头";
+
+//cameras
+"C_Speaking"    =   "对讲中";
+
+//events
+"event_1"       =   "移动侦测警报";
+"event_2"       =   "视频丢失警报";
+"event_3"       =   "IO联动警报";
+
+//new
+"N_add"         =   "新增";
+"N_QRCode"      =   "二维码";
+"N_Find"        =   "找到";
+"N_Camera"      =   "摄像头";
+"N_pleaseInsert"=   "请输入摄像头UID和密码";
+"N_uid_P"       =   "请输入UID";
+"N_psd_P"       =   "请输入密码";
+"N_notFindCam"  =   "未找到摄像头";
+
+//info
+"info_appV"     =   "APP版本:1.1.0";
+
+
+//alert
+"A_title"       =   "提示";
+"A_cancel"      =   "取消";
+"A_sure"        =   "好";
+"A_notNull"     =   "UID或名字不能为空";

@@ -51,6 +51,7 @@
 		048074BA1CF579B900F59273 /* SetSelectorTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B31CF579B900F59273 /* SetSelectorTV.swift */; };
 		048074BB1CF579B900F59273 /* SetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048074B41CF579B900F59273 /* SetTableViewController.swift */; };
 		048074E01CF5914F00F59273 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = 048074DF1CF5914F00F59273 /* 120.png */; };
+		04A9ADDF1D87C14C0096BC6A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04A9ADE11D87C14C0096BC6A /* Localizable.strings */; };
 		04CBFE6F1D585CAE00D04429 /* MainSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */; };
 		04D3BC111D582B9D002CF64C /* camera_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D3BC101D582B9D002CF64C /* camera_logo.png */; };
 		04D3BC131D583970002CF64C /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3BC121D583970002CF64C /* QRCodeViewController.swift */; };
@@ -265,6 +266,9 @@
 		048074B41CF579B900F59273 /* SetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetTableViewController.swift; sourceTree = "<group>"; };
 		048074C01CF57AA500F59273 /* Brideg_Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brideg_Header.h; sourceTree = "<group>"; };
 		048074DF1CF5914F00F59273 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
+		04A9ADE01D87C14C0096BC6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		04A9ADE21D87C14E0096BC6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		04A9ADE31D87C15F0096BC6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		04CBFE6E1D585CAE00D04429 /* MainSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingViewController.swift; sourceTree = "<group>"; };
 		04D3BC101D582B9D002CF64C /* camera_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_logo.png; sourceTree = "<group>"; };
 		04D3BC121D583970002CF64C /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -1048,6 +1052,7 @@
 				89DA94621C7A2CFC008735CA /* Assets.xcassets */,
 				89DA94671C7A2CFC008735CA /* Info.plist */,
 				89DA94561C7A2CFC008735CA /* Supporting Files */,
+				04A9ADE11D87C14C0096BC6A /* Localizable.strings */,
 			);
 			path = P2PCamera;
 			sourceTree = "<group>";
@@ -1547,6 +1552,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 89DA944A1C7A2CFC008735CA;
 			productRefGroup = 89DA94541C7A2CFC008735CA /* Products */;
@@ -1584,6 +1590,7 @@
 				B7091FC81C8DE0B7006A37A1 /* backBtn.png in Resources */,
 				89574B1F1C7A596E00A7E7A6 /* camera.png in Resources */,
 				89574B211C7A596E00A7E7A6 /* plus.png in Resources */,
+				04A9ADDF1D87C14C0096BC6A /* Localizable.strings in Resources */,
 				B77091011C87334400736155 /* CODE.png in Resources */,
 				B77090E71C85E2DC00736155 /* icon_mine_select.png in Resources */,
 				B77091031C8886B300736155 /* refresh.png in Resources */,
@@ -1794,6 +1801,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		04A9ADE11D87C14C0096BC6A /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04A9ADE01D87C14C0096BC6A /* Base */,
+				04A9ADE21D87C14E0096BC6A /* en */,
+				04A9ADE31D87C15F0096BC6A /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		89DA94681C7A2CFC008735CA /* Debug */ = {

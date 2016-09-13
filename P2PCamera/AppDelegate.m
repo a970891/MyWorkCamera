@@ -40,10 +40,7 @@
                          @"CamActionViewController",
                          @"AddCameraViewController",
                          @"InfomationViewController"];
-    NSMutableArray *VCtitles = @[@"摄像机",@"事件",@"新增摄像机",@"信息"];
-    if ([Myself getCurrentLanguage]){
-        VCtitles = @[@"Cameras",@"Events",@"New",@"Info"];
-    }
+    NSMutableArray *VCtitles = @[NSLocalizedString(@"barT_camera", @""),NSLocalizedString(@"barT_events", @""),NSLocalizedString(@"barT_new", @""),NSLocalizedString(@"barT_info", @"")];
     NSArray *VCimages = @[@"icon_home",@"icon_mine",@"icon_special",@"icon_search"];
     NSArray *VCimagesAct = @[@"icon_home_select",@"icon_mine_select",@"icon_special_select",@"icon_search_select"];
     NSMutableArray *viewControllers = [[NSMutableArray alloc]init];
@@ -73,7 +70,7 @@
     NSString *str = notification.alertBody;
     NSString *title = [notification.userInfo objectForKey:@"actionCamera"];
     NSString *main = [NSString stringWithFormat:@"%@: %@",str,title];
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"摄像机报警" message:main delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_camWarm", @"") message:main delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
     [alert show];
 }
 

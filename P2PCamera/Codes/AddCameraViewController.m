@@ -35,8 +35,6 @@ static NSString *const Ccell = @"Ccell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-//    _audioPlayer = [[AudioPlayer alloc] init];
-//    [_audioPlayer IOTC_Init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,10 +54,7 @@ static NSString *const Ccell = @"Ccell";
 
 - (void)setupUI{
     [self setMyNavBar];
-    self.titleLabel.text = @"添加摄影机";
-    if ([Myself getCurrentLanguage]){
-        self.titleLabel.text = @"NewCamera";
-    }
+    self.titleLabel.text = NSLocalizedString(@"title_new", @"");
     self.view.backgroundColor = [UIColor whiteColor];
     [self showRightButton];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
@@ -75,14 +70,14 @@ static NSString *const Ccell = @"Ccell";
 
 //删除按钮点击事件
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"提示" message:@"确认要删除该摄像机吗" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"A_title", @"") message:NSLocalizedString(@"A_delete_sure", @"") delegate:self cancelButtonTitle:NSLocalizedString(@"A_cancel", @"") otherButtonTitles:NSLocalizedString(@"A_sure", @""), nil];
     alertView.tag = 9999+indexPath.row;
     [alertView show];
     
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return @"删除";
+    return NSLocalizedString(@"delete", @"");
 }
 
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -95,7 +90,7 @@ static NSString *const Ccell = @"Ccell";
     if (!_addBtn) {
         _addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _addBtn.frame = CGRectMake(50*AUTO_WIDTH, 90*AUTO_HEIGHT, 60*AUTO_WIDTH, 20*AUTO_HEIGHT);
-        [_addBtn setTitle:@"新增" forState:UIControlStateNormal];
+        [_addBtn setTitle:NSLocalizedString(@"N_add", @"") forState:UIControlStateNormal];
         [_addBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _addBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_addBtn addTarget:self action:@selector(addBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -107,7 +102,7 @@ static NSString *const Ccell = @"Ccell";
     if (!_scanBtn) {
         _scanBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _scanBtn.frame = CGRectMake(210*AUTO_WIDTH, 90*AUTO_HEIGHT, 60*AUTO_WIDTH, 20*AUTO_HEIGHT);
-        [_scanBtn setTitle:@"QRCode" forState:UIControlStateNormal];
+        [_scanBtn setTitle:NSLocalizedString(@"N_QRCode", @"") forState:UIControlStateNormal];
         [_scanBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _scanBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_scanBtn addTarget:self action:@selector(scanBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -155,7 +150,6 @@ static NSString *const Ccell = @"Ccell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"%ld",indexPath.row);
     CameraObject *object = self.dataSource[indexPath.row];
     if([object.password isEqualToString:@""]) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请设置摄像头" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
