@@ -71,47 +71,47 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
     
     func setInfo() {
         //wifi
-        if cameraObj.ssid == "" || cameraObj.ssid == "关闭" {
-            cameraObj.ssid = "关闭"
+        if cameraObj.ssid == "" || cameraObj.ssid == NSLocalizedString("S_Wifi_close", comment:"") {
+            cameraObj.ssid = NSLocalizedString("S_Wifi_close", comment:"")
         }
         self.wifiLabel.text = cameraObj.ssid
         //视频质量
         switch cameraObj.quality.intValue {
         case 0:
-            self.qualtyLabel.text = "最高"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty1", comment:"")
             break;
         case 1:
-            self.qualtyLabel.text = "高"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty2", comment:"")
             break;
         case 2:
-            self.qualtyLabel.text = "中"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty3", comment:"")
             break;
         case 3:
-            self.qualtyLabel.text = "低"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty4", comment:"")
             break;
         case 4:
-            self.qualtyLabel.text = "最低"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty5", comment:"")
             break;
         default:
-            self.qualtyLabel.text = "未知"
+            self.qualtyLabel.text = NSLocalizedString("S_qualty6", comment:"")
             break;
         }
         //移动侦测
         switch cameraObj.motionDetect.intValue {
         case 0:
-            self.moveDetect.text = "关闭"
+            self.moveDetect.text = NSLocalizedString("S_detect1", comment:"")
             break
         case 1:
-            self.moveDetect.text = "低"
+            self.moveDetect.text = NSLocalizedString("S_detect2", comment:"")
             break
         case 2:
-            self.moveDetect.text = "适中"
+            self.moveDetect.text = NSLocalizedString("S_detect3", comment:"")
             break
         case 3:
-            self.moveDetect.text = "高"
+            self.moveDetect.text = NSLocalizedString("S_detect4", comment:"")
             break
         case 4:
-            self.moveDetect.text = "最高"
+            self.moveDetect.text = NSLocalizedString("S_detect5", comment:"")
             break
         default:
             break
@@ -119,16 +119,16 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
         //环境模式
         switch cameraObj.placeMode.intValue {
         case 0:
-            self.environmentLabel.text = "室内50HZ模式"
+            self.environmentLabel.text = NSLocalizedString("S_env1", comment:"")
             break;
         case 1:
-            self.environmentLabel.text = "室内60HZ模式"
+            self.environmentLabel.text = NSLocalizedString("S_env2", comment:"")
             break;
         case 2:
-            self.environmentLabel.text = "室外模式"
+            self.environmentLabel.text = NSLocalizedString("S_env3", comment:"")
             break;
         case 3:
-            self.environmentLabel.text = "夜间模式"
+            self.environmentLabel.text = NSLocalizedString("S_env4", comment:"")
             break;
         default:
             break;
@@ -136,16 +136,16 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
         //画面翻转
         switch cameraObj.videoMode.intValue {
         case 0:
-            self.videoTurnLabel.text = "一般"
+            self.videoTurnLabel.text = NSLocalizedString("S_videoTurn1", comment:"")
             break
         case 1:
-            self.videoTurnLabel.text = "垂直翻转"
+            self.videoTurnLabel.text = NSLocalizedString("S_videoTurn2", comment:"")
             break
         case 2:
-            self.videoTurnLabel.text = "水平翻转(镜像)"
+            self.videoTurnLabel.text = NSLocalizedString("S_videoTurn3", comment:"")
             break
         case 3:
-            self.videoTurnLabel.text = "垂直及水平翻转"
+            self.videoTurnLabel.text = NSLocalizedString("S_videoTurn4", comment:"")
             break
         default:
             break
@@ -153,16 +153,16 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
         //录像模式
         switch cameraObj.recordMode.intValue {
         case 0:
-            self.recordModeLabel.text = "关闭"
+            self.recordModeLabel.text = NSLocalizedString("S_record1", comment:"")
             break;
         case 1:
-            self.recordModeLabel.text = "全景"
+            self.recordModeLabel.text = NSLocalizedString("S_record2", comment:"")
             break;
         case 2:
-            self.recordModeLabel.text = "警报"
+            self.recordModeLabel.text = NSLocalizedString("S_record3", comment:"")
             break;
         case 3:
-            self.recordModeLabel.text = "普通"
+            self.recordModeLabel.text = NSLocalizedString("S_record4", comment:"")
             break;
         default:
             break;
@@ -171,7 +171,7 @@ class SetTableViewController: UITableViewController,UIAlertViewDelegate {
  
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 5 {
-            let alert = UIAlertView(title: "提示", message: "是否格式化SD卡", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "好")
+            let alert = UIAlertView(title: NSLocalizedString("A_title", comment:""), message: NSLocalizedString("S_formatSD", comment:""), delegate: self, cancelButtonTitle: NSLocalizedString("A_cancel", comment:""), otherButtonTitles: NSLocalizedString("A_sure", comment:""))
             alert.tag = 140
             alert.show()
         }

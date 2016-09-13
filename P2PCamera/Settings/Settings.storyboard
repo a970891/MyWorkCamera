@@ -22,7 +22,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vli-WA-lUa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-89.066666666666663" y="-344.58666666666664"/>
+            <point key="canvasLocation" x="-451" y="-329"/>
         </scene>
         <!--编辑摄像机-->
         <scene sceneID="EdZ-Ie-6zu">
@@ -224,7 +224,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="115.73333333333333" y="-344.58666666666664"/>
+            <point key="canvasLocation" x="-98" y="-310"/>
         </scene>
         <!--参数设置-->
         <scene sceneID="31e-V0-NM8">

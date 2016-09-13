@@ -21,7 +21,11 @@
 "default_name"  =   "摄像头";
 
 //cameras
-"C_Speaking"    =   "对讲中";
+"C_Speaking1"    =   "对讲中.";
+"C_Speaking2"    =   "对讲中..";
+"C_Speaking3"    =   "对讲中...";
+"C_save_suc"    =   "保存图片成功";
+"C_save_fai"    =   "保存图片失败";
 
 //events
 "event_1"       =   "移动侦测警报";
@@ -38,9 +42,9 @@
 "N_psd_P"       =   "请输入密码";
 "N_notFindCam"  =   "未找到摄像头";
 
-"N_setcam"      =   "Please set camera";
-"N_insertName"  =   "Please insert camera name";
-"N_insertPsd"   =   "Please insert camera password";
+"N_setcam"      =   "请设置摄像头";
+"N_insertName"  =   "请输入摄像头名字";
+"N_insertPsd"   =   "请输入摄像头连接密码";
 
 //info
 "info_appV"     =   "APP版本:1.1.0";
@@ -51,21 +55,21 @@
 "A_cancel"      =   "取消";
 "A_sure"        =   "好";
 "A_notNull"     =   "UID或名字不能为空";
-"A_camWarm"     =   "CameraWarning!";
+"A_camWarm"     =   "摄像头警报!";
 
-"A_delete_sure" =   "Delete this camera?";
-"A_psd_Null"    =   "Password can't be Null";
-"A_psd_set"     =   "Please set camera password";
+"A_delete_sure" =   "是否删除摄像头?";
+"A_psd_Null"    =   "密码不能为空";
+"A_psd_set"     =   "请设置摄像头密码";
 
 //status
-"connecting"    =   "connecting";
-"connected"     =   "connected succes";
-"connectFail"   =   "not connected";
+"connecting"    =   "联机中";
+"connected"     =   "已联机";
+"connectFail"   =   "未联机";
 
 //camera_set
-"S_formatSuc"   =   "Format Succeed";
-"S_formatFai"   =   "Format Failed";
-"S_changeFai"   =   "Modify Failed";
-"S_changeSuc"   =   "Modify Succeed";
-"S_oldWrong"    =   "Old password wrong";
-"S_twiceWrong"  =   "the new password is not same with the old one";
+"S_formatSuc"   =   "格式化SD卡成功";
+"S_formatFai"   =   "格式化SD卡失败";
+"S_changeFai"   =   "修改成功";
+"S_changeSuc"   =   "修改失败";
+"S_oldWrong"    =   "旧密码错误";
+"S_twiceWrong"  =   "两次输入的密码不一致";
